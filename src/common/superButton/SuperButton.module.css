@@ -1,0 +1,30 @@
+.default {
+    background-color: #1976D2;
+    border: 1px solid;
+    border-radius: 3px;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.default:hover {
+    background-color: #1565C0;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
+}
+
+.default:active {
+    background-color: #0F4787;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.disabled:hover {
+    background-color: #1976D2;
+    box-shadow: none;
+}
+
+
+.red {
+    background: red;
+}

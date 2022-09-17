@@ -1,0 +1,58 @@
+.loginBlock {
+    display: flex;
+    justify-content: center;
+}
+
+.loginContainer {
+    margin-top: 50px;
+    background-color: #fff;
+    width: 360px;
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.inputForm input {
+    width: 80%;
+}
+
+.eye {
+    position: absolute;
+    margin-left: -28px;
+    margin-top: 2px;
+}
+
+.checkedForm {
+    text-align: left;
+    padding-left: 28px;
+}
+
+.checkedForm input {
+    margin-right: 10px;
+}
+
+.error {
+    color: red;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.forPass {
+    text-align: right;
+    padding-right: 28px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.buttonForm button {
+    width: 80%;
+    padding: 5px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 20px;
+}

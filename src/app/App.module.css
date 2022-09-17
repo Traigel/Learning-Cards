@@ -1,3 +1,10 @@
-.app {
+.appBlock {
+ font-size: 16px;
+  line-height: 1.6;
+}
 
+.appContainer {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
 }

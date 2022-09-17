@@ -2,7 +2,8 @@
     height: 60px;
     width: 100%;
     box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
-
+    background-color: #FCFCFC;
+    z-index: 1;
 }
 
 .headerContainer {

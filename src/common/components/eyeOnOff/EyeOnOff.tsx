@@ -4,7 +4,7 @@ import React from 'react'
 export const EyeOnOff = (props: EyeOnOffPropsType) => {
 
     switch (props.onOff) {
-        case true: {
+        case false: {
             return <svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612"
                         className={props.className} onClick={props.onClick}>
                 <g>
@@ -50,7 +50,7 @@ export const EyeOnOff = (props: EyeOnOffPropsType) => {
                 </g>
             </svg>
         }
-        case false: {
+        case true: {
             return <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                         className={props.className} onClick={props.onClick}>
                 <path

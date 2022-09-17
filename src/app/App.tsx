@@ -16,6 +16,7 @@ export const App = () => {
         <div className={styles.app}>
             <Header/>
             <div className={styles.pages}>
+
                 <Routes>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/registration'} element={<Registration/>}/>

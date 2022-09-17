@@ -1,0 +1,20 @@
+.headerBlock {
+    height: 60px;
+    width: 100%;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
+
+}
+
+.headerContainer {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imgBlock img {
+    width: 50px;
+    height: 50px;
+}

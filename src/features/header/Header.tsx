@@ -1,20 +1,21 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
-import {Registration} from "../registration/Registration";
-import {Profile} from "../profile/Profile";
-import {TestComponent} from "../testComponent/TestComponent";
+import styles from './Header.module.css'
+import SuperButton from "../../common/components/superButton/SuperButton";
+import logoImg from '../../assets/image/logo.png'
 
 export const Header = () => {
 
     return (
-        <div>
-            <NavLink to={'/login'}>Login</NavLink>
-            _
-            <NavLink to={'/registration'}>Registration</NavLink>
-            _
-            <NavLink to={'/profile'}>Profile</NavLink>
-            ...
-            <NavLink to={'/testComponent'}>TestComponent</NavLink>
+        <div className={styles.headerBlock}>
+            <div className={styles.headerContainer}>
+                <div className={styles.imgBlock}>
+                    <img src={logoImg} alt={'Logo'}/>
+                </div>
+                <div>
+                    <SuperButton className={styles.buttonIn}>Sign in</SuperButton>
+                </div>
+            </div>
+
         </div>
     )
 }

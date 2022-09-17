@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './App.module.css';
 import {HashRouter, Route, Routes} from 'react-router-dom';
-import {Header} from "../components/header/Header";
-import {Login} from "../components/login/Login";
-import {Registration} from "../components/registration/Registration";
-import {Profile} from "../components/profile/Profile";
-import {Error404} from "../components/error404/Error404";
-import {PasswordRecovery} from "../components/password/passwordRec/passwordRecovery";
-import {NewPassword} from "../components/password/newPassword/NewPassword";
-import {TestComponent} from "../components/testComponent/TestComponent";
+import {Header} from "../features/header/Header";
+import {Login} from "../features/login/Login";
+import {Registration} from "../features/registration/Registration";
+import {Profile} from "../features/profile/Profile";
+import {Error404} from "../features/error404/Error404";
+import {PasswordRecovery} from "../features/password/passwordRec/passwordRecovery";
+import {NewPassword} from "../features/password/newPassword/NewPassword";
+import {TestComponent} from "../features/testComponent/TestComponent";
 
 export const App = () => {
   return (

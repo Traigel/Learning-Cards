@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
-import {TaskActionType, tasksReducer} from "../reducers/tasks-reducer";
+import {TaskActionType, appReducer} from "./app-reducer";
 
 const rootReducer = combineReducers({
-    tasks: tasksReducer
+    tasks: appReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))

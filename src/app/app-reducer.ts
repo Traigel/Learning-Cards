@@ -1,6 +1,6 @@
 const initialState: TasksType = {}
 
-export const tasksReducer = (state = initialState, action: TaskActionType): TasksType => {
+export const appReducer = (state = initialState, action: TaskActionType): TasksType => {
     switch (action.type) {
         case 'XXX': {
             return state

@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import SuperInputText from "../../common/superInputText/SuperInputText";
-import SuperButton from "../../common/superButton/SuperButton";
-import SuperCheckbox from "../../common/superCheckbox/SuperCheckbox";
-import SuperEditableSpan from "../../common/superEditableSpan/SuperEditableSpan";
-import SuperSelect from "../../common/superSelect/SuperSelect";
-import SuperRadio from "../../common/superRadio/SuperRadio";
+import SuperInputText from "../../common/components/superInputText/SuperInputText";
+import SuperButton from "../../common/components/superButton/SuperButton";
+import SuperCheckbox from "../../common/components/superCheckbox/SuperCheckbox";
+import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
+import SuperSelect from "../../common/components/superSelect/SuperSelect";
+import SuperRadio from "../../common/components/superRadio/SuperRadio";
 
 export const TestComponent = () => {
 

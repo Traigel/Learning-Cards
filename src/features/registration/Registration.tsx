@@ -21,7 +21,6 @@ export const Registration = () => {
     const dispatch = useAppDispatch()
 
     const registerSuccess = useAppSelector(state => state.register.registerSuccess)
-
     const formik = useFormik({
         initialValues: {
             email: '',

@@ -8,6 +8,7 @@ import {DisplayOnError} from "../common/components/displayOnError/DisplayOnError
 import CircularProgress from '@mui/material/CircularProgress';
 import {useAppDispatch, useAppSelector} from "./store";
 import {initializeAppTC} from "./app-reducer";
+import {Registration} from '../features/registration/Registration';
 
 export const App = () => {
 
@@ -32,7 +33,7 @@ export const App = () => {
                 <Routes>
                     <Route path={'/profile'} element={<h1>profile</h1>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/register'} element={<h1>register</h1>}/>
+                    <Route path={'/register'} element={<Registration/>}/>
                     <Route path={'/password'} element={<h1>new password</h1>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>

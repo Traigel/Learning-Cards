@@ -74,7 +74,6 @@ export const Registration = () => {
                         <div className={s.errorFormik}>{formik.errors.email}</div>}
                 </div>
 
-
                 <div className={s.inputSize}>
                     <SuperInputText
                         autoComplete="current-password"
@@ -84,12 +83,11 @@ export const Registration = () => {
                         {...formik.getFieldProps('password')}
                     />
                 </div>
-
                 <div className={s.errorConfirmPass}>
                     {formik.touched.password && formik.errors.password &&
                         <div className={s.errorFormik}>{formik.errors.password}</div>}
-
                 </div>
+
                 <div className={s.inputSize}>
                     <SuperInputText
                         autoComplete="current-password"
@@ -99,6 +97,10 @@ export const Registration = () => {
                         {...formik.getFieldProps('confirmPassword')}
                     />
                 </div>
+                <div className={s.errorConfirmPass}>
+                    {formik.touched.confirmPassword && formik.errors.confirmPassword &&
+                        <div className={s.errorFormik}>{formik.errors.confirmPassword}</div>}
+                </div>
 
                 <div className={s.errorConfirmPass}>
                     {!passwordShow
@@ -106,8 +108,6 @@ export const Registration = () => {
                                className={s.visibleConfirmEye} onClick={togglePassword} alt={'eye'}/>
                         : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
                                className={s.visibleConfirmEye} onClick={togglePassword} alt={'eye'}/>}
-                    {formik.touched.confirmPassword && formik.errors.confirmPassword &&
-                        <div className={s.errorFormik}>{formik.errors.confirmPassword}</div>}
                 </div>
 
 
@@ -117,6 +117,7 @@ export const Registration = () => {
                                className={s.visibleEye} onClick={toggleConfirmPassword} alt={'eye'}/>
                         : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
                                className={s.visibleEye} onClick={toggleConfirmPassword} alt={'eye'}/>}
+
 
                     <SuperButton type={'submit'}>confirm</SuperButton>
                     <h5>Already have an account?</h5>

@@ -86,7 +86,7 @@ export const Login = () => {
                         Remember me
                     </div>
                     <div className={styles.forPass}>
-                        Forgot Password?
+                        <NavLink to={'/password'}>Forgot Password?</NavLink>
                     </div>
                     <div className={styles.buttonForm}>
                         <SuperButton type="submit">Sign in</SuperButton>

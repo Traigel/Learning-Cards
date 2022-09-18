@@ -8,17 +8,16 @@ import {DisplayOnError} from "../common/components/displayOnError/DisplayOnError
 
 export const App = () => {
 
-
-
     return (
         <div className={styles.appBlock}>
             <Header/>
             <DisplayOnError/>
             <div className={styles.appContainer}>
                 <Routes>
+                    <Route path={'/profile'} element={<h1>profile</h1>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<h1>register</h1>}/>
-                    <Route path={'/profile'} element={<h1>profile</h1>}/>
+                    <Route path={'/password'} element={<h1>new password</h1>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>

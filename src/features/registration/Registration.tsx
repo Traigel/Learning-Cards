@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import SuperInputText from '../../common/components/superInputText/SuperInputText';
 import {useFormik} from 'formik';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import s from './Registration.module.css'
 import SuperButton from '../../common/components/superButton/SuperButton';
-import {NavLink} from 'react-router-dom';
-
+import {Navigate, NavLink} from 'react-router-dom';
+import {AppRootStateType} from '../../app/store';
+import {registerTC} from './register-reducer';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 
 type FormikErrorsType = {
     email?: string
@@ -16,7 +18,9 @@ type FormikErrorsType = {
 export const Registration = () => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+
+    const registerSuccess = useAppSelector(state => state.register.registerSuccess)
 
     const formik = useFormik({
         initialValues: {
@@ -40,17 +44,20 @@ export const Registration = () => {
             return errors
         },
         onSubmit: values => {
+            dispatch(registerTC(values))
             formik.resetForm()
-        },
+        }
     })
 
+    if (registerSuccess) {
+        return <Navigate to={'/login'}/>
+    }
     const togglePassword = () => {
         setPasswordShow(!passwordShow);
-    };
-
+    }
     const toggleConfirmPassword = () => {
         setConfirmPasswordShow(!confirmPasswordShow);
-    };
+    }
 
 
     return <div className={s.containerForm}>
@@ -86,7 +93,6 @@ export const Registration = () => {
                     {formik.touched.password && formik.errors.password &&
                         <div className={s.errorFormik}>{formik.errors.password}</div>}
                 </div>
-
                 <div className={s.inputSize}>
                     <SuperInputText
                         autoComplete="current-password"
@@ -100,7 +106,6 @@ export const Registration = () => {
                     {formik.touched.confirmPassword && formik.errors.confirmPassword &&
                         <div className={s.errorFormik}>{formik.errors.confirmPassword}</div>}
                 </div>
-
                 <div className={s.errorConfirmPass}>
                     {!passwordShow
                         ? <img src={' https://cdn-icons-png.flaticon.com/128/158/158746.png'}
@@ -115,21 +120,15 @@ export const Registration = () => {
                         : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
                                className={s.visibleConfirmEye} onClick={toggleConfirmPassword} alt={'eye'}/>}
                 </div>
-
-
                 <div className={s.bottomBlock}>
-                    <SuperButton className={s.buttonReg}   type={'submit'}>confirm</SuperButton>
+                    <SuperButton className={s.buttonReg} type={'submit'}>confirm</SuperButton>
                     <h5>Already have an account?</h5>
                     <NavLink to={'/login'}>Sign In</NavLink>
                 </div>
-
-
             </form>
         </div>
 
 
     </div>
-
-
 }
 

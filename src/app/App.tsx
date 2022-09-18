@@ -1,36 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './App.module.css';
-import {HashRouter, Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {Header} from "../features/header/Header";
 import {Login} from "../features/login/Login";
-import {Registration} from "../features/registration/Registration";
-import {Profile} from "../features/profile/Profile";
 import {Error404} from "../features/error404/Error404";
-import {PasswordRecovery} from "../features/password/passwordRec/passwordRecovery";
-import {NewPassword} from "../features/password/newPassword/NewPassword";
-import {TestComponent} from "../features/testComponent/TestComponent";
+import {DisplayOnError} from "../common/components/displayOnError/DisplayOnError";
+import CircularProgress from '@mui/material/CircularProgress';
+import {useAppDispatch, useAppSelector} from "./store";
+import {initializeAppTC} from "./app-reducer";
 
 export const App = () => {
-  return (
-      <HashRouter>
-        <div className={styles.app}>
+
+    const dispatch = useAppDispatch()
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
+
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
+
+    if (!isInitialized) {
+        return <div className={styles.init} >
+            <CircularProgress color="inherit"/>
+        </div>
+    }
+
+    return (
+        <div className={styles.appBlock}>
             <Header/>
-            <div className={styles.pages}>
+            <DisplayOnError/>
+            <div className={styles.appContainer}>
                 <Routes>
+                    <Route path={'/profile'} element={<h1>profile</h1>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/registration'} element={<Registration/>}/>
-                    <Route path={'/profile'} element={<Profile/>}/>
-
-                    <Route path={'/passwordRecovery'} element={<PasswordRecovery/>}/>
-                    <Route path={'/newPassword'} element={<NewPassword/>}/>
-
-                    <Route path={'/testComponent'} element={<TestComponent/>}/>
-
-                    <Route path={'/*'} element={<Error404/>}/>
+                    <Route path={'/register'} element={<h1>register</h1>}/>
+                    <Route path={'/password'} element={<h1>new password</h1>}/>
+                    <Route path={'/error404'} element={<Error404/>}/>
+                    <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>
             </div>
         </div>
-      </HashRouter>
-
-  );
+    );
 }

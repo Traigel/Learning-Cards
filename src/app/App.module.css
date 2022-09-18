@@ -8,3 +8,10 @@
   width: 80%;
   margin: 0 auto;
 }
+
+.init {
+    position: fixed;
+    top: 30%;
+    text-align: center;
+    width: 100%;
+}

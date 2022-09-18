@@ -43,7 +43,6 @@ export const loginTC = (data: LoginParamsType) => async (dispatch: Dispatch) => 
         dispatch(setIsLoggedInAC(true))
         dispatch(setUserInfoAC(res.data._id, res.data.email, res.data.name, res.data.publicCardPacksCount, res.data.avatar))
     } catch (e) {
-        dispatch(setIsLoggedInAC(false))
         const err = e as Error | AxiosError
         if (axios.isAxiosError(err)) {
             const error = err.response?.data ? (err.response.data as { error: string }).error : err.message

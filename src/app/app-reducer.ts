@@ -1,5 +1,8 @@
 import {Dispatch} from "redux"
 import {authAPI} from "../api/api";
+import axios, {AxiosError} from "axios";
+import {AppRootStateType} from "./store";
+import {setIsLoggedInAC, setUserInfoAC} from "../features/login/auth-reducer";
 
 const initialState: InitialAppStateType = {
     status: 'idle',
@@ -32,9 +35,18 @@ export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', 
 export const initializeAppTC = () => async (dispatch: Dispatch) => {
     try {
         const res = await authAPI.me()
+        dispatch(setIsLoggedInAC(true))
+        dispatch(setUserInfoAC(res.data._id, res.data.email, res.data.name, res.data.publicCardPacksCount, res.data.avatar))
+    } catch (e) {
+        const err = e as Error | AxiosError
+        if (axios.isAxiosError(err)) {
+            const error = err.response?.data ? (err.response.data as { error: string }).error : err.message
+            dispatch(setAppErrorAC(error))
+        } else {
+            dispatch(setAppErrorAC(`Native error ${err.message}`))
+        }
+    } finally {
         dispatch(setIsInitializedAC(true))
-    } catch (error) {
-        dispatch(setIsInitializedAC(false))
     }
 }
 

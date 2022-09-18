@@ -5,13 +5,18 @@ import SuperCheckbox from "../../common/components/superCheckbox/SuperCheckbox";
 import SuperButton from "../../common/components/superButton/SuperButton";
 import {useFormik} from 'formik';
 import {EyeOnOff} from "../../common/components/eyeOnOff/EyeOnOff";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../app/store";
+import {loginTC} from "./auth-reducer";
 
 
 export const Login = () => {
 
     const [eyeOnOff, setEyeOnOff] = useState<boolean>(false)
     const onClickHandler = () => setEyeOnOff(!eyeOnOff)
+
+    const dispatch = useAppDispatch()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
     const formik = useFormik({
         initialValues: {
@@ -33,10 +38,14 @@ export const Login = () => {
             return errors
         },
         onSubmit: values => {           // handleSubmit
-            alert(JSON.stringify(values, null, 2));
+            dispatch(loginTC(values))
             formik.resetForm();
         },
     });
+
+    if (isLoggedIn) {
+        return <Navigate to={'/profile'}/>
+    }
 
     return (
         <div className={styles.loginBlock}>

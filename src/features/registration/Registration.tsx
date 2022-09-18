@@ -13,7 +13,6 @@ type FormikErrorsType = {
     confirmPassword?: string
 }
 
-
 export const Registration = () => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
@@ -105,21 +104,21 @@ export const Registration = () => {
                 <div className={s.errorConfirmPass}>
                     {!passwordShow
                         ? <img src={' https://cdn-icons-png.flaticon.com/128/158/158746.png'}
-                               className={s.visibleConfirmEye} onClick={togglePassword} alt={'eye'}/>
+                               className={s.visibleEye} onClick={togglePassword} alt={'eye'}/>
                         : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
-                               className={s.visibleConfirmEye} onClick={togglePassword} alt={'eye'}/>}
+                               className={s.visibleEye} onClick={togglePassword} alt={'eye'}/>}
+                </div>
+                <div>
+                    {!confirmPasswordShow
+                        ? <img src={' https://cdn-icons-png.flaticon.com/128/158/158746.png'}
+                               className={s.visibleConfirmEye} onClick={toggleConfirmPassword} alt={'eye'}/>
+                        : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
+                               className={s.visibleConfirmEye} onClick={toggleConfirmPassword} alt={'eye'}/>}
                 </div>
 
 
                 <div className={s.bottomBlock}>
-                    {!confirmPasswordShow
-                        ? <img src={' https://cdn-icons-png.flaticon.com/128/158/158746.png'}
-                               className={s.visibleEye} onClick={toggleConfirmPassword} alt={'eye'}/>
-                        : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
-                               className={s.visibleEye} onClick={toggleConfirmPassword} alt={'eye'}/>}
-
-
-                    <SuperButton type={'submit'}>confirm</SuperButton>
+                    <SuperButton className={s.buttonReg}   type={'submit'}>confirm</SuperButton>
                     <h5>Already have an account?</h5>
                     <NavLink to={'/login'}>Sign In</NavLink>
                 </div>

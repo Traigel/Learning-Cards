@@ -4,6 +4,7 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 import {Header} from "../features/header/Header";
 import {Login} from "../features/login/Login";
 import {Error404} from "../features/error404/Error404";
+import {DisplayOnError} from "../common/components/displayOnError/DisplayOnError";
 
 export const App = () => {
 
@@ -12,6 +13,7 @@ export const App = () => {
     return (
         <div className={styles.appBlock}>
             <Header/>
+            <DisplayOnError/>
             <div className={styles.appContainer}>
                 <Routes>
                     <Route path={'/login'} element={<Login/>}/>

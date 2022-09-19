@@ -18,16 +18,17 @@ export const Registration = () => {
     const dispatch = useAppDispatch()
     const registerSuccess = useAppSelector(state => state.register.registerSuccess)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+
     const [passwordShow, setPasswordShow] = useState(false)
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
 
     const togglePassword = () => {
         setPasswordShow(!passwordShow);
     }
+
     const toggleConfirmPassword = () => {
         setConfirmPasswordShow(!confirmPasswordShow);
     }
-
 
     const formik = useFormik({
         initialValues: {
@@ -57,8 +58,9 @@ export const Registration = () => {
     })
 
     if (!isLoggedIn && registerSuccess) {
-        return <Navigate to={'login'}/>
+        return <Navigate to={'/login'}/>
     }
+
     if (isLoggedIn) {
         return <Navigate to={'/'}/>
     }

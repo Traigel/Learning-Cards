@@ -3,7 +3,7 @@ import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {appReducer, AppActionType} from "./app-reducer";
 import {AuthActionsType, authReducer} from "../features/login/auth-reducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {registerReducer} from '../features/registration/register-reducer';
+import {RegisterActionType, registerReducer} from '../features/registration/register-reducer';
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -16,7 +16,7 @@ export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // все типы экшенов для всего приложения
-type AppRootActionsType = AppActionType | AuthActionsType
+type AppRootActionsType = AppActionType | AuthActionsType | RegisterActionType
 
 //типизация санки если она возвращает другую санку
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppRootActionsType>

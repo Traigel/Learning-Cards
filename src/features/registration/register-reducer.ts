@@ -2,14 +2,13 @@ import axios, {AxiosError} from 'axios';
 import {authAPI, RegisterParamsType} from '../../api/api';
 import {setAppErrorAC, setAppStatusAC} from '../../app/app-reducer';
 import {AppThunk} from '../../app/store';
-import {Dispatch} from 'redux';
 
 
 const initialState = {
     registerSuccess: false
 }
 
-export const registerReducer = (state: InitialStateType = initialState, action: ActionsType) => {
+export const registerReducer = (state: InitialStateType = initialState, action: RegisterActionType) => {
     switch (action.type) {
         case 'register/set-is-register':
             return {
@@ -27,8 +26,7 @@ export const setIsRegistrationSuccess = (value: boolean) => ({
     } as const
 )
 
-
-export const registerTC = (data: RegisterParamsType): AppThunk => async (dispatch: Dispatch) => {
+export const registerTC = (data: RegisterParamsType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
         await authAPI.registerUser(data)
@@ -54,4 +52,4 @@ type ErrorType = {
 }
 
 export type InitialStateType = typeof initialState
-type ActionsType = ReturnType<typeof setIsRegistrationSuccess>
+export type RegisterActionType = ReturnType<typeof setIsRegistrationSuccess>

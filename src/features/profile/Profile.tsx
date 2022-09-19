@@ -9,9 +9,7 @@ export const Profile = () => {
     if ( !isLoggedIn) {
         return <Navigate to={'/login'}/>
     }
-    // if (isLoggedIn){
-    //     return <Navigate to={'/profile'}/>
-    // }
+
     return (
 
 

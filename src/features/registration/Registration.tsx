@@ -4,9 +4,9 @@ import {useFormik} from 'formik';
 import s from './Registration.module.css'
 import SuperButton from '../../common/components/superButton/SuperButton';
 import {Navigate, NavLink} from 'react-router-dom';
-import {registerTC} from './register-reducer';
 import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 import {EyeOnOff} from '../../common/components/eyeOnOff/EyeOnOff';
+import {registerTC} from '../login/auth-reducer';
 
 type FormikErrorsType = {
     email?: string
@@ -16,9 +16,8 @@ type FormikErrorsType = {
 
 export const Registration = () => {
     const dispatch = useAppDispatch()
-    const registerSuccess = useAppSelector(state => state.register.registerSuccess)
+    const registerSuccess = useAppSelector(state => state.auth.registerSuccess)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-
     const [passwordShow, setPasswordShow] = useState(false)
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
 

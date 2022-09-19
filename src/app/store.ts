@@ -3,12 +3,11 @@ import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {appReducer, AppActionType} from "./app-reducer";
 import {AuthActionsType, authReducer} from "../features/login/auth-reducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {RegisterActionType, registerReducer} from '../features/registration/register-reducer';
 
 const rootReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
-    register: registerReducer
+    // register: registerReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
@@ -16,7 +15,7 @@ export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // все типы экшенов для всего приложения
-type AppRootActionsType = AppActionType | AuthActionsType | RegisterActionType
+type AppRootActionsType = AppActionType | AuthActionsType
 
 //типизация санки если она возвращает другую санку
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppRootActionsType>

@@ -1,4 +1,4 @@
-import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC, ProfileType} from './auth-reducer';
+import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC, ProfileType, setIsRegistrationSuccess} from './auth-reducer';
 
 let state: InitialAuthStateType
 let userInfo: {
@@ -8,7 +8,8 @@ let userInfo: {
 beforeEach(() => {
     state = {
         isLoggedIn: false,
-        profile: null
+        profile: null,
+        registerSuccess: false
     }
     userInfo = {
         profile: {
@@ -39,4 +40,9 @@ test('set user info', () => {
     expect(authReducer1.profile?.name).toBe('Vladimir')
     expect(authReducer1.profile?.email).toBe('hello@gmail.com')
     expect(authReducer1.profile?.publicCardPacksCount).toBe(3)
+})
+
+test('register success', () => {
+    const regUser = authReducer(state, setIsRegistrationSuccess(true))
+    expect(regUser.registerSuccess).toBe(true)
 })

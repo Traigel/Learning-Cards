@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {useAppDispatch, useAppSelector} from "./store";
 import {initializeAppTC} from "./app-reducer";
 import {Registration} from '../features/registration/Registration';
+import { Profile } from '../features/profile/Profile';
 
 export const App = () => {
 
@@ -31,7 +32,7 @@ export const App = () => {
             <DisplayOnError/>
             <div className={styles.appContainer}>
                 <Routes>
-                    <Route path={'/profile'} element={<h1>profile</h1>}/>
+                    <Route path={'/'} element={<Profile/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
                     <Route path={'/password'} element={<h1>new password</h1>}/>

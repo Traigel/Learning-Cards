@@ -15,8 +15,12 @@ type FormikErrorsType = {
 }
 
 export const Registration = () => {
-    const [passwordShow, setPasswordShow] = useState(false);
-    const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
+    const dispatch = useAppDispatch()
+    const registerSuccess = useAppSelector(state => state.register.registerSuccess)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const [passwordShow, setPasswordShow] = useState(false)
+    const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
+
     const togglePassword = () => {
         setPasswordShow(!passwordShow);
     }
@@ -25,9 +29,6 @@ export const Registration = () => {
     }
 
 
-    const dispatch = useAppDispatch()
-
-    const registerSuccess = useAppSelector(state => state.register.registerSuccess)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -55,17 +56,16 @@ export const Registration = () => {
         }
     })
 
-    if (registerSuccess) {
-        return <Navigate to={'/login'}/>
+    if (!isLoggedIn && registerSuccess) {
+        return <Navigate to={'login'}/>
     }
-
-
-
+    if (isLoggedIn) {
+        return <Navigate to={'/'}/>
+    }
 
     return <div className={s.containerForm}>
 
         <h1 className={s.signUp}>Sign Up</h1>
-
         <div>
             <form onSubmit={formik.handleSubmit}>
                 <div className={s.inputSize}>
@@ -110,10 +110,11 @@ export const Registration = () => {
                 </div>
                 <div className={s.errorConfirmPass}>
 
-                    <EyeOnOff className={s.visibleEye} onClick={togglePassword} onOff={passwordShow} />
+                    <EyeOnOff className={s.visibleEye} onClick={togglePassword} onOff={passwordShow}/>
                 </div>
                 <div>
-                    <EyeOnOff className={s.visibleConfirmEye}  onClick={toggleConfirmPassword} onOff={confirmPasswordShow} />
+                    <EyeOnOff className={s.visibleConfirmEye} onClick={toggleConfirmPassword}
+                              onOff={confirmPasswordShow}/>
                 </div>
                 <div className={s.bottomBlock}>
                     <SuperButton className={s.buttonReg} type={'submit'}>confirm</SuperButton>

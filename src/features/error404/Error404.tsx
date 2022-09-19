@@ -6,7 +6,6 @@ import {Navigate} from "react-router-dom";
 export const Error404 = () => {
 
     const [error, setError] = useState<boolean>(false)
-
     const onClickHandler = () => setError(true)
 
     if (error) {

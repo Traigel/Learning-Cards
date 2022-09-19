@@ -1,29 +1,31 @@
-import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC} from "./auth-reducer";
+import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC, ProfileType} from './auth-reducer';
 
 let state: InitialAuthStateType
 let userInfo: {
-    id: string
-    email: string
-    name: string
-    publicCardPacksCount: number
-    avatar: string
+    profile: ProfileType
 }
 
 beforeEach(() => {
     state = {
         isLoggedIn: false,
-        _id: null,
-        name: null,
-        email: null,
-        publicCardPacksCount: 0, // количество колод
-        avatar: null
+        profile: null
     }
     userInfo = {
-        id: '123',
-        name: 'Vladimir',
-        email: 'hello@gmail.com',
-        publicCardPacksCount: 3,
-        avatar: ''
+        profile: {
+            name: 'Vladimir',
+            email: 'hello@gmail.com',
+            publicCardPacksCount: 3,
+            avatar: '',
+            _id: '',
+            __v: 0,
+            created: '',
+            isAdmin: false,
+            rememberMe: false,
+            token: '',
+            tokenDeathTime: 0,
+            updated: '',
+            verified: false,
+        }
     }
 })
 
@@ -33,9 +35,8 @@ test('set is logged in', () => {
 })
 
 test('set user info', () => {
-    const authReducer1 = authReducer(state, setUserInfoAC(userInfo.id, userInfo.email, userInfo.name,
-        userInfo.publicCardPacksCount, userInfo.avatar))
-    expect(authReducer1.name).toBe('Vladimir')
-    expect(authReducer1.email).toBe('hello@gmail.com')
-    expect(authReducer1.publicCardPacksCount).toBe(3)
+    const authReducer1 = authReducer(state, setUserInfoAC(userInfo.profile))
+    expect(authReducer1.profile?.name).toBe('Vladimir')
+    expect(authReducer1.profile?.email).toBe('hello@gmail.com')
+    expect(authReducer1.profile?.publicCardPacksCount).toBe(3)
 })

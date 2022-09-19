@@ -1,9 +1,8 @@
-import {Dispatch} from 'redux';
-import {registerAPI, RegisterParamsType} from './registration-api';
 import axios, {AxiosError} from 'axios';
-import {authAPI} from '../../api/api';
-import {setAppErrorAC} from '../../app/app-reducer';
-
+import {authAPI, RegisterParamsType} from '../../api/api';
+import {setAppErrorAC, setAppStatusAC} from '../../app/app-reducer';
+import {AppThunk} from '../../app/store';
+import {Dispatch} from 'redux';
 
 
 const initialState = {
@@ -28,15 +27,11 @@ export const setIsRegistrationSuccess = (value: boolean) => ({
     } as const
 )
 
-type ErrorType = {
-    error: string
-    email: string
-    in: string
-}
 
-export const registerTC = (data: RegisterParamsType) => async (dispatch: Dispatch) => {
+export const registerTC = (data: RegisterParamsType): AppThunk => async (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
     try {
-        const res = await authAPI.registerUser(data)
+        await authAPI.registerUser(data)
         dispatch(setIsRegistrationSuccess(true))
     } catch (e) {
         const err = e as Error | AxiosError
@@ -46,9 +41,17 @@ export const registerTC = (data: RegisterParamsType) => async (dispatch: Dispatc
         } else {
             dispatch(setAppErrorAC(`Native error ${err.message}`))
         }
+    }finally {
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
-//types
+//type
+type ErrorType = {
+    error: string
+    email: string
+    in: string
+}
+
 export type InitialStateType = typeof initialState
 type ActionsType = ReturnType<typeof setIsRegistrationSuccess>

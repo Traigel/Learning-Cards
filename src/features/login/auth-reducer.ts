@@ -35,6 +35,7 @@ export const setIsLoggedInAC = (isLoggedIn: boolean) => ({type: 'AUTH/SET-IS-LOG
 export const setUserInfoAC = (id: string, email: string, name: string, publicCardPacksCount: number, avatar: string) =>
     ({type: 'AUTH/SET-USER-INFO', id, email, name, publicCardPacksCount, avatar} as const)
 
+
 //thunks
 export const loginTC = (data: LoginParamsType) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
@@ -53,7 +54,6 @@ export const loginTC = (data: LoginParamsType) => async (dispatch: Dispatch) => 
     } finally {
         dispatch(setAppStatusAC("idle"))
     }
-
 }
 
 

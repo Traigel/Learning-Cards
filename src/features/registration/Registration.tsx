@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 import SuperInputText from '../../common/components/superInputText/SuperInputText';
 import {useFormik} from 'formik';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './Registration.module.css'
 import SuperButton from '../../common/components/superButton/SuperButton';
 import {Navigate, NavLink} from 'react-router-dom';
-import {AppRootStateType} from '../../app/store';
 import {registerTC} from './register-reducer';
 import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
+import {EyeOnOff} from '../../common/components/eyeOnOff/EyeOnOff';
 
 type FormikErrorsType = {
     email?: string
@@ -18,6 +17,14 @@ type FormikErrorsType = {
 export const Registration = () => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
+    const togglePassword = () => {
+        setPasswordShow(!passwordShow);
+    }
+    const toggleConfirmPassword = () => {
+        setConfirmPasswordShow(!confirmPasswordShow);
+    }
+
+
     const dispatch = useAppDispatch()
 
     const registerSuccess = useAppSelector(state => state.register.registerSuccess)
@@ -51,12 +58,8 @@ export const Registration = () => {
     if (registerSuccess) {
         return <Navigate to={'/login'}/>
     }
-    const togglePassword = () => {
-        setPasswordShow(!passwordShow);
-    }
-    const toggleConfirmPassword = () => {
-        setConfirmPasswordShow(!confirmPasswordShow);
-    }
+
+
 
 
     return <div className={s.containerForm}>
@@ -106,18 +109,11 @@ export const Registration = () => {
                         <div className={s.errorFormik}>{formik.errors.confirmPassword}</div>}
                 </div>
                 <div className={s.errorConfirmPass}>
-                    {!passwordShow
-                        ? <img src={' https://cdn-icons-png.flaticon.com/128/158/158746.png'}
-                               className={s.visibleEye} onClick={togglePassword} alt={'eye'}/>
-                        : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
-                               className={s.visibleEye} onClick={togglePassword} alt={'eye'}/>}
+
+                    <EyeOnOff className={s.visibleEye} onClick={togglePassword} onOff={passwordShow} />
                 </div>
                 <div>
-                    {!confirmPasswordShow
-                        ? <img src={' https://cdn-icons-png.flaticon.com/128/158/158746.png'}
-                               className={s.visibleConfirmEye} onClick={toggleConfirmPassword} alt={'eye'}/>
-                        : <img src={'https://cdn-icons-png.flaticon.com/128/6107/6107590.png'}
-                               className={s.visibleConfirmEye} onClick={toggleConfirmPassword} alt={'eye'}/>}
+                    <EyeOnOff className={s.visibleConfirmEye}  onClick={toggleConfirmPassword} onOff={confirmPasswordShow} />
                 </div>
                 <div className={s.bottomBlock}>
                     <SuperButton className={s.buttonReg} type={'submit'}>confirm</SuperButton>

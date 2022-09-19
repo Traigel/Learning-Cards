@@ -1,6 +1,7 @@
 import {appReducer, InitialAppStateType, setAppErrorAC, setAppStatusAC, setIsInitializedAC} from "./app-reducer";
 
 let state: InitialAppStateType
+
 beforeEach(() => {
     state = {
         status: 'idle',
@@ -23,3 +24,5 @@ test('set error', () => {
     const appReducer1 = appReducer(state, setAppErrorAC('Error messages'))
     expect(appReducer1.error).toBe('Error messages')
 })
+
+

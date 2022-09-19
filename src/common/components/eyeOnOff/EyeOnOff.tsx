@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 
 export const EyeOnOff = (props: EyeOnOffPropsType) => {
@@ -59,7 +59,6 @@ export const EyeOnOff = (props: EyeOnOffPropsType) => {
         }
     }
 }
-
 //type
 type EyeOnOffPropsType = {
     onOff: boolean

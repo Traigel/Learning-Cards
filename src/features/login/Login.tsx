@@ -23,7 +23,6 @@ export const Login = () => {
             email: '',
             password: '',
             rememberMe: false
-
         },
         validate: values => {           //валидация, обработка ошибок
             const errors: FormikErrorType = {}
@@ -44,7 +43,7 @@ export const Login = () => {
     });
 
     if (isLoggedIn) {
-        return <Navigate to={'/profile'}/>
+        return <Navigate to={'/'}/>
     }
 
     return (

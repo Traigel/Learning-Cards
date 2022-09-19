@@ -19,11 +19,11 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
 .disabled:hover {
     background-color: #1976D2;
     box-shadow: none;
 }
-
 
 .red {
     background: red;

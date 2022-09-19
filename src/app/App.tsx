@@ -8,6 +8,7 @@ import {DisplayOnError} from "../common/components/displayOnError/DisplayOnError
 import CircularProgress from '@mui/material/CircularProgress';
 import {useAppDispatch, useAppSelector} from "./store";
 import {initializeAppTC} from "./app-reducer";
+import {Profile} from "../features/profile/Profile";
 
 export const App = () => {
 
@@ -19,7 +20,7 @@ export const App = () => {
     }, [])
 
     if (!isInitialized) {
-        return <div className={styles.init} >
+        return <div className={styles.init}>
             <CircularProgress color="inherit"/>
         </div>
     }
@@ -30,7 +31,7 @@ export const App = () => {
             <DisplayOnError/>
             <div className={styles.appContainer}>
                 <Routes>
-                    <Route path={'/profile'} element={<h1>profile</h1>}/>
+                    <Route path={'/'} element={<Profile/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<h1>register</h1>}/>
                     <Route path={'/password'} element={<h1>new password</h1>}/>

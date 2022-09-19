@@ -1,4 +1,4 @@
-import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC} from "./auth-reducer";
+import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC, setIsLoggedOutAC} from "./auth-reducer";
 
 let state: InitialAuthStateType
 let userInfo: {
@@ -14,7 +14,7 @@ beforeEach(() => {
         _id: null,
         name: null,
         email: null,
-        publicCardPacksCount: 0, // количество колод
+        publicCardPacksCount: 0,
         avatar: null
     }
     userInfo = {
@@ -29,6 +29,11 @@ beforeEach(() => {
 test('set is logged in', () => {
     const authReducer1 = authReducer(state, setIsLoggedInAC(true))
     expect(authReducer1.isLoggedIn).toBe(true)
+})
+
+test('set is logged out', () => {
+    const authReducer1 = authReducer(state, setIsLoggedOutAC(false))
+    expect(authReducer1.isLoggedIn).toBe(false)
 })
 
 test('set user info', () => {

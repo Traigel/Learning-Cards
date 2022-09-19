@@ -13,7 +13,6 @@ type SuperEditableSpanType = DefaultInputPropsType & { // и + ещё пропс
     onEnter?: () => void
     error?: string
     spanClassName?: string
-
     spanProps?: DefaultSpanPropsType // пропсы для спана
 }
 
@@ -46,8 +45,6 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
         onDoubleClick && onDoubleClick(e)
     }
 
-    const spanClassName = `${'сделать красивый стиль для спана'} ${className}`
-
     return (
         <>
             {editMode
@@ -62,8 +59,7 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
                 ) : (
                     <span
                         onDoubleClick={onDoubleClickCallBack}
-                        className={spanClassName}
-
+                        className={restProps.spanClassName}
                         {...restSpanProps}
                     >&#9998;
                         {/*если нет захардкодженного текста для спана, то значение инпута*/}

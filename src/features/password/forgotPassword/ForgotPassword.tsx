@@ -18,8 +18,7 @@ export const ForgotPassword = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            // from: "test-front-admin <ai73a@yandex.by>",
-            message: "<div> password recovery link: <a href='http://localhost:3000/new-password/#/$token$'>link</a></div>",
+            message: "<div> password recovery link: <a href='http://localhost:3000/new-password/$token$'>link</a></div>",
         },
         validate: (values) => {
             const errors: FormikErrorsType = {}
@@ -40,6 +39,7 @@ export const ForgotPassword = () => {
     if (forgotPasswordSuccess) {
         return <Navigate to={'/checkEmail'}/>
     }
+
     return <div className={s.containerForm}>
         <h1 className={s.signUp}>Forgot your password?</h1>
         <div>

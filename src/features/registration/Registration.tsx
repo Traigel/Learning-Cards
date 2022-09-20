@@ -56,7 +56,7 @@ export const Registration = () => {
         }
     })
 
-    if (!isLoggedIn && registerSuccess) {
+    if (registerSuccess) {
         return <Navigate to={'/login'}/>
     }
 

@@ -36,6 +36,7 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
     }
 }
 
+
 //action
 export const setIsLoggedInAC = (isLoggedIn: boolean) => ({type: 'AUTH/SET-IS-LOGGED-IN', isLoggedIn} as const)
 export const setUserInfoAC = (data: ProfileType) => ({type: 'AUTH/SET-USER-INFO', data} as const)
@@ -87,7 +88,6 @@ export const forgotPasswordTC = (data: ForgotPasswordType): AppThunk => async (d
         console.log(data)
         dispatch(setDataForgetPassword(data.email))
         dispatch(forgotPasswordSuccess(true))
-
     } catch (e) {
         const err = e as Error | AxiosError
         if (axios.isAxiosError(err)) {
@@ -100,6 +100,7 @@ export const forgotPasswordTC = (data: ForgotPasswordType): AppThunk => async (d
         dispatch(setAppStatusAC('idle'))
     }
 }
+
 export const createNewPasswordTC = (data: SetNewPasswordType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
@@ -132,7 +133,7 @@ export type InitialAuthStateType = {
 
 export type SetNewPasswordType = {
     password: string
-    resetPasswordToken: string
+    resetPasswordToken: string | undefined
 }
 
 export type ForgotPasswordType = {

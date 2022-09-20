@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useFormik} from 'formik';
 import s from './NewPassword.module.css'
-import {NavLink} from 'react-router-dom';
+import {NavLink, useParams} from 'react-router-dom';
 import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import SuperButton from '../../../common/components/superButton/SuperButton';
 import {useAppDispatch} from '../../../common/hooks/hooks';
@@ -18,13 +18,15 @@ export const NewPassword = () => {
     const togglePassword = () => {
         setPasswordShow(!passwordShow);
     }
-
+    const params = useParams()
+    const token = params.token
     const dispatch = useAppDispatch()
     const formik = useFormik({
         initialValues: {
             password: '',
-            resetPasswordToken: '',
+            resetPasswordToken: token,
         },
+
         validate: (values) => {
             const errors: FormikErrorsType = {}
             if (values.password.length < 3) {
@@ -37,7 +39,7 @@ export const NewPassword = () => {
             formik.resetForm()
         }
     })
-
+    console.log(token)
     return <div className={s.containerForm}>
         <h1 className={s.signUp}>Create new password</h1>
         <div>

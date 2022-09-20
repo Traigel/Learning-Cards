@@ -85,7 +85,6 @@ export const forgotPasswordTC = (data: ForgotPasswordType): AppThunk => async (d
     dispatch(setAppStatusAC('loading'))
     try {
         await authAPI.forgotPassword(data)
-        console.log(data)
         dispatch(setDataForgetPassword(data.email))
         dispatch(forgotPasswordSuccess(true))
     } catch (e) {
@@ -118,9 +117,6 @@ export const createNewPasswordTC = (data: SetNewPasswordType): AppThunk => async
         dispatch(setAppStatusAC('idle'))
     }
 }
-
-
-
 
 //type
 export type InitialAuthStateType = {

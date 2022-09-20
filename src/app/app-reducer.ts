@@ -1,7 +1,7 @@
 import {Dispatch} from "redux"
 import {authAPI} from "../api/api";
 import axios, {AxiosError} from "axios";
-import {setIsLoggedInAC, setUserInfoAC} from "../features/login/auth-reducer";
+import {setIsLoggedInOutAC, setUserInfoAC} from "../features/login/auth-reducer";
 
 const initialState: InitialAppStateType = {
     status: 'idle',
@@ -34,7 +34,7 @@ export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', 
 export const initializeAppTC = () => async (dispatch: Dispatch) => {
     try {
         const res = await authAPI.me()
-        dispatch(setIsLoggedInAC(true))
+        dispatch(setIsLoggedInOutAC(true))
         dispatch(setUserInfoAC(res.data))
     } catch (e) {
         const err = e as Error | AxiosError

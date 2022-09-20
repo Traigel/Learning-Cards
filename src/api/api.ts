@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
+import {ProfileType} from "../features/login/auth-reducer";
 
 export const instance = axios.create({
     //baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/' ,
@@ -15,12 +16,9 @@ export const authAPI = {
     },
     me() {
         return instance.post<{}, AxiosResponse<ResponseMeType>>('/auth/me', {})
-    }
-}
-
-export const profileAPI = {
+    },
     changeUserName(data: ChangeUserNameParamsType) {
-        return instance.put<ChangeUserNameParamsType, AxiosResponse<ResponseMeType>>('/auth/login', data)
+        return instance.put<ChangeUserNameParamsType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
     }
 }
 
@@ -34,6 +32,12 @@ export type LoginParamsType = {
     email: string
     password: string
     rememberMe: boolean
+}
+
+export type ResponseUpdatesUserType = {
+    token: string
+    tokenDeathTime: string
+    updatedUser: ProfileType
 }
 
 export type ResponseMeType = {

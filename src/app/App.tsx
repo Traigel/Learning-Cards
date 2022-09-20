@@ -10,6 +10,9 @@ import {useAppDispatch, useAppSelector} from "./store";
 import {initializeAppTC} from "./app-reducer";
 import {Registration} from '../features/registration/Registration';
 import { Profile } from '../features/profile/Profile';
+import {ForgotPassword} from '../features/password/forgotPassword/ForgotPassword';
+import {NewPassword} from '../features/password/newPassword/NewPassword';
+import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
 
 export const App = () => {
 
@@ -35,7 +38,9 @@ export const App = () => {
                     <Route path={'/'} element={<Profile/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
-                    <Route path={'/password'} element={<h1>new password</h1>}/>
+                    <Route path={'/new-password'} element={<NewPassword/>}/>
+                    <Route path={'/forgot'} element={<ForgotPassword/>}/>
+                    <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>

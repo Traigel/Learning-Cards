@@ -118,7 +118,7 @@ export const Registration = () => {
                               onOff={confirmPasswordShow}/>
                 </div>
                 <div className={s.bottomBlock}>
-                    <SuperButton className={s.buttonReg} type={'submit'}>confirm</SuperButton>
+                    <SuperButton className={s.buttonReg} type={'submit'}>Sign Up </SuperButton>
                     <h5>Already have an account?</h5>
                     <NavLink to={'/login'}>Sign In</NavLink>
                 </div>

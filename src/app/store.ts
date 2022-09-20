@@ -7,7 +7,6 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 const rootReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
-    // register: registerReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))

@@ -9,7 +9,9 @@ beforeEach(() => {
     state = {
         isLoggedIn: false,
         profile: null,
-        registerSuccess: false
+        registerSuccess: false,
+        forgotPasswordSuccess: false,
+        forgetEmail: null
     }
     userInfo = {
         profile: {

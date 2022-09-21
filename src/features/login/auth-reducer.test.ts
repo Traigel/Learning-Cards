@@ -1,4 +1,12 @@
-import {authReducer, setIsLoggedInAC, InitialAuthStateType, setUserInfoAC, ProfileType, setIsRegistrationSuccess} from './auth-reducer';
+import {
+    authReducer,
+    setIsLoggedInAC,
+    InitialAuthStateType,
+    setUserInfoAC,
+    ProfileType,
+    setIsRegistrationSuccess,
+    forgotPasswordSuccess, setDataForgetPassword
+} from './auth-reducer';
 
 let state: InitialAuthStateType
 let userInfo: {
@@ -47,4 +55,12 @@ test('set user info', () => {
 test('register success', () => {
     const regUser = authReducer(state, setIsRegistrationSuccess(true))
     expect(regUser.registerSuccess).toBe(true)
+})
+test('forgot password success', () => {
+    const forgotPass = authReducer(state, forgotPasswordSuccess(true))
+    expect(forgotPass.forgotPasswordSuccess).toBe(true)
+})
+test('set data email', () => {
+    const setDataEmail = authReducer(state, setDataForgetPassword('hello@gmail.com'))
+    expect(setDataEmail.forgetEmail).toBe('hello@gmail.com')
 })

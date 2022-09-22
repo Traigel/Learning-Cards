@@ -1,12 +1,12 @@
-import {authReducer, setIsLoggedInOutAC, InitialAuthStateType, setUserInfoAC, ProfileType} from "./auth-reducer";
 import {
     authReducer,
-    setIsLoggedInAC,
+    forgotPasswordSuccess,
     InitialAuthStateType,
-    setUserInfoAC,
     ProfileType,
+    setDataForgetPassword,
+    setIsLoggedInOutAC,
     setIsRegistrationSuccess,
-    forgotPasswordSuccess, setDataForgetPassword
+    setUserInfoAC
 } from './auth-reducer';
 
 let state: InitialAuthStateType
@@ -21,7 +21,6 @@ beforeEach(() => {
         forgetEmail: null
     }
     userInfo = {
-        profile: {
             name: 'Vladimir',
             email: 'hello@gmail.com',
             publicCardPacksCount: 3,
@@ -36,7 +35,6 @@ beforeEach(() => {
             updated: '',
             verified: false,
         }
-    }
 })
 
 test('set is logged in', () => {

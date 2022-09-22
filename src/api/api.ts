@@ -15,7 +15,7 @@ export const authAPI = {
         return instance.delete<AxiosResponse<ResponseMeType>>('/auth/me')
     },
     me() {
-        return instance.post<{}, AxiosResponse<ResponseMeType>>('/auth/me', {})
+        return instance.post<{}, AxiosResponse<ResponseMeType>>('/auth/me')
     },
     changeUserName(data: ChangeUserNameParamsType) {
         return instance.put<ChangeUserNameParamsType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)

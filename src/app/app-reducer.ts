@@ -1,7 +1,7 @@
-import {Dispatch} from "redux"
 import {authAPI} from "../api/api";
 import axios, {AxiosError} from "axios";
 import {setIsLoggedInOutAC, setUserInfoAC} from "../features/login/auth-reducer";
+import {AppThunk} from "./store";
 
 const initialState: InitialAppStateType = {
     status: 'idle',
@@ -31,7 +31,7 @@ export const setIsInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-I
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 
 //thunks
-export const initializeAppTC = () => async (dispatch: Dispatch) => {
+export const initializeAppTC = (): AppThunk => async (dispatch) => {
     try {
         const res = await authAPI.me()
         dispatch(setIsLoggedInOutAC(true))

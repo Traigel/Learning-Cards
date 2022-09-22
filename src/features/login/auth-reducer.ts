@@ -13,10 +13,13 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
         case "AUTH/SET-LOGIN-LOGOUT":
             return {...state, isLoggedIn: action.isLoggedIn}
         case "AUTH/SET-USER-INFO":
-            return {
-                ...state,
-                profile: {...action.data}
+            if (action.data) {
+                return {
+                    ...state,
+                    profile: {...action.data}
+                }
             }
+            else return {...state, profile: null}
         default:
             return state
     }
@@ -24,7 +27,7 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
 
 //action creators
 export const setIsLoggedInOutAC = (isLoggedIn: boolean) => ({type: 'AUTH/SET-LOGIN-LOGOUT', isLoggedIn} as const)
-export const setUserInfoAC = (data: ProfileType) => ({type: 'AUTH/SET-USER-INFO', data} as const)
+export const setUserInfoAC = (data: ProfileType | null) => ({type: 'AUTH/SET-USER-INFO', data} as const)
 
 //thunks
 export const loginTC = (data: LoginParamsType): AppThunk => async (dispatch) => {
@@ -51,6 +54,7 @@ export const logoutTC = (): AppThunk => async (dispatch) => {
     try {
         await authAPI.logout()
         dispatch(setIsLoggedInOutAC(false))
+        dispatch(setUserInfoAC(null))
     } catch (e) {
         const err = e as Error | AxiosError
         if (axios.isAxiosError(err)) {

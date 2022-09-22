@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './CheckEmail.module.css'
 import SuperButton from '../../../common/components/superButton/SuperButton';
-import checkEmail from '../../../utils/images/checkemail.png'
+import checkEmail from '../../../assets/image/checkemail.png'
 import {NavLink} from 'react-router-dom';
 import {useAppSelector} from '../../../common/hooks/hooks';
 
@@ -12,7 +12,7 @@ const email = useAppSelector(s=>s.auth.forgetEmail)
 
     return <div className={s.containerForm}>
         <h1 className={s.signUp}>Check Email</h1>
-        <div >
+        <div>
 
             <div className={s.checkEmail}>
                 <img src={checkEmail} alt={'check'} />

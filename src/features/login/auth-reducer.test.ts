@@ -1,4 +1,13 @@
 import {authReducer, setIsLoggedInOutAC, InitialAuthStateType, setUserInfoAC, ProfileType} from "./auth-reducer";
+import {
+    authReducer,
+    setIsLoggedInAC,
+    InitialAuthStateType,
+    setUserInfoAC,
+    ProfileType,
+    setIsRegistrationSuccess,
+    forgotPasswordSuccess, setDataForgetPassword
+} from './auth-reducer';
 
 let state: InitialAuthStateType
 let userInfo: ProfileType
@@ -6,22 +15,27 @@ let userInfo: ProfileType
 beforeEach(() => {
     state = {
         isLoggedIn: false,
-        profile: userInfo
+        profile: userInfo,
+        registerSuccess: false,
+        forgotPasswordSuccess: false,
+        forgetEmail: null
     }
     userInfo = {
-        _id: '123',
-        email: 'hello@gmail.com',
-        rememberMe: false,
-        isAdmin: false,
-        name: 'Vladimir',
-        verified: false,
-        publicCardPacksCount: 3,
-        created: '',
-        updated: '',
-        __v: 312,
-        token: '',
-        tokenDeathTime: 123,
-        avatar: ''
+        profile: {
+            name: 'Vladimir',
+            email: 'hello@gmail.com',
+            publicCardPacksCount: 3,
+            avatar: '',
+            _id: '',
+            __v: 0,
+            created: '',
+            isAdmin: false,
+            rememberMe: false,
+            token: '',
+            tokenDeathTime: 0,
+            updated: '',
+            verified: false,
+        }
     }
 })
 
@@ -42,4 +56,16 @@ test('set user info', () => {
         expect(authReducer1.profile.email).toBe('hello@gmail.com')
         expect(authReducer1.profile.publicCardPacksCount).toBe(3)
     }
+})
+test('register success', () => {
+    const regUser = authReducer(state, setIsRegistrationSuccess(true))
+    expect(regUser.registerSuccess).toBe(true)
+})
+test('forgot password success', () => {
+    const forgotPass = authReducer(state, forgotPasswordSuccess(true))
+    expect(forgotPass.forgotPasswordSuccess).toBe(true)
+})
+test('set data email', () => {
+    const setDataEmail = authReducer(state, setDataForgetPassword('hello@gmail.com'))
+    expect(setDataEmail.forgetEmail).toBe('hello@gmail.com')
 })

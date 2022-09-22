@@ -9,6 +9,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {useAppDispatch, useAppSelector} from "./store";
 import {initializeAppTC} from "./app-reducer";
 import {Profile} from "../features/profile/Profile";
+import {Registration} from '../features/registration/Registration';
+import {ForgotPassword} from '../features/password/forgotPassword/ForgotPassword';
+import {NewPassword} from '../features/password/newPassword/NewPassword';
+import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
 
 export const App = () => {
 
@@ -33,8 +37,10 @@ export const App = () => {
                 <Routes>
                     <Route path={'/'} element={<Profile/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/register'} element={<h1>register</h1>}/>
-                    <Route path={'/password'} element={<h1>new password</h1>}/>
+                    <Route path={'/register'} element={<Registration/>}/>
+                    <Route path={'/new-password/:token'} element={<NewPassword/>}/>
+                    <Route path={'/forgot'} element={<ForgotPassword/>}/>
+                    <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>

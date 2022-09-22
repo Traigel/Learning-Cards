@@ -36,7 +36,6 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
     }
 }
 
-
 //action
 export const setIsLoggedInAC = (isLoggedIn: boolean) => ({type: 'AUTH/SET-IS-LOGGED-IN', isLoggedIn} as const)
 export const setUserInfoAC = (data: ProfileType) => ({type: 'AUTH/SET-USER-INFO', data} as const)

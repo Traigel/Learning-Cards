@@ -2,8 +2,8 @@ import React, {FocusEvent, KeyboardEvent, useEffect, useState} from 'react'
 import styles from './Profile.module.css'
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
-import {changeUserNameTC, logoutTC} from "../login/auth-reducer";
-import {useAppDispatch} from "../../app/store";
+import {logoutTC, updateUserInfoTC} from "../login/auth-reducer";
+import {useAppDispatch, useAppSelector} from "../../app/store";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getIsLoggedIn, getProfileInfo} from "../login/auth-selectors";
@@ -12,8 +12,9 @@ export const Profile = () => {
 
     const profileInfo = useSelector(getProfileInfo)
     const isLoggedIn = useSelector(getIsLoggedIn)
+    const userName = useAppSelector((state) => state.auth.profile?.name)
 
-    const [inputValue, setInputValue] = useState<string>('')
+    const [inputValue, setInputValue] = useState(userName)
     const dispatch = useAppDispatch()
 
     const logoutHandler = () => {
@@ -25,12 +26,12 @@ export const Profile = () => {
     }
 
     const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
-        dispatch(changeUserNameTC({name: e.currentTarget.value, avatar: ''}))
+        dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            dispatch(changeUserNameTC({name: e.currentTarget.value, avatar: ''}))
+            dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
         }
     }
 
@@ -55,14 +56,15 @@ export const Profile = () => {
                     <span>1</span>
                 </div>
                 <SuperEditableSpan
-                    value={inputValue}
+                    inputValue={inputValue}
+                    spanValue={userName}
                     className={styles.additionalForInput}
                     spanClassName={styles.additionalForSpan}
                     onChangeText={(e) => changeUserNameHandler(e)}
                     onBlur={(e) => onBlurHandler(e)}
                     onKeyPress={(e) => onKeyPressHandler(e)}
                 />
-                <h3>{profileInfo!.email}</h3>
+                <h3>{profileInfo && profileInfo.email}</h3>
                 <SuperButton onClick={logoutHandler}>
                     Log out
                 </SuperButton>

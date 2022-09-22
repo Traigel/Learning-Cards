@@ -1,6 +1,5 @@
-import axios, {AxiosError, AxiosResponse} from "axios";
-import {Dispatch} from "redux";
-import {authAPI, ChangeUserNameParamsType, LoginParamsType, ResponseMeType} from "../../api/api";
+import axios, {AxiosError} from "axios";
+import {authAPI, ChangeUserNameParamsType, LoginParamsType} from "../../api/api";
 import {setAppErrorAC, setAppStatusAC} from "../../app/app-reducer";
 import {AppThunk} from "../../app/store";
 
@@ -13,9 +12,6 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
     switch (action.type) {
         case "AUTH/SET-LOGIN-LOGOUT":
             return {...state, isLoggedIn: action.isLoggedIn}
-        case "PROFILE/SET-NEW-USER-NAME":
-            console.log('change name CASE')
-            return state
         case "AUTH/SET-USER-INFO":
             return {
                 ...state,
@@ -28,7 +24,6 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
 
 //action creators
 export const setIsLoggedInOutAC = (isLoggedIn: boolean) => ({type: 'AUTH/SET-LOGIN-LOGOUT', isLoggedIn} as const)
-export const setNewUserNameAC = (userName: string) => ({type: 'PROFILE/SET-NEW-USER-NAME', userName} as const)
 export const setUserInfoAC = (data: ProfileType) => ({type: 'AUTH/SET-USER-INFO', data} as const)
 
 //thunks
@@ -69,7 +64,7 @@ export const logoutTC = (): AppThunk => async (dispatch) => {
     }
 }
 
-export const changeUserNameTC = (data: ChangeUserNameParamsType): AppThunk => async (dispatch) => {
+export const updateUserInfoTC = (data: ChangeUserNameParamsType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         const res = await authAPI.changeUserName(data)
@@ -88,7 +83,6 @@ export const changeUserNameTC = (data: ChangeUserNameParamsType): AppThunk => as
 }
 
 //type
-
 export type ProfileType = {
 	_id?: string;
 	email: string;
@@ -110,6 +104,5 @@ export type InitialAuthStateType = {
     profile: ProfileType | null
 }
 export type SetIsLoggedInOutType = ReturnType<typeof setIsLoggedInOutAC>
-export type SetNewUserNameType = ReturnType<typeof setNewUserNameAC>
 export type SetUserInfoType = ReturnType<typeof setUserInfoAC>
-export type AuthActionsType = SetIsLoggedInOutType | SetUserInfoType | SetNewUserNameType
+export type AuthActionsType = SetIsLoggedInOutType | SetUserInfoType

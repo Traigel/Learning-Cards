@@ -16,10 +16,10 @@ type FormikErrorsType = {
 
 export const Registration = () => {
     const dispatch = useAppDispatch()
-    const registerSuccess = useAppSelector(state => state.auth.registerSuccess)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const [passwordShow, setPasswordShow] = useState(false)
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
+    const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false)
 
     const togglePassword = () => {
         setPasswordShow(!passwordShow);
@@ -53,10 +53,11 @@ export const Registration = () => {
         onSubmit: values => {
             dispatch(registerTC(values))
             formik.resetForm()
+            setIsRegistrationSuccess(true)
         }
     })
 
-    if (registerSuccess) {
+    if (isRegistrationSuccess) {
         return <Navigate to={'/login'}/>
     }
 

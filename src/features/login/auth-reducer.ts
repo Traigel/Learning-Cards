@@ -6,7 +6,6 @@ import {AppThunk} from "../../app/store";
 const initialState: InitialAuthStateType = {
     isLoggedIn: false,
     profile: null,
-    registerSuccess: false,
     forgotPasswordSuccess: false,
     forgetEmail: null
 }
@@ -23,11 +22,6 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
                 }
             }
             else return {...state, profile: null}
-
-        case 'AUTH/SET-AUTH-REGISTER':
-            return {
-                ...state, registerSuccess: action.value
-            }
         case 'AUTH/SEND-FORGOT-PASSWORD':
             return {...state, forgotPasswordSuccess: action.forgotPasswordSuccess}
         case 'AUTH/SET-DATA-EMAIL':
@@ -43,7 +37,6 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
 //action creators
 export const setIsLoggedInOutAC = (isLoggedIn: boolean) => ({type: 'AUTH/SET-LOGIN-LOGOUT', isLoggedIn} as const)
 export const setUserInfoAC = (data: ProfileType | null) => ({type: 'AUTH/SET-USER-INFO', data} as const)
-export const setIsRegistrationSuccess = (value: boolean) => ({type: 'AUTH/SET-AUTH-REGISTER', value} as const)
 export const forgotPasswordSuccess = (forgotPasswordSuccess: boolean) => ({type: 'AUTH/SEND-FORGOT-PASSWORD', forgotPasswordSuccess} as const)
 export const setDataForgetPassword  = (email: string) => ({type: 'AUTH/SET-DATA-EMAIL', email} as const)
 
@@ -90,7 +83,6 @@ export const registerTC = (data: RegisterParamsType): AppThunk => async (dispatc
     dispatch(setAppStatusAC('loading'))
     try {
         await authAPI.registerUser(data)
-        dispatch(setIsRegistrationSuccess(true))
     } catch (e) {
         const err = e as Error | AxiosError
         if (axios.isAxiosError(err)) {
@@ -179,7 +171,6 @@ export type ProfileType = {
 export type InitialAuthStateType = {
     isLoggedIn: boolean
     profile: ProfileType | null
-    registerSuccess: boolean
     forgotPasswordSuccess: boolean
     forgetEmail: string | null
 }
@@ -195,6 +186,5 @@ export type ForgotPasswordType = {
 export type AuthActionsType =
     | ReturnType<typeof setIsLoggedInOutAC>
     | ReturnType<typeof setUserInfoAC>
-    | ReturnType<typeof setIsRegistrationSuccess>
     | ReturnType<typeof forgotPasswordSuccess>
     | ReturnType<typeof setDataForgetPassword>

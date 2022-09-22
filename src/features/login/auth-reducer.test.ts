@@ -5,7 +5,6 @@ import {
     ProfileType,
     setDataForgetPassword,
     setIsLoggedInOutAC,
-    setIsRegistrationSuccess,
     setUserInfoAC
 } from './auth-reducer';
 
@@ -16,7 +15,6 @@ beforeEach(() => {
     state = {
         isLoggedIn: false,
         profile: userInfo,
-        registerSuccess: false,
         forgotPasswordSuccess: false,
         forgetEmail: null
     }
@@ -54,10 +52,6 @@ test('set user info', () => {
         expect(authReducer1.profile.email).toBe('hello@gmail.com')
         expect(authReducer1.profile.publicCardPacksCount).toBe(3)
     }
-})
-test('register success', () => {
-    const regUser = authReducer(state, setIsRegistrationSuccess(true))
-    expect(regUser.registerSuccess).toBe(true)
 })
 test('forgot password success', () => {
     const forgotPass = authReducer(state, forgotPasswordSuccess(true))

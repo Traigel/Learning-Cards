@@ -19,20 +19,20 @@ beforeEach(() => {
         forgetEmail: null
     }
     userInfo = {
-            name: 'Vladimir',
-            email: 'hello@gmail.com',
-            publicCardPacksCount: 3,
-            avatar: '',
-            _id: '',
-            __v: 0,
-            created: '',
-            isAdmin: false,
-            rememberMe: false,
-            token: '',
-            tokenDeathTime: 0,
-            updated: '',
-            verified: false,
-        }
+        name: 'Vladimir',
+        email: 'hello@gmail.com',
+        publicCardPacksCount: 3,
+        avatar: '',
+        _id: '',
+        __v: 0,
+        created: '',
+        isAdmin: false,
+        rememberMe: false,
+        token: '',
+        tokenDeathTime: 0,
+        updated: '',
+        verified: false,
+    }
 })
 
 test('set is logged in', () => {

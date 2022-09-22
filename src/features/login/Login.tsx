@@ -30,8 +30,8 @@ export const Login = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
-            if (values.password.length < 5) {
-                errors.password = 'Password must be more than five characters'
+            if (values.password.length < 8) {
+                errors.password = 'Password must be more than 7 characters'
             }
             return errors
         },
@@ -79,9 +79,9 @@ export const Login = () => {
                     <div className={styles.checkedForm}>
                         <SuperCheckbox
                             checked={formik.values.rememberMe}
+                            children={'Remember me'}
                             {...formik.getFieldProps('rememberMe')}
                         />
-                        Remember me
                     </div>
                     <div className={styles.forPass}>
                         <NavLink to={'/forgot'}>Forgot Password?</NavLink>

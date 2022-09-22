@@ -2,7 +2,6 @@ import axios, {AxiosResponse} from 'axios'
 import {ProfileType} from "../features/login/auth-reducer";
 import {ForgotPasswordType, SetNewPasswordType} from '../features/login/auth-reducer'
 
-
 export const instance = axios.create({
     //baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/' ,
     baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:7542/2.0/' : 'https://neko-back.herokuapp.com/2.0/',
@@ -25,7 +24,7 @@ export const authAPI = {
     changeUserName(data: ChangeUserNameParamsType) {
         return instance.put<ChangeUserNameParamsType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
     },
-    registerUser(data:RegisterParamsType) {
+    registerUser(data: RegisterParamsType) {
         return instance.post<RegisterParamsType, AxiosResponse<ResponseMeType>>('auth/register', data)
     },
     forgotPassword(data: ForgotPasswordType) {
@@ -55,10 +54,10 @@ export type ResponseUpdatesUserType = {
 }
 
 export type ResponseForgotType = {
-	info: string;
-	success: boolean;
-	answer: boolean;
-	html: boolean;
+    info: string;
+    success: boolean;
+    answer: boolean;
+    html: boolean;
 }
 
 export type ResponseMeType = {

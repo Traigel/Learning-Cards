@@ -1,7 +1,6 @@
 import {authAPI} from "../api/api";
-import axios, {AxiosError} from "axios";
 import {setIsLoggedInOutAC, setUserInfoAC} from "../features/login/auth-reducer";
-import {AppRootStateType, AppThunk} from './store';
+import {AppThunk} from './store';
 
 const initialState: InitialAppStateType = {
     status: 'idle',

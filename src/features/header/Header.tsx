@@ -3,8 +3,8 @@ import styles from './Header.module.css'
 import SuperButton from "../../common/components/superButton/SuperButton";
 import logoImg from '../../assets/image/logo.png'
 import LinearProgress from '@mui/material/LinearProgress';
-import {useAppSelector} from "../../app/store";
 import {NavLink} from "react-router-dom";
+import {useAppSelector} from "../../common/hooks/hooks";
 
 export const Header = () => {
 
@@ -12,10 +12,10 @@ export const Header = () => {
     const profileInfo = useAppSelector(state => state.auth.profile)
 
     return (
-        <div className={styles.headerBlock}>
+        <header className={styles.headerBlock}>
             <div className={styles.headerContainer}>
                 <div className={styles.imgBlock}>
-                    <img src={logoImg} alt={'Logo'}/>
+                    <a href="#"><img src={logoImg} alt={'Logo'}/></a>
                 </div>
                 <div>
                     {profileInfo &&
@@ -36,7 +36,7 @@ export const Header = () => {
             <div className={styles.linear}>
                 {status === 'loading' && <LinearProgress color="inherit"/>}
             </div>
-        </div>
+        </header>
     )
 }
 

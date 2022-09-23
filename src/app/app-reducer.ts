@@ -2,10 +2,10 @@ import {authAPI} from "../api/api";
 import {setIsLoggedInOutAC, setUserInfoAC} from "../features/login/auth-reducer";
 import {AppThunk} from './store';
 
-const initialState: InitialAppStateType = {
-    status: 'idle',
+const initialState = {
+    status: 'idle' as RequestStatusType,
     isInitialized: false,
-    error: null,
+    error: null as string | null,
 }
 
 export const appReducer = (state = initialState, action: AppActionType): InitialAppStateType => {
@@ -42,13 +42,9 @@ export const initializeAppTC = (): AppThunk => async (dispatch) => {
 }
 
 // type
-export type InitialAppStateType = {
-    status: RequestStatusType
-    isInitialized: boolean
-    error: string | null
-}
-type SetStatusType = ReturnType<typeof setAppStatusAC>
-type SetIsInitializedType = ReturnType<typeof setIsInitializedAC>
-type SetErrorType = ReturnType<typeof setAppErrorAC>
-export type AppActionType = SetStatusType | SetIsInitializedType | SetErrorType
+export type InitialAppStateType = typeof initialState
 export type RequestStatusType = 'idle' | 'loading'
+export type AppActionType =
+    | ReturnType<typeof setAppStatusAC>
+    | ReturnType<typeof setIsInitializedAC>
+    | ReturnType<typeof setAppErrorAC>

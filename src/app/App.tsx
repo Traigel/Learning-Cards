@@ -6,13 +6,13 @@ import {Login} from "../features/login/Login";
 import {Error404} from "../features/error404/Error404";
 import {DisplayOnError} from "../common/components/displayOnError/DisplayOnError";
 import CircularProgress from '@mui/material/CircularProgress';
-import {useAppDispatch, useAppSelector} from "./store";
 import {initializeAppTC} from "./app-reducer";
 import {Profile} from "../features/profile/Profile";
 import {Registration} from '../features/registration/Registration';
 import {ForgotPassword} from '../features/password/forgotPassword/ForgotPassword';
 import {NewPassword} from '../features/password/newPassword/NewPassword';
 import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
+import {useAppDispatch, useAppSelector} from '../common/hooks/hooks';
 
 export const App = () => {
 

@@ -6,8 +6,8 @@ import SuperButton from "../../common/components/superButton/SuperButton";
 import {useFormik} from 'formik';
 import {EyeOnOff} from "../../common/components/eyeOnOff/EyeOnOff";
 import {Navigate, NavLink} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../app/store";
 import {loginTC} from "./auth-reducer";
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 
 export const Login = () => {
 

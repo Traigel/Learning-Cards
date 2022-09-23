@@ -3,10 +3,10 @@ import styles from './Profile.module.css'
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
 import {logoutTC, updateUserInfoTC} from "../login/auth-reducer";
-import {useAppDispatch, useAppSelector} from "../../app/store";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getIsLoggedIn, getProfileInfo} from "../login/auth-selectors";
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 
 export const Profile = () => {
 
@@ -26,7 +26,7 @@ export const Profile = () => {
     }
 
     const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
-        if (profileInfo && e.currentTarget.value !== profileInfo.name) {
+        if (profileInfo && e.currentTarget.value !== profileInfo.name || !e.currentTarget.value) {
             dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
         }
     }

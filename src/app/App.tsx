@@ -36,11 +36,14 @@ export const App = () => {
             <div className={styles.appContainer}>
                 <Routes>
                     <Route path={'/'} element={<Profile/>}/>
+                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
+                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/forgot'} element={<ForgotPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
+                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                     test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text

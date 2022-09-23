@@ -47,8 +47,10 @@
 }
 
 .inputContainer {
+    padding-left: 25px;
     margin-top: 10px;
     height: 50px;
+    font-weight: 500;
 }
 
 .additionalForInput {
@@ -59,10 +61,25 @@
     color: inherit;
 }
 
+.additionalForInput:focus {
+    outline: none;
+    border: none;
+    padding: 5px 8px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #313131;
+}
+
 .additionalForSpan {
     box-sizing: border-box;
     display: flex;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+}
+
+.additionalForSpan span {
+    box-sizing: border-box;
+    margin-top: 3px;
+    opacity: 0.8;
 }
 
 .additionalForSpan:hover {
@@ -76,7 +93,7 @@
 
 .userMailTitle::selection {
     color: #2c2c2c;
-    background-color: rgba(211, 211, 211, 0.62);
+    background-color: rgba(182, 182, 182, 0.24);
 }
 
 

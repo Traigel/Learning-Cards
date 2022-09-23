@@ -48,7 +48,7 @@ export const Login = () => {
     return (
         <div className={styles.loginBlock}>
             <div className={styles.loginContainer}>
-                <h2 className={styles.title}>Sign in</h2>
+                <h2 className={styles.title}>Sign In</h2>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={styles.inputForm}>
                         <SuperInputText

@@ -9,5 +9,6 @@
 }
 
 .error404 img {
+    cursor: pointer;
     margin-top: 4vh;
 }

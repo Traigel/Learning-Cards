@@ -26,7 +26,9 @@ export const Profile = () => {
     }
 
     const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
-        dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
+        if (profileInfo && e.currentTarget.value !== profileInfo.name) {
+            dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
+        }
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {

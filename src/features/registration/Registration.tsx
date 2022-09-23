@@ -51,6 +51,7 @@ export const Registration = () => {
             return errors
         },
         onSubmit: values => {
+            debugger
             dispatch(registerTC(values))
             formik.resetForm()
             setIsRegistrationSuccess(true)
@@ -108,9 +109,9 @@ export const Registration = () => {
                     <div>
                         <EyeOnOff className={styles.visibleConfirmEye} onClick={toggleConfirmPassword} onOff={confirmPasswordShow}/>
                     </div>
+                    <SuperButton className={styles.buttonReg} type={'submit'}>sign up</SuperButton>
                 </form>
             </div>
-            <SuperButton className={styles.buttonReg} type={'submit'}>sign up</SuperButton>
             <h4 className={styles.haveAccountTitle}>Already have an account?</h4>
             <NavLink to={'/login'} className={styles.signInTitle}>Sign In</NavLink>
         </div>

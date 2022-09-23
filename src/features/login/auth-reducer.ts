@@ -80,6 +80,7 @@ export const logoutTC = (): AppThunk => async (dispatch) => {
     }
 }
 export const registerTC = (data: RegisterParamsType): AppThunk => async (dispatch) => {
+    debugger
     dispatch(setAppStatusAC('loading'))
     try {
         await authAPI.registerUser(data)

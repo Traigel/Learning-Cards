@@ -18,7 +18,7 @@ export const ForgotPassword = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            message: "<div>password recovery link: <a href='http://localhost:3000/new-password/$token$'>link</a></div>",
+            message: "<div>password recovery link: <a href='http://localhost:3000/#/new-password/$token$'>link</a></div>",
         },
         validate: (values) => {
             const errors: FormikErrorsType = {}
@@ -29,7 +29,6 @@ export const ForgotPassword = () => {
             }
             return errors
         },
-
         onSubmit: values => {
             dispatch(forgotPasswordTC(values))
             formik.resetForm()

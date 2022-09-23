@@ -35,7 +35,7 @@ export const App = () => {
             <DisplayOnError/>
             <div className={styles.appContainer}>
                 <Routes>
-                    <Route path={'/'} element={<Profile/>}/>
+                    <Route path={'/'} element={<Profile1/>}/>
                     test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>

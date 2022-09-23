@@ -51,7 +51,6 @@ export const Registration = () => {
             return errors
         },
         onSubmit: values => {
-            debugger
             dispatch(registerTC(values))
             formik.resetForm()
             setIsRegistrationSuccess(true)

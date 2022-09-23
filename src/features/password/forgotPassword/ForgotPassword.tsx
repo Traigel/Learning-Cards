@@ -1,6 +1,6 @@
 import React from 'react'
 import {useFormik} from 'formik';
-import s from './ForgotPassword.module.css'
+import styles from './ForgotPassword.module.css'
 import {Navigate, NavLink} from 'react-router-dom';
 import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import SuperButton from '../../../common/components/superButton/SuperButton';
@@ -18,12 +18,12 @@ export const ForgotPassword = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            message: "<div> password recovery link: <a href='http://localhost:3000/new-password/$token$'>link</a></div>",
+            message: "<div>password recovery link: <a href='http://localhost:3000/new-password/$token$'>link</a></div>",
         },
         validate: (values) => {
             const errors: FormikErrorsType = {}
             if (!values.email) {
-                errors.email = 'required'
+                errors.email = 'email required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
@@ -40,32 +40,34 @@ export const ForgotPassword = () => {
         return <Navigate to={'/checkEmail'}/>
     }
 
-    return <div className={s.containerForm}>
-        <h1 className={s.signUp}>Forgot your password?</h1>
-        <div>
-            <form onSubmit={formik.handleSubmit}>
-                <div className={s.inputSize}>
-                    <SuperInputText
-                        autoComplete="email"
-                        placeholder="Email"
-                        id={'email'}
-                        type="text"
-                        {...formik.getFieldProps('email')}
-                    />
-                </div>
-                <div className={s.errorConfirmPass}>
-                    {formik.touched.email && formik.errors.email &&
-                        <div className={s.errorFormik}>{formik.errors.email}</div>}
-                </div>
+    return (
+        <div className={styles.containerForm}>
+            <h1 className={styles.forgotPasswordTitle}>Forgot your password?</h1>
+            <div className={styles.mainContainer}>
+                <form onSubmit={formik.handleSubmit}>
+                    <div className={styles.inputSize}>
+                        <SuperInputText
+                            autoComplete="email"
+                            placeholder="Email"
+                            id={'email'}
+                            type="text"
+                            {...formik.getFieldProps('email')}
+                        />
+                    </div>
+                    <div className={styles.errorConfirmPass}>
+                        {formik.touched.email && formik.errors.email &&
+                            <div className={styles.errorFormik}>{formik.errors.email}</div>}
+                    </div>
 
-                <h6>Enter your email address and we will send you further instructions </h6>
-                <div className={s.bottomBlock}>
-                    <SuperButton className={s.buttonReg} type={'submit'}>Send Instructions</SuperButton>
-                    <h5>Did you remember your password?</h5>
-                    <NavLink to={'/login'}>Try logging in</NavLink>
-                </div>
-            </form>
+                    <h4 className={styles.enterEmailTitle}>Enter your email address and we<br/> will send you further instructions </h4>
+                    <div className={styles.bottomBlock}>
+                        <SuperButton className={styles.buttonReg} type={'submit'}>send Instructions</SuperButton>
+                        <h4 className={styles.rememberPasswordTitle}>Did you remember your password?</h4>
+                        <NavLink to={'/login'} className={styles.tryToLoginTitle}>Try logging in</NavLink>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+    )
 }
 

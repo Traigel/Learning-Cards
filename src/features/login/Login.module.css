@@ -76,6 +76,7 @@
     font-size: 0.85rem;
     color: rgba(208, 0, 0, 0.63);
     height: 20px;
+    user-select: none;
 }
 
 .forPass {

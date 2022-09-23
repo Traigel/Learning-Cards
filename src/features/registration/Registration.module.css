@@ -2,6 +2,7 @@
     text-align: center;
     color: rgba(208, 0, 0, 0.63);
     font-size: 0.85rem;
+    user-select: none;
 }
 
 .formContainer {

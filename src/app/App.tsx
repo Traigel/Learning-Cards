@@ -35,18 +35,14 @@ export const App = () => {
             <DisplayOnError/>
             <div className={styles.appContainer}>
                 <Routes>
-                    <Route path={'/'} element={<Profile1/>}/>
-                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
+                    <Route path={'/'} element={<Profile/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
-                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/forgot'} element={<ForgotPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
-                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
-                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                 </Routes>
             </div>
         </div>

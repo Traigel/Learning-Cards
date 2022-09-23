@@ -29,7 +29,7 @@
     color: #2d2157;
 }
 
-.haveAccountTitle {
+.dontHaveAccountTitle {
     color: #757575;
     user-select: none;
 }
@@ -48,10 +48,6 @@
     padding: 5px;
     height: 20px;
     width: 80%;
-}
-
-.inputForm input:focus {
-    /*background-color: #0F4787;*/
 }
 
 .inputForm input::placeholder {
@@ -75,11 +71,11 @@
 }
 
 .error {
-    padding-top: 5px;
+    box-sizing: border-box;
+    margin: 3px 0 5px 0;
     font-size: 0.85rem;
-    color: rgba(215, 0, 0, 0.49);
+    color: rgba(208, 0, 0, 0.63);
     height: 20px;
-    margin-bottom: 10px;
 }
 
 .forPass {
@@ -96,8 +92,5 @@
 
 .buttonForm button {
     width: 80%;
-    padding: 5px;
-    color: white;
-    font-weight: 500;
     margin-bottom: 20px;
 }

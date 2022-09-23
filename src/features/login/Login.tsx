@@ -26,12 +26,12 @@ export const Login = () => {
         validate: values => {
             const errors: FormikErrorType = {}
             if (!values.email) {
-                errors.email = 'enter your email'
+                errors.email = 'email required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'invalid email address'
             }
             if (values.password.length < 8) {
-                errors.password = 'password must be more than 7 characters'
+                errors.password = 'password must be more than 7 symbols'
             }
             return errors
         },
@@ -85,9 +85,9 @@ export const Login = () => {
                         <NavLink to={'/forgot'} className={styles.forgotPassTitle}>Forgot Password?</NavLink>
                     </div>
                     <div className={styles.buttonForm}>
-                        <SuperButton type="submit">Sign in</SuperButton>
+                        <SuperButton type="submit">sign in</SuperButton>
                     </div>
-                    <div className={styles.haveAccountTitle}>
+                    <div className={styles.dontHaveAccountTitle}>
                         Don't have an account?
                     </div>
                     <NavLink to={'/register'} className={styles.signUpTitle}>Sign Up</NavLink>

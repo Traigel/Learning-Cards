@@ -38,15 +38,15 @@ export const Registration = () => {
         validate: (values) => {
             const errors: FormikErrorsType = {}
             if (!values.email) {
-                errors.email = 'required'
+                errors.email = 'email required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
-            if (values.password.length < 3) {
-                errors.password = 'enter more than 3 symbols'
+            if (values.password.length < 8) {
+                errors.password = 'enter more than 7 symbols'
             }
             if (values.confirmPassword !== values.password) {
-                errors.confirmPassword = 'Passwords do not match'
+                errors.confirmPassword = 'passwords do not match'
             }
             return errors
         },
@@ -68,62 +68,51 @@ export const Registration = () => {
     return (
         <div className={styles.formContainer}>
             <h2 className={styles.signUpTitle}>Sign Up</h2>
-            <div>
+            <div className={styles.mainContainer}>
                 <form onSubmit={formik.handleSubmit}>
-                    <div className={styles.inputSize}>
-                        <SuperInputText
-                            autoComplete="email"
-                            placeholder="Email"
-                            id={'email'}
-                            type="text"
-                            {...formik.getFieldProps('email')}
-                        />
-                    </div>
+                    <SuperInputText
+                        autoComplete="email"
+                        placeholder="Email"
+                        id={'email'}
+                        type="text"
+                        {...formik.getFieldProps('email')}
+                    />
                     <div className={styles.errorConfirmPass}>
-                        {formik.touched.email && formik.errors.email &&
-                            <div className={styles.errorFormik}>{formik.errors.email}</div>}
+                        {formik.touched.email && formik.errors.email && <div className={styles.errorFormik}>{formik.errors.email}</div>}
                     </div>
-                    <div className={styles.inputSize}>
-                        <SuperInputText
-                            autoComplete="current-password"
-                            placeholder="Password"
-                            id={'password'}
-                            type={passwordShow ? 'text' : 'password'}
-                            {...formik.getFieldProps('password')}
-                        />
-                    </div>
+                    <SuperInputText
+                        autoComplete="current-password"
+                        placeholder="Password"
+                        id={'password'}
+                        type={passwordShow ? 'text' : 'password'}
+                        {...formik.getFieldProps('password')}
+                    />
                     <div className={styles.errorConfirmPass}>
                         {formik.touched.password && formik.errors.password &&
                             <div className={styles.errorFormik}>{formik.errors.password}</div>}
                     </div>
-                    <div className={styles.inputSize}>
-                        <SuperInputText
-                            autoComplete="current-password"
-                            placeholder="confirmPassword"
-                            id={'confirmPassword'}
-                            type={confirmPasswordShow ? 'text' : 'password'}
-                            {...formik.getFieldProps('confirmPassword')}
-                        />
-                    </div>
+                    <SuperInputText
+                        autoComplete="current-password"
+                        placeholder="confirm Password"
+                        id={'confirmPassword'}
+                        type={confirmPasswordShow ? 'text' : 'password'}
+                        {...formik.getFieldProps('confirmPassword')}
+                    />
                     <div className={styles.errorConfirmPass}>
                         {formik.touched.confirmPassword && formik.errors.confirmPassword &&
                             <div className={styles.errorFormik}>{formik.errors.confirmPassword}</div>}
                     </div>
                     <div className={styles.errorConfirmPass}>
-
                         <EyeOnOff className={styles.visibleEye} onClick={togglePassword} onOff={passwordShow}/>
                     </div>
                     <div>
-                        <EyeOnOff className={styles.visibleConfirmEye} onClick={toggleConfirmPassword}
-                                  onOff={confirmPasswordShow}/>
-                    </div>
-                    <div className={styles.bottomBlock}>
-                        <SuperButton className={styles.buttonReg} type={'submit'}>Sign Up </SuperButton>
-                        <h5>Already have an account?</h5>
-                        <NavLink to={'/login'}>Sign In</NavLink>
+                        <EyeOnOff className={styles.visibleConfirmEye} onClick={toggleConfirmPassword} onOff={confirmPasswordShow}/>
                     </div>
                 </form>
             </div>
+            <SuperButton className={styles.buttonReg} type={'submit'}>sign up</SuperButton>
+            <h4 className={styles.haveAccountTitle}>Already have an account?</h4>
+            <NavLink to={'/login'} className={styles.signInTitle}>Sign In</NavLink>
         </div>
     )
 }

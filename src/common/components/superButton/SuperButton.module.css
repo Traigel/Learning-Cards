@@ -9,12 +9,11 @@
 }
 
 .default:hover {
-    /*background-color: #1565C0;*/
-    /*box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);*/
+    cursor: pointer;
 }
 
 .default:active {
-    /*background-color: #0F4787;*/
+
 }
 
 .disabled {

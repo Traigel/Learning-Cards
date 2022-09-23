@@ -4,7 +4,7 @@ import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
 import {logoutTC, updateUserInfoTC} from "../login/auth-reducer";
 import {useAppDispatch, useAppSelector} from "../../app/store";
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getIsLoggedIn, getProfileInfo} from "../login/auth-selectors";
 
@@ -49,6 +49,12 @@ export const Profile = () => {
 
     return (
         <div className={styles.profileContainer}>
+            <div className={styles.backToCardsBlock}>
+                <NavLink to={'/packs'} className={styles.goToPacksTitle}>
+                    <span className={styles.backArrowTitle}>←</span>
+                    Back to packs list
+                </NavLink>
+            </div>
             <div className={styles.profileBlock}>
                 <h2 className={styles.profileMainTitle}>Personal Information</h2>
                 <div className={styles.userAvatarContainer}>

@@ -5,7 +5,28 @@
     justify-content: center;
 }
 
+.backToCardsBlock {
+    position: absolute;
+    top: 80px;
+    left: 200px;
+}
+
+.goToPacksTitle {
+    user-select: none;
+    text-decoration: none;
+    color: #727272;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+.backArrowTitle {
+    font-size: 1.5rem;
+    padding-right: 5px;
+    opacity: 0.8;
+}
+
 .profileBlock {
+    position: relative;
     padding-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.23);
     display: flex;

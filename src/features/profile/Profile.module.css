@@ -96,7 +96,10 @@
     background-color: rgba(182, 182, 182, 0.24);
 }
 
-
+.logOutBtn {
+    border-radius: 5px;
+    width: 100px;
+}
 
 
 

@@ -69,7 +69,7 @@ export const Profile = () => {
                     />
                 </div>
                 <h3 className={styles.userMailTitle}>{profileInfo && profileInfo.email}</h3>
-                <SuperButton onClick={logoutHandler}>
+                <SuperButton onClick={logoutHandler} className={styles.logOutBtn}>
                     Log out
                 </SuperButton>
             </div>

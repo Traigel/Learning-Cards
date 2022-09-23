@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.imgBlock {
+    padding-top: 8px;
+}
+
 .imgBlock img {
     width: 50px;
     height: 50px;
@@ -25,4 +29,31 @@
     height: 5px;
     position: relative;
     bottom: 4px;
+}
+
+.personInfoInHeader {
+    display: flex;
+    padding-top: 3px;
+}
+
+.userNameIcon {
+    padding: 7px 10px 0;
+    user-select: none;
+}
+
+.goToProfileTitle {
+    user-select: none;
+    text-decoration: none;
+    color: black;
+    box-sizing: border-box;
+}
+
+.goToProfileTitle:hover {
+    color: #072c57;
+}
+
+.userAvatarIcon img {
+    width: 35px;
+    height: 35px;
+    border-radius: 18px;
 }

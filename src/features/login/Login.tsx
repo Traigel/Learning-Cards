@@ -23,15 +23,15 @@ export const Login = () => {
             password: '',
             rememberMe: false
         },
-        validate: values => {           //валидация, обработка ошибок
+        validate: values => {
             const errors: FormikErrorType = {}
             if (!values.email) {
-                errors.email = 'Error email'
+                errors.email = 'enter your email'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address'
+                errors.email = 'invalid email address'
             }
             if (values.password.length < 8) {
-                errors.password = 'Password must be more than 7 characters'
+                errors.password = 'password must be more than 7 characters'
             }
             return errors
         },
@@ -48,9 +48,7 @@ export const Login = () => {
     return (
         <div className={styles.loginBlock}>
             <div className={styles.loginContainer}>
-                <div className={styles.title}>
-                    Sign in
-                </div>
+                <h2 className={styles.title}>Sign in</h2>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={styles.inputForm}>
                         <SuperInputText
@@ -84,18 +82,17 @@ export const Login = () => {
                         />
                     </div>
                     <div className={styles.forPass}>
-                        <NavLink to={'/forgot'}>Forgot Password?</NavLink>
+                        <NavLink to={'/forgot'} className={styles.forgotPassTitle}>Forgot Password?</NavLink>
                     </div>
                     <div className={styles.buttonForm}>
                         <SuperButton type="submit">Sign in</SuperButton>
                     </div>
-                    <div>
-                        Already have an account?
+                    <div className={styles.haveAccountTitle}>
+                        Don't have an account?
                     </div>
-                    <NavLink to={'/register'}>Sign Up</NavLink>
+                    <NavLink to={'/register'} className={styles.signUpTitle}>Sign Up</NavLink>
                 </form>
             </div>
-
         </div>
     )
 }

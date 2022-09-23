@@ -2,17 +2,16 @@
     color: red;
 }
 
-.containerForm {
+.formContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     width: 413px;
     height: 528px;
     background: #FFFFFF;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
     border-radius: 2px;
 }
 
@@ -34,7 +33,7 @@
     color: #1565c0
 }
 
-.signUp {
+.signUpTitle {
     padding: 10px 0 50px 0;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;

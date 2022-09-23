@@ -4,9 +4,9 @@
 
 .errorInput {
     border: 3px solid #0F4787;
-    background: red;
+    background: rgba(255, 0, 0, 0.59);
 }
 
 .error {
-    color: red;
+    color: rgba(255, 0, 0, 0.55);
 }

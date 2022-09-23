@@ -43,6 +43,7 @@ export const App = () => {
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
+                    test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
                 </Routes>
             </div>
         </div>

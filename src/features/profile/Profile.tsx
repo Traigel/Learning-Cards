@@ -22,18 +22,22 @@ export const Profile = () => {
     }
 
     const changeUserNameHandler = (e: string) => {
-        setInputValue(e)
+            setInputValue(e)
+    }
+
+    const handler = (value: string) => {
+        if (profileInfo && value !== profileInfo.name && value) {
+            dispatch(updateUserInfoTC({name: value, avatar: ''}))
+        }
     }
 
     const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
-        if (profileInfo && e.currentTarget.value !== profileInfo.name || !e.currentTarget.value) {
-            dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
-        }
+        handler(e.currentTarget.value)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            dispatch(updateUserInfoTC({name: e.currentTarget.value, avatar: ''}))
+            handler(e.currentTarget.value)
         }
     }
 

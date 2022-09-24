@@ -37,6 +37,14 @@ export const authAPI = {
     },
 }
 
+export const packsAPI = {
+
+}
+
+export const cardsAPI = {
+
+}
+
 //type
 export type ChangeUserNameParamsType = {
     name: string

@@ -13,7 +13,6 @@ import {ForgotPassword} from '../features/password/forgotPassword/ForgotPassword
 import {NewPassword} from '../features/password/newPassword/NewPassword';
 import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
 import {useAppDispatch, useAppSelector} from '../common/hooks/hooks';
-import {TableB} from "../features/table/Table";
 
 export const App = () => {
 
@@ -35,9 +34,9 @@ export const App = () => {
             <Header/>
             <DisplayOnError/>
             <div className={styles.appContainer}>
-                <TableB/>
                 <Routes>
-                    <Route path={'/'} element={<Profile/>}/>
+                    <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                    <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>

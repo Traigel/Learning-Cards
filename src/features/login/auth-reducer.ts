@@ -7,7 +7,8 @@ const initialState = {
     isLoggedIn: false,
     profile: null as ProfileType | null,
     forgotPasswordSuccess: false,
-    forgetEmail: null as string | null
+    forgetEmail: null as string | null,
+    newPasswordSuccess: false,
 }
 
 export const authReducer = (state = initialState, action: AuthActionsType): InitialAuthStateType => {
@@ -23,6 +24,8 @@ export const authReducer = (state = initialState, action: AuthActionsType): Init
             } else return {...state, profile: null}
         case 'AUTH/SEND-FORGOT-PASSWORD':
             return {...state, forgotPasswordSuccess: action.forgotPasswordSuccess}
+        case 'AUTH/NEW-PASSWORD-SUCCESS':
+            return {...state, newPasswordSuccess: action.newPassword}
         case 'AUTH/SET-DATA-EMAIL':
             return {
                 ...state,
@@ -39,6 +42,10 @@ export const setUserInfoAC = (data: ProfileType | null) => ({type: 'AUTH/SET-USE
 export const forgotPasswordSuccess = (forgotPasswordSuccess: boolean) => ({
     type: 'AUTH/SEND-FORGOT-PASSWORD',
     forgotPasswordSuccess
+} as const)
+export const newPasswordSuccess = (newPassword: boolean) => ({
+    type: 'AUTH/NEW-PASSWORD-SUCCESS',
+    newPassword
 } as const)
 export const setDataForgetPassword = (email: string) => ({type: 'AUTH/SET-DATA-EMAIL', email} as const)
 
@@ -93,7 +100,7 @@ export const createNewPasswordTC = (data: SetNewPasswordType): AppThunk => async
     dispatch(setAppStatusAC('loading'))
     try {
         await authAPI.setNewPassword(data)
-
+        dispatch(newPasswordSuccess(true))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -114,8 +121,9 @@ export const updateUserInfoTC = (data: ChangeUserNameParamsType): AppThunk => as
 
 //type
 export type InitialAuthStateType = typeof initialState
+
 export type ProfileType = {
-    _id?: string;
+    _id: string;
     email: string;
     rememberMe: boolean;
     isAdmin: boolean;
@@ -142,3 +150,4 @@ export type AuthActionsType =
     | ReturnType<typeof setUserInfoAC>
     | ReturnType<typeof forgotPasswordSuccess>
     | ReturnType<typeof setDataForgetPassword>
+    | ReturnType<typeof newPasswordSuccess>

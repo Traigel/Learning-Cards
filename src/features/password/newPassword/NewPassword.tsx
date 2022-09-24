@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import {useFormik} from 'formik';
 import styles from './NewPassword.module.css'
-import {NavLink, useParams} from 'react-router-dom';
+import {Navigate, NavLink, useParams} from 'react-router-dom';
 import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import SuperButton from '../../../common/components/superButton/SuperButton';
-import {useAppDispatch} from '../../../common/hooks/hooks';
+import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 import {EyeOnOff} from '../../../common/components/eyeOnOff/EyeOnOff';
 import {createNewPasswordTC} from '../../login/auth-reducer';
 
@@ -13,6 +13,8 @@ type FormikErrorsType = {
 }
 
 export const NewPassword = () => {
+
+    const newPasswordSuccess = useAppSelector(state => state.auth.newPasswordSuccess)
 
     const [passwordShow, setPasswordShow] = useState(false)
     const togglePassword = () => {
@@ -39,6 +41,10 @@ export const NewPassword = () => {
             formik.resetForm()
         }
     })
+
+    if (newPasswordSuccess){
+        return <Navigate to={'/login'}/>
+    }
 
     return (
         <div className={styles.containerForm}>

@@ -1,7 +1,7 @@
 import {
     authReducer,
     forgotPasswordSuccess,
-    InitialAuthStateType,
+    InitialAuthStateType, newPasswordSuccess,
     ProfileType,
     setDataForgetPassword,
     setIsLoggedInOutAC,
@@ -16,7 +16,8 @@ beforeEach(() => {
         isLoggedIn: false,
         profile: userInfo,
         forgotPasswordSuccess: false,
-        forgetEmail: null
+        forgetEmail: null,
+        newPasswordSuccess: false,
     }
     userInfo = {
         name: 'Vladimir',
@@ -53,11 +54,18 @@ test('set user info', () => {
         expect(authReducer1.profile.publicCardPacksCount).toBe(3)
     }
 })
+
 test('forgot password success', () => {
     const forgotPass = authReducer(state, forgotPasswordSuccess(true))
     expect(forgotPass.forgotPasswordSuccess).toBe(true)
 })
+
 test('set data email', () => {
     const setDataEmail = authReducer(state, setDataForgetPassword('hello@gmail.com'))
     expect(setDataEmail.forgetEmail).toBe('hello@gmail.com')
+})
+
+test('set new password', () => {
+    const newPass = authReducer(state, newPasswordSuccess(true))
+    expect(newPass.newPasswordSuccess).toBe(true)
 })

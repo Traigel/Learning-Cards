@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 
+// типизация state
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // все типы экшенов для всего приложения

@@ -6,11 +6,11 @@ dates, formulas or any subject matter that can be learned via a question-and-ans
 
 ---
 
-— GitHub commits —
+### GitHub commits
 
-<тип>: описание
+type: description
 
-типы будут такими:
+types:
 
 1. feat - - добавил новую функцию в ваш код
 2. fix - - исправил баг в вашем коде
@@ -19,7 +19,7 @@ dates, formulas or any subject matter that can be learned via a question-and-ans
 5. test - - создал тест
 6. info - - коммит для проверки чего-то, неважные изменения, не влияющие на проект
 
-ПРИМЕР:
+EXAMPLE:
 
 test: create unit test for profile reducer
 

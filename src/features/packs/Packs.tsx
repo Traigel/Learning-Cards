@@ -12,10 +12,11 @@ import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperInputText from "../../common/components/superInputText/SuperInputText";
 import {setCardsTC} from './packs-reducer';
+import {SuperDoubleRange} from "../../common/components/superDoubleRange/SuperDoubleRange";
 
 export const Packs = () => {
 
-    const packsInfo = useAppSelector((state)=>state.packs.packs)
+    const packsInfo = useAppSelector((state) => state.packs.packs)
 
     const dispatch = useAppDispatch()
 
@@ -28,9 +29,28 @@ export const Packs = () => {
             <div className={styles.button}>
                 <SuperButton>Button</SuperButton>
             </div>
-            <label>Search</label>
-            <div className={styles.input}>
-                <SuperInputText placeholder={'Provide your text'}/>
+            <div className={styles.filterBlock}>
+                <div className={styles.inputBlock}>
+                    <label>Search</label>
+                    <SuperInputText placeholder={'Provide your text'}/>
+                </div>
+                <div className={styles.buttonFilter}>
+                    <label>Show packs cards</label>
+                    <SuperButton>My</SuperButton>
+                    <SuperButton>All</SuperButton>
+                </div>
+                <div className={styles.doubleRangeBlock}>
+                    <label>Number of cards</label>
+                    <SuperDoubleRange
+                        value={[0, 100]}
+                        onChangeRange={() => {
+                        }}
+                        className={styles.doubleRange}
+                    />
+                </div>
+                <div>
+                    svg
+                </div>
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -51,7 +71,8 @@ export const Packs = () => {
                             >
                                 <TableCell component="th" scope="row">{row.name}</TableCell>
                                 <TableCell align="right">{row.cardsCount}</TableCell>
-                                <TableCell align="right">{row.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
+                                <TableCell
+                                    align="right">{row.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
                                 <TableCell align="right">{row.user_name}</TableCell>
                                 <TableCell align="right">svg svg svg</TableCell>
                             </TableRow>

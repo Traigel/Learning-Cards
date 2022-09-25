@@ -8,7 +8,7 @@ const initialState = {
     profile: null as ProfileType | null,
     forgotPasswordSuccess: false,
     forgetEmail: null as string | null,
-    newPasswordSuccess: false,
+    newPasswordSuccess: false
 }
 
 export const authReducer = (state = initialState, action: AuthActionsType): InitialAuthStateType => {
@@ -137,14 +137,17 @@ export type ProfileType = {
     tokenDeathTime: number;
     avatar: string;
 }
+
 export type SetNewPasswordType = {
     password: string
     resetPasswordToken: string | undefined
 }
+
 export type ForgotPasswordType = {
     email: string
     message: string
 }
+
 export type AuthActionsType =
     | ReturnType<typeof setIsLoggedInOutAC>
     | ReturnType<typeof setUserInfoAC>

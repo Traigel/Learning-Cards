@@ -63,8 +63,8 @@ export const cardsAPI = {
         return instance.put('cards/card', {card})
     },
     deleteCards(cardID: string) {
-        return instance.put(`cards/card?id=${cardID}`)
-    },
+        return instance.delete(`cards/card?id=${cardID}`)
+    }
 }
 
 //type authAPI
@@ -115,7 +115,7 @@ export type RegisterParamsType = {
 
 //type packsAPI
 export type ResponsePacksType = {
-    cardPacks: PacksType[];
+    cardPacks: PackType[];
     page: number;
     pageCount: number;
     cardPacksTotalCount: number;
@@ -125,7 +125,7 @@ export type ResponsePacksType = {
     tokenDeathTime: number;
 }
 
-export type PacksType = {
+export type PackType = {
     _id: string;
     user_id: string;
     user_name: string;

@@ -37,6 +37,37 @@ export const authAPI = {
     },
 }
 
+export const packsAPI = {
+    getPacks() {
+        return instance.get<ResponsePacksType>('cards/pack')
+    },
+    createPacks(cardsPack: createPacksType) {
+        return instance.post('cards/pack', {cardsPack})
+    },
+    updatePacks(cardsPack: updatePackType) {
+        return instance.put('cards/pack', {cardsPack})
+    },
+    deletePacks(packID: string) {
+        return instance.delete(`cards/pack?id=${packID}`)
+    }
+}
+
+export const cardsAPI = {
+    getCards(packID: string) {
+        return instance.get<ResponseCardsType>(`cards/card?cardsPack_id=${packID}`)
+    },
+    createCards(card: createCardsType) {
+        return instance.post('cards/card', {card})
+    },
+    updateCards(card: updateCardsType) {
+        return instance.put('cards/card', {card})
+    },
+    deleteCards(cardID: string) {
+        return instance.delete(`cards/card?id=${cardID}`)
+    },
+}
+
+
 //type
 export type ChangeUserNameParamsType = {
     name: string
@@ -81,4 +112,98 @@ export type ResponseMeType = {
 export type RegisterParamsType = {
     email: string
     password: string
+}
+
+//type packsAPI
+export type ResponsePacksType = {
+    cardPacks: PacksType[];
+    page: number;
+    pageCount: number;
+    cardPacksTotalCount: number;
+    minCardsCount: number;
+    maxCardsCount: number;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export type PacksType = {
+    _id: string;
+    user_id: string;
+    user_name: string;
+    private: boolean;
+    name: string;
+    path: string;
+    grade: number;
+    shots: number;
+    cardsCount: number;
+    type: string;
+    rating: number;
+    created: string;
+    updated: string;
+    more_id: string;
+    __v: number;
+}
+
+export type createPacksType = {
+    name: string
+    deckCover?: string
+    private?: boolean
+}
+
+export type updatePackType = {
+    _id: string
+    name?: string
+}
+
+//type cardsAPI
+export type ResponseCardsType = {
+    cards: CardsType[];
+    packUserId: string;
+    packName: string;
+    packPrivate: boolean;
+    packDeckCover: string;
+    packCreated: string;
+    packUpdated: string;
+    page: number;
+    pageCount: number;
+    cardsTotalCount: number;
+    minGrade: number;
+    maxGrade: number;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export type CardsType = {
+    _id: string;
+    cardsPack_id: string;
+    user_id: string;
+    answer: string;
+    question: string;
+    grade: number;
+    shots: number;
+    comments: string;
+    type: string;
+    rating: number;
+    more_id: string;
+    created: string;
+    updated: string;
+    __v: number;
+}
+
+export type createCardsType = {
+    cardsPack_id: string
+    question: string
+    answer: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+}
+
+export type updateCardsType = {
+    _id: string
+    question?: string
+    comments?: string
 }

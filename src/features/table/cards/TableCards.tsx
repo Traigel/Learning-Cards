@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,18 +11,14 @@ import SuperButton from '../../../common/components/superButton/SuperButton';
 import styles from './TableCards.module.css'
 import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
-import {useEffect} from 'react';
 import {createCardsTC, setCardsTC} from './cards-reducer';
 import {useParams} from 'react-router-dom';
-import {createCardsType} from '../../../api/api';
-import { Card } from './Card';
+import {Card} from './Card';
 
 export const TableCards = () => {
 
     const dispatch = useAppDispatch()
     const cards = useAppSelector(state => state.cards.cards)
-    console.log(cards)
-
     const params = useParams()
     const packID = params.packID
 
@@ -34,11 +31,10 @@ export const TableCards = () => {
     const addNewCardHandler = () => {
         const newCard = {
             cardsPack_id: packID,
-            answer: 'asd'
+            answer: 'asd',
+            question: 'norm'
         }
         dispatch(createCardsTC(newCard))
-        // dispatch(setCardsTC('6331704b3c22f21db471fa5a'))
-
     }
 
     return (
@@ -62,9 +58,10 @@ export const TableCards = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-
                         {cards && cards.map((row) => (
                             <Card
+                                cardID={row._id}
+                                userID={row.user_id}
                                 key={row._id}
                                 question={row.question}
                                 answer={row.answer}

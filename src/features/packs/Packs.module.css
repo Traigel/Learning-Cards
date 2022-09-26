@@ -4,27 +4,7 @@
     padding-bottom: 30px;
 }
 
-.filterBlock {
-    display: flex;
-    justify-content: space-between;
-}
-
-.inputBlock {
-    padding: 5px 0 20px 0;
-    display: inline-block;
-}
-
-.inputBlock input{
-
+.inputBlock input {
     height: 30px;
 }
 
-.buttonFilter {
-    display: inline-block;
-}
-.doubleRangeBlock {
-    display: inline-block;
-}
-.doubleRange {
-
-}

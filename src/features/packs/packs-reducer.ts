@@ -1,13 +1,13 @@
 import {AppThunk} from "../../app/store";
-import {packsAPI, PackType} from "../../api/api";
+import {packsAPI, PackType, ResponsePacksType} from "../../api/api";
 
 const initialState = {
-    packs: null as PackType[] | null,
+	cardPacks: null as PackType[] | null,
 	page: null as number | null,
 	pageCount: null as number | null,
 	cardPacksTotalCount: null as number | null,
-	minCardsCount: null as number | null,
-	maxCardsCount: null as number | null,
+	minCardsCount: 0,
+	maxCardsCount: 0,
 	token: null as string | null,
 	tokenDeathTime: null as number | null
 }
@@ -15,21 +15,21 @@ const initialState = {
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialAuthStateType => {
     switch (action.type) {
         case 'PACKS/SET-PACKS-DATA':
-            return {...state, packs: action.data}
+            return {...action.data}
         default:
             return state
     }
 }
 
 //action creators
-export const setPacksDataAC = (data: PackType[]) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
+export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
 //thunks
 
 export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
 	try {
 		const res = await packsAPI.getPacks()
-		dispatch(setPacksDataAC(res.data.cardPacks))
+		dispatch(setPacksDataAC(res.data))
 	}
 	catch (e) {
 		console.log('catch')

@@ -10,13 +10,12 @@ import Paper from '@mui/material/Paper';
 import styles from './Packs.module.css'
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import SuperButton from "../../common/components/superButton/SuperButton";
-import SuperInputText from "../../common/components/superInputText/SuperInputText";
 import {setCardsTC} from './packs-reducer';
-import {SuperDoubleRange} from "../../common/components/superDoubleRange/SuperDoubleRange";
+import {SetPacks} from "./setPacks/SetPacks";
 
 export const Packs = () => {
 
-    const packsInfo = useAppSelector((state) => state.packs.packs)
+    const packsInfo = useAppSelector((state) => state.packs.cardPacks)
 
     const dispatch = useAppDispatch()
 
@@ -29,29 +28,7 @@ export const Packs = () => {
             <div className={styles.button}>
                 <SuperButton>Button</SuperButton>
             </div>
-            <div className={styles.filterBlock}>
-                <div className={styles.inputBlock}>
-                    <label>Search</label>
-                    <SuperInputText placeholder={'Provide your text'}/>
-                </div>
-                <div className={styles.buttonFilter}>
-                    <label>Show packs cards</label>
-                    <SuperButton>My</SuperButton>
-                    <SuperButton>All</SuperButton>
-                </div>
-                <div className={styles.doubleRangeBlock}>
-                    <label>Number of cards</label>
-                    <SuperDoubleRange
-                        value={[0, 100]}
-                        onChangeRange={() => {
-                        }}
-                        className={styles.doubleRange}
-                    />
-                </div>
-                <div>
-                    svg
-                </div>
-            </div>
+            <SetPacks/>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>

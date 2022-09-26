@@ -45,6 +45,7 @@ export const App = () => {
                     <Route path={'/forgot'} element={<ForgotPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
+                    <Route path={'/cards/:packId'} element={<h1>132</h1>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>
             </div>

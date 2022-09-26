@@ -5,11 +5,13 @@ import SuperButton from "../../../common/components/superButton/SuperButton";
 import learnIcon from "../../../assets/images/teacher.png"
 import editIcon from "../../../assets/images/Edit.png"
 import deleteIcon from "../../../assets/images/Delete.png"
-import styles from "./PacksTable.module.css"
+import styles from "./Pack.module.css"
 import {changePackTC, deletePackTC} from "../packs-reducer";
-import {useAppDispatch} from "../../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {NavLink} from "react-router-dom";
 
 type PacksTablePropsType = {
+    userId: string
     packId: string
     name: string
     cardsCount: number
@@ -17,7 +19,11 @@ type PacksTablePropsType = {
     user_name: string
 }
 
-export const PacksTable = (props: PacksTablePropsType) => {
+export const Pack = (props: PacksTablePropsType) => {
+
+    const userId = useAppSelector((state)=>state.auth.profile?._id)
+
+    const isPackAuthor = props.userId === userId
 
     const dispatch = useAppDispatch()
 
@@ -38,14 +44,18 @@ export const PacksTable = (props: PacksTablePropsType) => {
         <TableRow
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-            <TableCell component="th" scope="row">{props.name}</TableCell>
+            <TableCell component="th" scope="row">
+                <NavLink to={`/cards/:${props.packId}`}>{props.name}</NavLink>
+            </TableCell>
             <TableCell align="right">{props.cardsCount}</TableCell>
             <TableCell align="right">{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
             <TableCell align="right">{props.user_name}</TableCell>
             <TableCell align="right">
                 <SuperButton onClick={onLearnClickHandler} className={styles.iconBtn}><img src={learnIcon} alt="learn"/></SuperButton>
-                <SuperButton onClick={onEditClickHandler} className={styles.iconBtn}><img src={editIcon} alt="edit"/></SuperButton>
-                <SuperButton onClick={onDeleteClickHandler} className={styles.iconBtn}><img src={deleteIcon} alt="delete"/></SuperButton>
+                {isPackAuthor &&
+                    <SuperButton onClick={onEditClickHandler} className={styles.iconBtn}><img src={editIcon} alt="edit"/></SuperButton>}
+                {isPackAuthor &&
+                    <SuperButton onClick={onDeleteClickHandler} className={styles.iconBtn}><img src={deleteIcon} alt="delete"/></SuperButton>}
             </TableCell>
         </TableRow>
     );

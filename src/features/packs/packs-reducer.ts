@@ -27,8 +27,7 @@ export const packsReducer = (state = initialState, action: PacksActionsType) => 
 export const setPacksDataAC = (data: PackType[]) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
 //thunks
-
-export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
+export const setPacksTC = (): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         const res = await packsAPI.getPacks()
@@ -44,7 +43,7 @@ export const addNewPackTC = (data: createPacksType): AppThunk => async (dispatch
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.createPack(data)
-        dispatch(setCardsTC())
+        dispatch(setPacksTC())
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -56,7 +55,7 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.updatePack(data)
-        dispatch(setCardsTC())
+        dispatch(setPacksTC())
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -68,7 +67,7 @@ export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.deletePack(data)
-        dispatch(setCardsTC())
+        dispatch(setPacksTC())
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -76,7 +75,7 @@ export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     }
 }
 
-//type
+//types
 export type InitialAuthStateType = typeof initialState
 
 export type PacksActionsType =

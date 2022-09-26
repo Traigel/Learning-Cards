@@ -1,5 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {addNewPackTC, setPacksTC} from './packs-reducer';
+import {Pack} from "./pack/Pack";
+import styles from './Packs.module.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,12 +11,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import styles from './Packs.module.css'
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperInputText from "../../common/components/superInputText/SuperInputText";
-import {addNewPackTC, setCardsTC} from './packs-reducer';
-import {PacksTable} from "./pack/PacksTable";
 
 export const Packs = () => {
 
@@ -26,7 +26,7 @@ export const Packs = () => {
     }
 
     useEffect(() => {
-        dispatch(setCardsTC())
+        dispatch(setPacksTC())
     }, [])
 
     return (
@@ -51,8 +51,9 @@ export const Packs = () => {
                     </TableHead>
                     <TableBody>
                         {packsInfo && packsInfo.map((row) => (
-                            <PacksTable
+                            <Pack
                                 key={row._id}
+                                userId={row.user_id}
                                 packId={row._id}
                                 name={row.name}
                                 cardsCount={row.cardsCount}

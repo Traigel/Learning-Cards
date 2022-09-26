@@ -1,5 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import { setPacksTC} from './packs-reducer';
+import styles from './Packs.module.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,11 +10,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import styles from './Packs.module.css'
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperInputText from "../../common/components/superInputText/SuperInputText";
-import {setCardsTC} from './packs-reducer';
+import {Pack} from './Pack';
 
 export const Packs = () => {
 
@@ -19,14 +20,19 @@ export const Packs = () => {
 
     const dispatch = useAppDispatch()
 
+    const onclickHandler = () => {
+        const createPacksData = {name: 'Typescript Pack'}
+        // dispatch(addNewPackTC(createPacksData))
+    }
+
     useEffect(() => {
-        dispatch(setCardsTC())
+        dispatch(setPacksTC())
     }, [])
 
     return (
         <>
             <div className={styles.button}>
-                <SuperButton>Button</SuperButton>
+                <SuperButton onClick={onclickHandler}>Add new Pack</SuperButton>
             </div>
             <label>Search</label>
             <div className={styles.input}>
@@ -45,16 +51,15 @@ export const Packs = () => {
                     </TableHead>
                     <TableBody>
                         {packsInfo && packsInfo.map((row) => (
-                            <TableRow
+                            <Pack
                                 key={row._id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">{row.name}</TableCell>
-                                <TableCell align="right">{row.cardsCount}</TableCell>
-                                <TableCell align="right">{row.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
-                                <TableCell align="right">{row.user_name}</TableCell>
-                                <TableCell align="right">svg svg svg</TableCell>
-                            </TableRow>
+                                userId={row.user_id}
+                                packId={row._id}
+                                name={row.name}
+                                cardsCount={row.cardsCount}
+                                updated={row.updated}
+                                user_name={row.user_name}
+                            />
                         ))}
                     </TableBody>
                 </Table>

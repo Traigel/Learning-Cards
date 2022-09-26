@@ -1,53 +1,56 @@
-import {authAPI, cardsAPI, LoginParamsType} from '../../../api/api';
+import {cardsAPI} from '../../../api/api';
 import {AppThunk} from '../../../app/store';
 import {setAppStatusAC} from '../../../app/app-reducer';
 import {errorHandlerUtil} from '../../../common/utils/errors-utils';
-import {setIsLoggedInOutAC, setUserInfoAC} from '../../login/auth-reducer';
 
 const InitialStateCards = {
-    cardsPack: null as CardsPack | null
+    cards: null as Card[] | null
 }
-
 
 export const cardsReducer = (state = InitialStateCards, action: CardsActionType) => {
 
     switch (action.type) {
         case 'CARDS/SET-CARDS':
-            if (action.data) {
                 return {
                     ...state,
-                    cardsPack: {...action.data}
+                    cardsPack: action.data
                 }
-            } else return {...state, cardsPack: null}
         default:
             return state
     }
 }
 
 //action creators
-export const setCards = (data: CardsPack | null) => ({type: 'CARDS/SET-CARDS', data})
-
-
+export const setCards = (data: Card[] | null) => ({type: 'CARDS/SET-CARDS', data})
 
 //thunks
-export const setCardsTC = (packID: string ): AppThunk => async (dispatch) => {
-    dispatch(setAppStatusAC("loading"))
+export const setCardsTC = (packID: string): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
     try {
-        const res = await cardsAPI.getCards(packID)
-        console.log(res)
+       const res =  await cardsAPI.getCards(packID)
+        dispatch(setCards(res.data.cards))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC("idle"))
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
-
-
+export const createCardsTC = (data: any): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        await cardsAPI.createCards(data)
+        dispatch(setCardsTC(data.cardsPack_id))
+    } catch (e) {
+        errorHandlerUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
 
 //types
 export type CardsPack = {
-    cards: CardsPackCard[];
+    cards: Card[];
     packUserId: string;
     packName: string;
     packPrivate: boolean;
@@ -62,7 +65,8 @@ export type CardsPack = {
     token: string;
     tokenDeathTime: number;
 }
-export type CardsPackCard = {
+export type Card = {
+
     _id: string;
     cardsPack_id: string;
     user_id: string;
@@ -77,10 +81,8 @@ export type CardsPackCard = {
     created: string;
     updated: string;
     __v: number;
-    answerImg: string;
-    answerVideo: string;
-    questionImg: string;
-    questionVideo: string;
+
 }
 
-export type CardsActionType = ReturnType<typeof setCards>
+export type CardsActionType =
+    | ReturnType<typeof setCards>

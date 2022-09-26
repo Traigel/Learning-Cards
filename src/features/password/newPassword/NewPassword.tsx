@@ -22,6 +22,7 @@ export const NewPassword = () => {
     }
     const params = useParams()
     const token = params.token
+
     const dispatch = useAppDispatch()
     const formik = useFormik({
         initialValues: {

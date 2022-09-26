@@ -26,7 +26,7 @@ export const setPacksDataAC = (data: PackType[]) => ({type: 'PACKS/SET-PACKS-DAT
 
 //thunks
 
-export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
+export const setPacksTC = (): AppThunk => async (dispatch, getState) => {
 	try {
 		const res = await packsAPI.getPacks()
 		dispatch(setPacksDataAC(res.data.cardPacks))
@@ -48,7 +48,6 @@ export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
 //         dispatch(setAppStatusAC("idle"))
 //     }
 // }
-
 
 //type
 export type InitialAuthStateType = typeof initialState

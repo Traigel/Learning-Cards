@@ -1,9 +1,10 @@
-import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from 'redux';
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
-import {AppActionType, appReducer} from "./app-reducer";
-import {AuthActionsType, authReducer} from "../features/login/auth-reducer";
+import {AppActionType, appReducer} from './app-reducer';
+import {AuthActionsType, authReducer} from '../features/login/auth-reducer';
 import {cardsReducer} from '../features/table/cards/cards-reducer';
-import {PacksActionsType, packsReducer} from "../features/packs/packs-reducer";
+import {PacksActionsType, packsReducer} from '../features/packs/packs-reducer';
+import {CardsActionType} from '../features/table/cards/cards-reducer';
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -17,7 +18,7 @@ export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // все типы экшенов для всего приложения
-export type AppRootActionsType = AppActionType | AuthActionsType |  PacksActionsType
+export type AppRootActionsType = AppActionType | AuthActionsType | CardsActionType | PacksActionsType
 
 //типизация санки если она возвращает другую санку
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppRootActionsType>

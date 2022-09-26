@@ -11,35 +11,41 @@ import styles from './TableCards.module.css'
 import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 import {useEffect} from 'react';
-import {setCardsTC} from './cards-reducer';
-
-function createData(
-    question: string,
-    answer: string,
-    lastUpdated: number,
-    grade: number,
-) {
-    return {question, answer, lastUpdated, grade};
-}
-
-const dispatch = useAppDispatch()
-const packID = useAppSelector(state => state.cards.cardsPack.pa)
-
-
-useEffect(()=> {
-    dispatch(setCardsTC(packID))
-}, [])
-const rows = [
-    createData('Frozen yoghurt', '159', 6.0, 5),
-];
+import {createCardsTC, setCardsTC} from './cards-reducer';
+import {useParams} from 'react-router-dom';
+import {createCardsType} from '../../../api/api';
+import { Card } from './Card';
 
 export const TableCards = () => {
+
+    const dispatch = useAppDispatch()
+    const cards = useAppSelector(state => state.cards.cards)
+    console.log(cards)
+
+    const params = useParams()
+    const packID = params.packID
+
+    useEffect(() => {
+        if (packID) {
+            dispatch(setCardsTC(packID))
+        }
+    }, [])
+
+    const addNewCardHandler = () => {
+        const newCard = {
+            cardsPack_id: packID,
+            answer: 'asd'
+        }
+        dispatch(createCardsTC(newCard))
+        // dispatch(setCardsTC('6331704b3c22f21db471fa5a'))
+
+    }
+
     return (
         <>
             < div className={styles.button}>
-                <SuperButton>Learn to pack</SuperButton>
+                <SuperButton onClick={addNewCardHandler}>Add new card</SuperButton>
             </div>
-
             <label>Search</label>
             <div className={styles.input}>
                 <SuperInputText placeholder={'Provide your text'}/>
@@ -56,18 +62,15 @@ export const TableCards = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.lastUpdated}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.question}
-                                </TableCell>
-                                <TableCell align="right">{row.answer}</TableCell>
-                                <TableCell align="right">{row.lastUpdated}</TableCell>
-                                <TableCell align="right">{row.grade}</TableCell>
-                            </TableRow>
+
+                        {cards && cards.map((row) => (
+                            <Card
+                                key={row._id}
+                                question={row.question}
+                                answer={row.answer}
+                                grade={row.grade}
+                                updated={row.updated}
+                            />
                         ))}
                     </TableBody>
                 </Table>

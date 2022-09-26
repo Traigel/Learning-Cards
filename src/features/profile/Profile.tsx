@@ -22,7 +22,7 @@ export const Profile = () => {
     }
 
     const changeUserNameHandler = (e: string) => {
-            setInputValue(e)
+        setInputValue(e)
     }
 
     const handler = (value: string) => {

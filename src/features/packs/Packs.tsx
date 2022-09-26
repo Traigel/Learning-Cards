@@ -11,13 +11,19 @@ import styles from './Packs.module.css'
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperInputText from "../../common/components/superInputText/SuperInputText";
-import {setCardsTC} from './packs-reducer';
+import {addNewPackTC, setCardsTC} from './packs-reducer';
+import {PacksTable} from "./pack/PacksTable";
 
 export const Packs = () => {
 
     const packsInfo = useAppSelector((state)=>state.packs.packs)
 
     const dispatch = useAppDispatch()
+
+    const onclickHandler = () => {
+        const createPacksData = {name: 'Typescript Pack'}
+        dispatch(addNewPackTC(createPacksData))
+    }
 
     useEffect(() => {
         dispatch(setCardsTC())
@@ -26,7 +32,7 @@ export const Packs = () => {
     return (
         <>
             <div className={styles.button}>
-                <SuperButton>Button</SuperButton>
+                <SuperButton onClick={onclickHandler}>Add new Pack</SuperButton>
             </div>
             <label>Search</label>
             <div className={styles.input}>
@@ -45,16 +51,14 @@ export const Packs = () => {
                     </TableHead>
                     <TableBody>
                         {packsInfo && packsInfo.map((row) => (
-                            <TableRow
+                            <PacksTable
                                 key={row._id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">{row.name}</TableCell>
-                                <TableCell align="right">{row.cardsCount}</TableCell>
-                                <TableCell align="right">{row.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
-                                <TableCell align="right">{row.user_name}</TableCell>
-                                <TableCell align="right">svg svg svg</TableCell>
-                            </TableRow>
+                                packId={row._id}
+                                name={row.name}
+                                cardsCount={row.cardsCount}
+                                updated={row.updated}
+                                user_name={row.user_name}
+                            />
                         ))}
                     </TableBody>
                 </Table>

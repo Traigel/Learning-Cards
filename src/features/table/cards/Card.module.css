@@ -12,3 +12,13 @@
 .input {
     padding: 5px 0 20px 0;
 }
+
+.iconBtn {
+    width: 20px;
+    cursor: pointer;
+    padding-left: 5px;
+    background-color: #ffffff;
+}
+.iconBtn img {
+    width: 20px;
+}

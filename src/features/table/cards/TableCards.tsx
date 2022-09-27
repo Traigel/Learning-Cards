@@ -28,20 +28,34 @@ export const TableCards = () => {
         }
     }, [])
 
+    const learnCards = ()=> {
+        alert('EXY')
+    }
+
     const addNewCardHandler = () => {
         const newCard = {
             cardsPack_id: packID,
-            answer: 'asd',
-            question: 'norm'
+            answer: 'what are you doing?',
+            question: 'oops..'
         }
         dispatch(createCardsTC(newCard))
     }
+    const userID = useAppSelector((state)=>state.auth.profile?._id)
+    const userCardID = useAppSelector(state => state.cards.packUserID)
+    const packName = useAppSelector(state => state.cards.packName)
+    const isPackAuthor = userCardID === userID
 
     return (
         <>
-            < div className={styles.button}>
+            <h2>
+                {packName}
+            </h2>
+            {isPackAuthor ?
+            <div className={styles.button}>
                 <SuperButton onClick={addNewCardHandler}>Add new card</SuperButton>
-            </div>
+            </div> : <div className={styles.button}>
+                    <SuperButton onClick={learnCards}>Learn to pack</SuperButton>
+                </div>}
             <label>Search</label>
             <div className={styles.input}>
                 <SuperInputText placeholder={'Provide your text'}/>

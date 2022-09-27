@@ -4,17 +4,28 @@ import {setAppStatusAC} from '../../../app/app-reducer';
 import {errorHandlerUtil} from '../../../common/utils/errors-utils';
 
 const InitialStateCards = {
-    cards: null as Card[] | null
+    cards: null as Card[] | null,
+    packUserID: null,
+    packName: null,
 }
 
-
-export const cardsReducer = (state = InitialStateCards, action: CardsActionType): InitialStateCardsType => {
+export const cardsReducer = (state = InitialStateCards, action: any): InitialStateCardsType => {
 
     switch (action.type) {
         case 'CARDS/SET-CARDS':
             return {
                 ...state,
                 cards: action.data
+            }
+        case 'CARDS/SET-USER-ID':
+            return {
+                ...state,
+            packUserID: action.userID
+            }
+        case 'CARDS/SET-PACK-NAME':
+            return {
+                ...state,
+                packName: action.packName
             }
         default:
             return state
@@ -23,12 +34,16 @@ export const cardsReducer = (state = InitialStateCards, action: CardsActionType)
 
 //action creators
 export const setCards = (data: Card[] | null) => ({type: 'CARDS/SET-CARDS', data})
+export const setPackUserID = (userID: string) => ({type: 'CARDS/SET-USER-ID', userID})
+export const setPackName = (packName: string) => ({type: 'CARDS/SET-PACK-NAME', packName})
 
 //thunks
 export const setCardsTC = (packID: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
         const res = await cardsAPI.getCards(packID)
+        dispatch(setPackUserID(res.data.packUserId))
+        dispatch(setPackName(res.data.packName))
         dispatch(setCards(res.data.cards))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -37,11 +52,11 @@ export const setCardsTC = (packID: string): AppThunk => async (dispatch) => {
     }
 }
 
-export const createCardsTC = (data: createCardsType ): AppThunk => async (dispatch) => {
+export const createCardsTC = (data: createCardsType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
-         await cardsAPI.createCards(data)
-        if (data.cardsPack_id){
+        await cardsAPI.createCards(data)
+        if (data.cardsPack_id) {
             dispatch(setCardsTC(data.cardsPack_id))
         }
     } catch (e) {
@@ -67,7 +82,6 @@ export const updateCardsTC = (card: updateCardsType): AppThunk => async (dispatc
     dispatch(setAppStatusAC('loading'))
     try {
         const res = await cardsAPI.updateCards(card)
-        console.log(res)
         dispatch(setCardsTC(res.data.updatedCard.cardsPack_id))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -114,3 +128,5 @@ type InitialStateCardsType = typeof InitialStateCards
 
 export type CardsActionType =
     | ReturnType<typeof setCards>
+    | ReturnType<typeof setPackUserID>
+    | ReturnType<typeof setPackName>

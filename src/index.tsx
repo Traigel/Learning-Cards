@@ -12,6 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <Provider store={store}>
+        {/*test*/}
         <HashRouter>
             <App/>
         </HashRouter>

@@ -7,15 +7,16 @@ const initialState = {
 	pageCount: null as number | null,
 	cardPacksTotalCount: null as number | null,
 	minCardsCount: 0,
-	maxCardsCount: 0,
+	maxCardsCount: 100,
 	token: null as string | null,
-	tokenDeathTime: null as number | null
+	tokenDeathTime: null as number | null,
+	filterPacks: 'My' as 'My' | 'All'
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialAuthStateType => {
     switch (action.type) {
         case 'PACKS/SET-PACKS-DATA':
-            return {...action.data}
+            return {...action.data, filterPacks: "My"}
         default:
             return state
     }

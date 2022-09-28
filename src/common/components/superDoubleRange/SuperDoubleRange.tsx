@@ -1,10 +1,12 @@
 import {Box} from '@mui/material'
 import Slider from '@mui/material/Slider'
 import React from 'react'
+import styles from './SuperDoubleRange.module.css'
 
 type SuperDoubleRangePropsType = {
     onChangeRange: (value: [number, number]) => void
     value: [number, number]
+    minMax: [number, number]
     width?: number
     className?: string
 }
@@ -14,7 +16,8 @@ export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         onChangeRange,
         value,
         width,
-        className
+        className,
+        minMax
     }
 ) => {
 
@@ -23,7 +26,7 @@ export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
     };
 
     return (
-        <div style={{display: 'inline-block'}}>
+        <div className={styles.range}>
             <Box width={width ? width : 200}>
                 <Slider
                     getAriaLabel={() => 'Range'}
@@ -31,6 +34,8 @@ export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     className={className}
+                    min={minMax[0]}
+                    max={minMax[1]}
                 />
             </Box>
         </div>

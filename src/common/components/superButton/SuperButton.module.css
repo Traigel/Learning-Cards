@@ -5,18 +5,20 @@
     padding: 7px 10px;
     color: white;
     font-weight: 500;
-    border-radius: 15px;
-    border: #0b78ea;
+    border-radius: 20px;
+    border: 1px solid #0b78ea;
 }
 
 .default:hover {
     cursor: pointer;
     background-color: #298eff;
+    border: 1px solid #298eff;
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
 }
 
 .default:active {
     background-color: #4d5156;
+    border: 1px solid #4d5156;
 }
 
 .disabled {

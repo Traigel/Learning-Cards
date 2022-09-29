@@ -32,7 +32,6 @@ export const setPacksTC = (): AppThunk => async (dispatch) => {
     try {
         const res = await packsAPI.getPacks()
         dispatch(setPacksDataAC(res.data))
-        console.log(res)
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {

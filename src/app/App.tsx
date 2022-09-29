@@ -14,6 +14,7 @@ import {NewPassword} from '../features/password/newPassword/NewPassword';
 import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
 import {useAppDispatch, useAppSelector} from '../common/hooks/hooks';
 import {Packs} from "../features/packs/Packs";
+import {TEST} from "../features/packs/TEST";
 
 export const App = () => {
 
@@ -38,6 +39,7 @@ export const App = () => {
                 <Routes>
                     <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
                     <Route path={'/profile'} element={<Profile/>}/>
+                    {/*<Route path={'/packs'} element={<TEST/>}/>*/}
                     <Route path={'/packs'} element={<Packs/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>

@@ -39,7 +39,7 @@ export const Profile = () => {
         handler(e.currentTarget.value)
     }
 
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             handler(e.currentTarget.value)
         }
@@ -81,7 +81,7 @@ export const Profile = () => {
                         spanClassName={styles.additionalForSpan}
                         onChangeText={(e) => changeUserNameHandler(e)}
                         onBlur={(e) => onBlurHandler(e)}
-                        onKeyPress={(e) => onKeyPressHandler(e)}
+                        onKeyDown={(e) => onKeyDownHandler(e)}
                     />
                 </div>
                 <h3 className={styles.userMailTitle}>{profileInfo && profileInfo.email}</h3>

@@ -65,7 +65,6 @@ export const Pack = (props: PacksTablePropsType) => {
                         <SvgSelector svgName='delete'/>
                     </SuperButton>}
             </TableCell>
-
         </TableRow>
     )
 }

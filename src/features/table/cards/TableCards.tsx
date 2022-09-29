@@ -32,11 +32,16 @@ export const TableCards = () => {
         alert('EXY')
     }
 
+    function getRandomInt(max:number) {
+        return Math.floor(Math.random() * max);
+    }
+
     const addNewCardHandler = () => {
         const newCard = {
             cardsPack_id: packID,
             answer: 'what are you doing?',
-            question: 'oops..'
+            question: 'oops..',
+            grade: getRandomInt(6),
         }
         dispatch(createCardsTC(newCard))
     }

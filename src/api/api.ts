@@ -67,7 +67,6 @@ export const cardsAPI = {
     },
 }
 
-
 //type
 export type ChangeUserNameParamsType = {
     name: string

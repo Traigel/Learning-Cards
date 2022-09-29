@@ -45,7 +45,7 @@ export const Pack = (props: PacksTablePropsType) => {
     return (
         <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
             <TableCell component="th" scope="row">
-                <NavLink to={`/cards/:${props.packId}`}>{props.name}</NavLink>
+                <NavLink to={`/cards/${props.packId}`}>{props.name}</NavLink>
             </TableCell>
 
             <TableCell align="right">{props.cardsCount}</TableCell>

@@ -4,8 +4,8 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import {deleteCardsTC, updateCardsTC} from './cards-reducer';
 import styles from './Card.module.css'
-import edit from './.././../../assets/image/edit.png'
-import clear from './.././../../assets/image/clear.png'
+// import edit from './.././../../assets/image/edit.png'
+// import clear from './.././../../assets/image/clear.png'
 import {BasicRating} from '../../../common/components/starsRating/StartRating';
 
 export type CardType = {
@@ -47,9 +47,9 @@ export const Card = (props: CardType) => {
             <TableCell align="left"><BasicRating values={props.grade}/></TableCell>
             <TableCell align="right">
                 {isPackAuthor &&
-                    <img className={styles.iconBtn} onClick={onEditClickHandler} src={edit} alt="edit"/>}
+                    <img className={styles.iconBtn} onClick={onEditClickHandler} src={''} alt="edit"/>}
                 {isPackAuthor &&
-                    <img onClick={onDeleteClickHandler} className={styles.iconBtn} src={clear} alt="delete"/>}
+                    <img onClick={onDeleteClickHandler} className={styles.iconBtn} src={''} alt="delete"/>}
             </TableCell>
         </TableRow>
     );

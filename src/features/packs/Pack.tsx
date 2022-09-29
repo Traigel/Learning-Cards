@@ -51,11 +51,11 @@ export const Pack = (props: PacksTablePropsType) => {
             <TableCell align="right">{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
             <TableCell align="right">{props.user_name}</TableCell>
             <TableCell align="right">
-                {/*<SuperButton onClick={onLearnClickHandler} className={styles.iconBtn}><img src={learnIcon} alt="learn"/></SuperButton>*/}
-                {/*{isPackAuthor &&*/}
-                {/*    <SuperButton onClick={onEditClickHandler} className={styles.iconBtn}><img src={editIcon} alt="edit"/></SuperButton>}*/}
-                {/*{isPackAuthor &&*/}
-                {/*    <SuperButton onClick={onDeleteClickHandler} className={styles.iconBtn}><img src={deleteIcon} alt="delete"/></SuperButton>}*/}
+                <SuperButton onClick={onLearnClickHandler} className={styles.iconBtn}><img src={learnIcon} alt="learn"/></SuperButton>
+                {isPackAuthor &&
+                    <SuperButton onClick={onEditClickHandler} className={styles.iconBtn}><img src={editIcon} alt="edit"/></SuperButton>}
+                {isPackAuthor &&
+                    <SuperButton onClick={onDeleteClickHandler} className={styles.iconBtn}><img src={deleteIcon} alt="delete"/></SuperButton>}
             </TableCell>
         </TableRow>
 

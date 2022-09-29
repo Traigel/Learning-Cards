@@ -15,13 +15,13 @@ export const instanceHeroku = axios.create({
 
 export const authAPI = {
     login(data: LoginParamsType) {
-        return instance.post<LoginParamsType, AxiosResponse<ResponseMeType>>('auth/login', data)
+        return instance.post<LoginParamsType, AxiosResponse<ResponseMeType>>('/auth/login', data)
     },
     logout() {
-        return instance.delete<AxiosResponse<ResponseMeType>>('auth/me')
+        return instance.delete<AxiosResponse<ResponseMeType>>('/auth/me')
     },
     me() {
-        return instance.post<{}, AxiosResponse<ResponseMeType>>('auth/me')
+        return instance.post<{}, AxiosResponse<ResponseMeType>>('/auth/me')
     },
     changeUserName(data: ChangeUserNameParamsType) {
         return instance.put<ChangeUserNameParamsType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
@@ -64,10 +64,10 @@ export const cardsAPI = {
     },
     deleteCards(cardID: string) {
         return instance.delete(`cards/card?id=${cardID}`)
-    }
+    },
 }
 
-//type authAPI
+//type
 export type ChangeUserNameParamsType = {
     name: string
     avatar: string
@@ -156,6 +156,7 @@ export type updatePackType = {
 
 //type cardsAPI
 export type ResponseCardsType = {
+
     cards: CardsType[];
     packUserId: string;
     packName: string;
@@ -190,7 +191,7 @@ export type CardsType = {
 }
 
 export type createCardsType = {
-    cardsPack_id: string
+    cardsPack_id: string | undefined
     question: string
     answer: string
     grade?: number

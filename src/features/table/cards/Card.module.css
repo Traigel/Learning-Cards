@@ -1,0 +1,24 @@
+.button {
+    display: flex;
+    justify-content: end;
+    padding-bottom: 30px;
+}
+
+.input input{
+    min-width: 100%;
+    height: 30px;
+}
+
+.input {
+    padding: 5px 0 20px 0;
+}
+
+.iconBtn {
+    width: 20px;
+    cursor: pointer;
+    padding-left: 5px;
+    background-color: #ffffff;
+}
+.iconBtn img {
+    width: 20px;
+}

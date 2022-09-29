@@ -65,10 +65,11 @@ export const TableCards = () => {
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{fontWeight: 'bold', width: 50}}>Question</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 50}} align="right">Answer</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Last Updated</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Grade</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}} align="left">Question</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}} align="left">Answer</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}} align="left">Last Updated</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}} align="left">Grade</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}} align="right"/>
                         </TableRow>
                     </TableHead>
                     <TableBody>

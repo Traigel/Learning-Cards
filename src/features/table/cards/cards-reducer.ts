@@ -1,16 +1,15 @@
-import {cardsAPI, createCardsType, updateCardsType} from '../../../api/api';
+import {cardsAPI, CardsType, createCardsType, updateCardsType} from '../../../api/api';
 import {AppThunk} from '../../../app/store';
 import {setAppStatusAC} from '../../../app/app-reducer';
 import {errorHandlerUtil} from '../../../common/utils/errors-utils';
 
 const InitialStateCards = {
-    cards: null as Card[] | null,
-    packUserID: null,
-    packName: null,
+    cards: null as CardsType[] | null,
+    packUserID: null as string | null,
+    packName: null as string | null,
 }
 
-export const cardsReducer = (state = InitialStateCards, action: any): InitialStateCardsType => {
-
+export const cardsReducer = (state = InitialStateCards, action: CardsActionType): InitialStateCardsType => {
     switch (action.type) {
         case 'CARDS/SET-CARDS':
             return {
@@ -20,7 +19,7 @@ export const cardsReducer = (state = InitialStateCards, action: any): InitialSta
         case 'CARDS/SET-USER-ID':
             return {
                 ...state,
-            packUserID: action.userID
+                packUserID: action.userID
             }
         case 'CARDS/SET-PACK-NAME':
             return {
@@ -33,18 +32,18 @@ export const cardsReducer = (state = InitialStateCards, action: any): InitialSta
 }
 
 //action creators
-export const setCards = (data: Card[] | null) => ({type: 'CARDS/SET-CARDS', data})
-export const setPackUserID = (userID: string) => ({type: 'CARDS/SET-USER-ID', userID})
-export const setPackName = (packName: string) => ({type: 'CARDS/SET-PACK-NAME', packName})
+export const setCards = (data: CardsType[]) => ({type: 'CARDS/SET-CARDS', data} as const)
+export const setPackUserID = (userID: string) => ({type: 'CARDS/SET-USER-ID', userID} as const)
+export const setPackName = (packName: string) => ({type: 'CARDS/SET-PACK-NAME', packName} as const)
 
 //thunks
 export const setCardsTC = (packID: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
         const res = await cardsAPI.getCards(packID)
+        dispatch(setCards(res.data.cards))
         dispatch(setPackUserID(res.data.packUserId))
         dispatch(setPackName(res.data.packName))
-        dispatch(setCards(res.data.cards))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -91,38 +90,6 @@ export const updateCardsTC = (card: updateCardsType): AppThunk => async (dispatc
 }
 
 //types
-export type CardsPack = {
-    cards: Card[];
-    packUserId: string;
-    packName: string;
-    packPrivate: boolean;
-    packDeckCover: string;
-    packCreated: string;
-    packUpdated: string;
-    page: number;
-    pageCount: number;
-    cardsTotalCount: number;
-    minGrade: number;
-    maxGrade: number;
-    token: string;
-    tokenDeathTime: number;
-}
-export type Card = {
-    _id: string;
-    cardsPack_id: string;
-    user_id: string;
-    answer: string;
-    question: string;
-    grade: number;
-    shots: number;
-    comments: string;
-    type: string;
-    rating: number;
-    more_id: string;
-    created: string;
-    updated: string;
-    __v: number;
-}
 
 type InitialStateCardsType = typeof InitialStateCards
 

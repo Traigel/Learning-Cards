@@ -157,6 +157,7 @@ export type updatePackType = {
 
 //type cardsAPI
 export type ResponseCardsType = {
+
     cards: CardsType[];
     packUserId: string;
     packName: string;

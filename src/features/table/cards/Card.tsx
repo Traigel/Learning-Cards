@@ -45,10 +45,10 @@ export const Card = (props: CardType) => {
         <TableRow
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
-            <TableCell align="right">{props.question}</TableCell>
-            <TableCell align="right">{props.answer}</TableCell>
-            <TableCell align="right">{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
-            <TableCell align="right">{props.grade}</TableCell>
+            <TableCell align="left">{props.question}</TableCell>
+            <TableCell align="left">{props.answer}</TableCell>
+            <TableCell align="left">{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
+            <TableCell align="left">{props.grade}</TableCell>
             <TableCell align="right">
                 {isPackAuthor &&
                     <img className={styles.iconBtn} onClick={onEditClickHandler} src={edit} alt="edit"/>}

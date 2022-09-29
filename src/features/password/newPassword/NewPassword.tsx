@@ -28,7 +28,6 @@ export const NewPassword = () => {
             password: '',
             resetPasswordToken: token,
         },
-
         validate: (values) => {
             const errors: FormikErrorsType = {}
             if (values.password.length < 8) {

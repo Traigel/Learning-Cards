@@ -119,7 +119,7 @@ export const updateUserInfoTC = (data: ChangeUserNameParamsType): AppThunk => as
     }
 }
 
-//type
+//types
 export type InitialAuthStateType = typeof initialState
 
 export type ProfileType = {

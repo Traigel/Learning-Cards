@@ -1,12 +1,16 @@
 import React, {FocusEvent, KeyboardEvent, useEffect, useState} from 'react'
 import styles from './Profile.module.css'
+
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
-import {logoutTC, updateUserInfoTC} from "../login/auth-reducer";
-import {Navigate, NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {getIsLoggedIn, getProfileInfo} from "../login/auth-selectors";
+
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {useSelector} from "react-redux";
+
+import {logoutTC, updateUserInfoTC} from "../login/auth-reducer";
+import {getIsLoggedIn, getProfileInfo} from "../login/auth-selectors";
+
+import {Navigate, NavLink} from "react-router-dom";
 
 export const Profile = () => {
 
@@ -22,7 +26,7 @@ export const Profile = () => {
     }
 
     const changeUserNameHandler = (e: string) => {
-            setInputValue(e)
+        setInputValue(e)
     }
 
     const handler = (value: string) => {

@@ -7,6 +7,8 @@ import styles from './Card.module.css'
 // import edit from './.././../../assets/image/edit.png'
 // import clear from './.././../../assets/image/clear.png'
 import {BasicRating} from '../../../common/components/starsRating/StartRating';
+import {SvgSelector} from '../../../common/components/svgSelector/svgSelector';
+import SuperButton from '../../../common/components/superButton/SuperButton';
 
 export type CardType = {
     question: string
@@ -47,9 +49,11 @@ export const Card = (props: CardType) => {
             <TableCell align="left"><BasicRating values={props.grade}/></TableCell>
             <TableCell align="right">
                 {isPackAuthor &&
-                    <img className={styles.iconBtn} onClick={onEditClickHandler} src={''} alt="edit"/>}
+                    <SuperButton className={styles.iconBtn} onClick={onEditClickHandler}>
+                        <SvgSelector svgName='pencil'/>
+                    </SuperButton> }
                 {isPackAuthor &&
-                    <img onClick={onDeleteClickHandler} className={styles.iconBtn} src={''} alt="delete"/>}
+                    <SuperButton className={styles.iconBtn}><SvgSelector svgName='delete'/></SuperButton>}
             </TableCell>
         </TableRow>
     );

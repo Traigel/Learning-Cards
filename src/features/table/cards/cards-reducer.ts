@@ -91,7 +91,7 @@ export const updateCardsTC = (card: updateCardsType): AppThunk => async (dispatc
 
 //types
 
-type InitialStateCardsType = typeof InitialStateCards
+export type InitialStateCardsType = typeof InitialStateCards
 
 export type CardsActionType =
     | ReturnType<typeof setCards>

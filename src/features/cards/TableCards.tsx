@@ -7,10 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SuperButton from '../../../common/components/superButton/SuperButton';
+import SuperButton from '../../common/components/superButton/SuperButton';
 import styles from './TableCards.module.css'
-import SuperInputText from '../../../common/components/superInputText/SuperInputText';
-import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
+import SuperInputText from '../../common/components/superInputText/SuperInputText';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 import {createCardsTC, setCardsTC} from './cards-reducer';
 import {useParams} from 'react-router-dom';
 import {Card} from './Card';

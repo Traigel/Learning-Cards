@@ -1,18 +1,21 @@
 import React from 'react';
+import styles from './Packs.module.css';
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+
 import {addNewPackTC, setPacksTC} from './packs-reducer';
+
 import {Pack} from "./pack/Pack";
-import styles from './Packs.module.css';
+import SuperButton from "../../common/components/superButton/SuperButton";
+import SuperInputText from "../../common/components/superInputText/SuperInputText";
+
+import TableCell from '@mui/material/TableCell';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SuperButton from "../../common/components/superButton/SuperButton";
-import SuperInputText from "../../common/components/superInputText/SuperInputText";
 
 export const Packs = () => {
 
@@ -40,6 +43,7 @@ export const Packs = () => {
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
+
                     <TableHead>
                         <TableRow>
                             <TableCell style={{fontWeight: 'bold', width: 50}}>Name</TableCell>
@@ -49,6 +53,7 @@ export const Packs = () => {
                             <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
+
                     <TableBody>
                         {packsInfo && packsInfo.map((row) => (
                             <Pack
@@ -62,6 +67,7 @@ export const Packs = () => {
                             />
                         ))}
                     </TableBody>
+
                 </Table>
             </TableContainer>
         </>

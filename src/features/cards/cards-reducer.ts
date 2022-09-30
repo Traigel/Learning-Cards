@@ -1,7 +1,7 @@
-import {cardsAPI, CardsType, createCardsType, updateCardsType} from '../../../api/api';
-import {AppThunk} from '../../../app/store';
-import {setAppStatusAC} from '../../../app/app-reducer';
-import {errorHandlerUtil} from '../../../common/utils/errors-utils';
+import {cardsAPI, CardsType, createCardsType, updateCardsType} from '../../api/api';
+import {AppThunk} from '../../app/store';
+import {setAppStatusAC} from '../../app/app-reducer';
+import {errorHandlerUtil} from '../../common/utils/errors-utils';
 
 const InitialStateCards = {
     cards: null as CardsType[] | null,

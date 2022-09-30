@@ -40,7 +40,6 @@ export const Pack = (props: PacksTablePropsType) => {
     }
 
     return (
-
         <TableRow
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
@@ -58,6 +57,5 @@ export const Pack = (props: PacksTablePropsType) => {
                     <SuperButton onClick={onDeleteClickHandler} className={styles.iconBtn}><img src={deleteIcon} alt="delete"/></SuperButton>}
             </TableCell>
         </TableRow>
-
     );
 };

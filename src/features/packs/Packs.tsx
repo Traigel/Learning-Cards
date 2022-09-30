@@ -1,7 +1,8 @@
 import React from 'react';
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import { setPacksTC} from './packs-reducer';
+import {addNewPackTC, setPacksTC} from './packs-reducer';
+import {Pack} from "./pack/Pack";
 import styles from './Packs.module.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,17 +13,16 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperInputText from "../../common/components/superInputText/SuperInputText";
-import {Pack} from './Pack';
 
 export const Packs = () => {
 
-    const packsInfo = useAppSelector((state)=>state.packs.packs)
+    const packsInfo = useAppSelector((state)=> state.packs.cardPacks)
 
     const dispatch = useAppDispatch()
 
     const onclickHandler = () => {
         const createPacksData = {name: 'Typescript Pack'}
-        // dispatch(addNewPackTC(createPacksData))
+        dispatch(addNewPackTC(createPacksData))
     }
 
     useEffect(() => {

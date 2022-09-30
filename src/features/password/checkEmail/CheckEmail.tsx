@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './CheckEmail.module.css'
 import SuperButton from '../../../common/components/superButton/SuperButton';
-import checkEmail from '../../../assets/image/checkemail.png'
+import checkEmail from '../../../assets/images/checkemail.png'
 import {NavLink} from 'react-router-dom';
 import {useAppSelector} from '../../../common/hooks/hooks';
 

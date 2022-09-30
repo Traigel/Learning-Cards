@@ -41,13 +41,13 @@ export const packsAPI = {
     getPacks() {
         return instance.get<ResponsePacksType>('cards/pack')
     },
-    createPacks(cardsPack: createPacksType) {
+    createPack(cardsPack: createPacksType) {
         return instance.post('cards/pack', {cardsPack})
     },
-    updatePacks(cardsPack: updatePackType) {
+    updatePack(cardsPack: updatePackType) {
         return instance.put('cards/pack', {cardsPack})
     },
-    deletePacks(packID: string) {
+    deletePack(packID: string) {
         return instance.delete(`cards/pack?id=${packID}`)
     }
 }

@@ -192,8 +192,8 @@ export type CardsType = {
 
 export type createCardsType = {
     cardsPack_id: string | undefined
-    question: string
-    answer: string
+    question?: string
+    answer?: string
     grade?: number
     shots?: number
     answerImg?: string

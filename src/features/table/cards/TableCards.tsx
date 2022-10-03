@@ -14,6 +14,8 @@ import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 import {createCardsTC, setCardsTC} from './cards-reducer';
 import {useParams} from 'react-router-dom';
 import {Card} from './Card';
+import {AddModal} from '../../../common/components/modals/cards/AddModal';
+import {DeleteModal} from '../../../common/components/modals/cards/DeleteModal';
 
 export const TableCards = () => {
 
@@ -28,24 +30,11 @@ export const TableCards = () => {
         }
     }, [])
 
-    const learnCards = ()=> {
+    const learnCards = () => {
         alert('EXY')
     }
 
-    function getRandomInt(max:number) {
-        return Math.floor(Math.random() * max);
-    }
-
-    const addNewCardHandler = () => {
-        const newCard = {
-            cardsPack_id: packID,
-            answer: 'what are you doing?',
-            question: 'oops..',
-            grade: getRandomInt(6),
-        }
-        dispatch(createCardsTC(newCard))
-    }
-    const userID = useAppSelector((state)=>state.auth.profile?._id)
+    const userID = useAppSelector((state) => state.auth.profile?._id)
     const userCardID = useAppSelector(state => state.cards.packUserID)
     const packName = useAppSelector(state => state.cards.packName)
     const isPackAuthor = userCardID === userID
@@ -56,9 +45,9 @@ export const TableCards = () => {
                 {packName}
             </h2>
             {isPackAuthor ?
-            <div className={styles.button}>
-                <SuperButton onClick={addNewCardHandler}>Add new card</SuperButton>
-            </div> : <div className={styles.button}>
+                <div className={styles.button}>
+                    <AddModal/>
+                </div> : <div className={styles.button}>
                     <SuperButton onClick={learnCards}>Learn to pack</SuperButton>
                 </div>}
             <label>Search</label>

@@ -9,11 +9,13 @@ type SuperDoubleRangePropsType = {
     minMax: [number, number]
     width?: number
     className?: string
+    onChangeCommitted?: (event: React.SyntheticEvent | Event, value: number | number[]) => void
 }
 
 export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
     {
         onChangeRange,
+        onChangeCommitted,
         value,
         width,
         className,
@@ -36,6 +38,7 @@ export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
                     className={className}
                     min={minMax[0]}
                     max={minMax[1]}
+                    onChangeCommitted={onChangeCommitted ? onChangeCommitted : () => {}}
                 />
             </Box>
         </div>

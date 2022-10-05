@@ -45,9 +45,11 @@ export const App = () => {
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
 
+                    <Route path={'/profile'} element={<Profile/>}/>
+
                     <Route path={'/packs'} element={<Packs/>}/>
 
-                    <Route path={'/profile'} element={<Profile/>}/>
+
 
                     <Route path={'/cards/:packID'} element={<TableCards/>}/>
 

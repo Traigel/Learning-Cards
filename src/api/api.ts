@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {ProfileType} from "../features/login/auth-reducer";
 import {ForgotPasswordType, SetNewPasswordType} from '../features/login/auth-reducer'
+import {SetDataType} from "../features/packs/packs-reducer";
 
 export const instance = axios.create({
     //baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/' ,
@@ -38,8 +39,16 @@ export const authAPI = {
 }
 
 export const packsAPI = {
-    getPacks(page: number = 1, pageCount: number = 5) {
-        return instance.get<ResponsePacksType>(`cards/pack?page=${page}&pageCount=${pageCount}`)
+    getPacks(data: SetDataType) {
+        return instance.get<ResponsePacksType>(`cards/pack`, {
+            params: {
+                page: data.page,
+                pageCount: data.pageCount,
+                packName: data.packName,
+                minRange: 3,
+                maxRange: 5
+            }
+        })
     },
     createPack(cardsPack: createPacksType, ) {
         return instance.post('cards/pack', {cardsPack})

@@ -9,22 +9,18 @@ export const PacksPagination = () =>  {
     const page = useAppSelector((state) => state.packs.page)
     const pageCount = useAppSelector((state) => state.packs.pageCount)
 
-    const [rowsPerPage, setRowsPerPage] = React.useState(pageCount);
-
     const dispatch = useAppDispatch()
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
-        setRowsPerPage(pageCount);
         dispatch(setPacksTC(newPage + 1, pageCount))
     };
 
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
         dispatch(setPacksTC(page, +event.target.value))
     };
 
@@ -35,7 +31,7 @@ export const PacksPagination = () =>  {
             page={page - 1}
             onPageChange={handleChangePage}
             rowsPerPageOptions={[5, 10, 25, 50]}
-            rowsPerPage={rowsPerPage}
+            rowsPerPage={pageCount}
             onRowsPerPageChange={handleChangeRowsPerPage}
         />
     );

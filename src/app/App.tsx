@@ -21,6 +21,9 @@ export const App = () => {
     const dispatch = useAppDispatch()
     const isInitialized = useAppSelector(state => state.app.isInitialized)
 
+    const page = useAppSelector((state) => state.packs.page)
+    const pageCount = useAppSelector((state) => state.packs.pageCount)
+
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
@@ -46,13 +49,14 @@ export const App = () => {
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
 
                     <Route path={'/packs'} element={<Packs/>}/>
+                    {/*/packs?page=:page&pageCount=:pageCount*/}
 
                     <Route path={'/profile'} element={<Profile/>}/>
 
                     <Route path={'/cards/:packID'} element={<TableCards/>}/>
 
-                    <Route path={'/error404'} element={<Error404/>}/>
-                    <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
+                    {/*<Route path={'/error404'} element={<Error404/>}/>*/}
+                    {/*<Route path={'*'} element={<Navigate to={'/error404'}/>}/>*/}
                 </Routes>
             </div>
         </div>

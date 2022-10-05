@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Packs.module.css';
-import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 
 import {addNewPackTC, setPacksTC} from './packs-reducer';
@@ -17,10 +16,18 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {PacksPagination} from "./packsPagination/PacksPagination";
+import {useSearchParams} from "react-router-dom";
 
 export const Packs = () => {
 
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const pageURL = searchParams.get('page')
+    const pageCountURL = searchParams.get('pageCount')
     const packsInfo = useAppSelector((state)=> state.packs.cardPacks)
+
+    const page = useAppSelector((state) => state.packs.page)
+    const pageCount = useAppSelector((state) => state.packs.pageCount)
 
     const dispatch = useAppDispatch()
 
@@ -30,7 +37,8 @@ export const Packs = () => {
     }
 
     useEffect(() => {
-        dispatch(setPacksTC(0))
+        dispatch(setPacksTC(pageURL, pageCountURL))
+        // setSearchParams(searchParams.set("page", page + ''))
     }, [])
 
     return (

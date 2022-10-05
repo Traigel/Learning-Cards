@@ -18,6 +18,9 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
     switch (action.type) {
         case 'PACKS/SET-PACKS-DATA':
             return {...action.data}
+        case 'PACKS/SET_PAGE_URL': {
+            return {...state, page: action.page}
+        }
         default:
             return state
     }
@@ -26,8 +29,10 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 //action creators
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
+export const setPageUlr = (page: number) => ({type: 'PACKS/SET_PAGE_URL', page} as const)
+
 //thunks
-export const setPacksTC = (page: any = 1, pageCount: any = 5): AppThunk => async (dispatch) => {
+export const setPacksTC = (page: number, pageCount?: number): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         const res = await packsAPI.getPacks(page, pageCount)
@@ -82,3 +87,4 @@ export type InitialPacksStateType = typeof initialState
 
 export type PacksActionsType =
     | ReturnType<typeof setPacksDataAC>
+    | ReturnType<typeof setPageUlr>

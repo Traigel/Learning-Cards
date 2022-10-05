@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styles from './Packs.module.css';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 
-import {addNewPackTC, setPacksTC} from './packs-reducer';
+import {addNewPackTC, setPacksTC, setPageUlr} from './packs-reducer';
 
 import {Pack} from "./pack/Pack";
 import SuperButton from "../../common/components/superButton/SuperButton";
@@ -16,18 +16,35 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {PacksPagination} from "./packsPagination/PacksPagination";
-import {useSearchParams} from "react-router-dom";
+import {createSearchParams, useNavigate, useSearchParams} from "react-router-dom";
 
 export const Packs = () => {
 
     const [searchParams, setSearchParams] = useSearchParams()
-
+    const navigate = useNavigate();
     const pageURL = searchParams.get('page')
     const pageCountURL = searchParams.get('pageCount')
-    const packsInfo = useAppSelector((state)=> state.packs.cardPacks)
+
+    useEffect(() => {
+        pageURL && dispatch(setPageUlr(+pageURL))
+    }, [])
+
+    const packsInfo = useAppSelector((state) => state.packs.cardPacks)
+    console.log('render PACKS')
+    //console.log(pageURL, pageCountURL)
 
     const page = useAppSelector((state) => state.packs.page)
     const pageCount = useAppSelector((state) => state.packs.pageCount)
+
+    useEffect(() => {
+        navigate({
+            search: createSearchParams({
+                page: page + '',
+                pageCount: pageCount + '',
+            }).toString()
+        });
+        dispatch(setPacksTC(page, pageCount))
+    }, [page, pageCount])
 
     const dispatch = useAppDispatch()
 
@@ -35,11 +52,6 @@ export const Packs = () => {
         const createPacksData = {name: 'Typescript Pack'}
         dispatch(addNewPackTC(createPacksData))
     }
-
-    useEffect(() => {
-        dispatch(setPacksTC(pageURL, pageCountURL))
-        // setSearchParams(searchParams.set("page", page + ''))
-    }, [])
 
     return (
         <>

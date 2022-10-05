@@ -14,6 +14,7 @@ import {NewPassword} from '../features/password/newPassword/NewPassword';
 import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
 import {useAppDispatch, useAppSelector} from '../common/hooks/hooks';
 import {Packs} from "../features/packs/Packs";
+import {TableCards} from '../features/table/cards/TableCards';
 
 export const App = () => {
 
@@ -37,13 +38,14 @@ export const App = () => {
             <div className={styles.appContainer}>
                 <Routes>
                     <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
-                    <Route path={'/profile'} element={<Profile/>}/>
-                    <Route path={'/packs'} element={<Packs/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
-                    <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/forgot'} element={<ForgotPassword/>}/>
+                    <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
+                    <Route path={'/profile'} element={<Profile/>}/>
+                    <Route path={'/packs'} element={<Packs/>}/>
+                    <Route path={'/cards/:packID'} element={<TableCards/>}/>
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>

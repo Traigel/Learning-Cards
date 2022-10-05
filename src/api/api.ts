@@ -49,7 +49,7 @@ export const packsAPI = {
     },
     deletePack(packID: string) {
         return instance.delete(`cards/pack?id=${packID}`)
-    }
+    },
 }
 
 export const cardsAPI = {

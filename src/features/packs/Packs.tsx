@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {addNewPackTC, setPacksTC} from './packs-reducer';
@@ -37,6 +37,7 @@ export const Packs = () => {
             <SetPacks/>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
+
                     <TableHead>
                         <TableRow>
                             <TableCell style={{fontWeight: 'bold', width: 50}}>Name</TableCell>
@@ -46,6 +47,7 @@ export const Packs = () => {
                             <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
+
                     <TableBody>
                         {packsInfo && packsInfo.map((row) => (
                             <Pack
@@ -59,6 +61,7 @@ export const Packs = () => {
                             />
                         ))}
                     </TableBody>
+
                 </Table>
             </TableContainer>
         </>

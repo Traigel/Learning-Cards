@@ -1,14 +1,12 @@
 import React from 'react';
-import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import {deleteCardsTC, updateCardsTC} from './cards-reducer';
 import styles from './Card.module.css'
-// import edit from './.././../../assets/image/edit.png'
-// import clear from './.././../../assets/image/clear.png'
-import {BasicRating} from '../../../common/components/starsRating/StartRating';
-import {SvgSelector} from '../../../common/components/svgSelector/svgSelector';
-import SuperButton from '../../../common/components/superButton/SuperButton';
+import {BasicRating} from "../../common/components/starsRating/StartRating";
+import SuperButton from "../../common/components/superButton/SuperButton";
+import { SvgSelector } from '../../common/components/svgSelector/svgSelector';
 
 export type CardType = {
     question: string

@@ -12,7 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SuperButton from "../../common/components/superButton/SuperButton";
-import SuperInputText from "../../common/components/superInputText/SuperInputText";
+import { SetPacks } from './setPacks/SetPacks';
 
 export const Packs = () => {
 

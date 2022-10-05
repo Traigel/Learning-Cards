@@ -10,7 +10,6 @@ export const SetPacks = () => {
 
     const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
-    const filterPacks = useAppSelector(state => state.packs.filterPacks)
     console.log(minCardsCount, maxCardsCount)
 
     const [minRange, setMinRange] = useState(minCardsCount)
@@ -26,8 +25,8 @@ export const SetPacks = () => {
         setMaxRange(maxCardsCount)
     }, [minCardsCount, maxCardsCount])
 
-    const myActive = filterPacks === 'My' ? styles.active : ''
-    const allActive = filterPacks === 'All' ? styles.active : ''
+    const myActive = styles.active
+    const allActive = styles.active
 
      return (
         <div className={styles.setPacks}>

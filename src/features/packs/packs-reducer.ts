@@ -4,21 +4,20 @@ import {setAppStatusAC} from "../../app/app-reducer";
 import {errorHandlerUtil} from "../../common/utils/errors-utils";
 
 const initialState = {
-	cardPacks: null as PackType[] | null,
-	page: 0,
-	pageCount: 0,
-	cardPacksTotalCount: 0,
-	minCardsCount: 0,
-	maxCardsCount: 100,
-	token: 0,
-	tokenDeathTime: 0,
-	filterPacks: 'My' as 'My' | 'All'
+    cardPacks: null as PackType[] | null,
+    page: 0,
+    pageCount: 0,
+    cardPacksTotalCount: 0,
+    minCardsCount: 0,
+    maxCardsCount: 100,
+    token: '',
+    tokenDeathTime: 0,
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialPacksStateType => {
     switch (action.type) {
         case 'PACKS/SET-PACKS-DATA':
-            return {...action.data, filterPacks: "My"}
+            return {...action.data}
         default:
             return state
     }
@@ -64,19 +63,17 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
     }
 }
 
-export const changePackTC = (data: updatePackType): AppThunk => async (dispatch) => {
-	dispatch(setAppStatusAC("loading"))
-	try {
-		await packsAPI.updatePack(data)
-		dispatch(setPacksTC())
-	} catch (e) {
-		errorHandlerUtil(e, dispatch)
-	} finally {
-		dispatch(setAppStatusAC("idle"))
-	}
+export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        await packsAPI.deletePack(data)
+        dispatch(setPacksTC())
+    } catch (e) {
+        errorHandlerUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
 }
-
-
 
 //types
 export type InitialPacksStateType = typeof initialState

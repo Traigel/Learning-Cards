@@ -8,6 +8,7 @@ import styles from "./Pack.module.css"
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 import SuperButton from '../../common/components/superButton/SuperButton';
+import {changePackTC, deletePackTC} from "./packs-reducer";
 
 type PacksTablePropsType = {
     userId: string
@@ -32,11 +33,11 @@ export const Pack = (props: PacksTablePropsType) => {
 
     const onEditClickHandler = () => {
         const updatePackData = {_id: props.packId, name: 'changed Pack-Name'}
-        // dispatch(changePackTC(updatePackData))
+        dispatch(changePackTC(updatePackData))
     }
 
     const onDeleteClickHandler = () => {
-        // dispatch(deletePackTC(props.packId))
+        dispatch(deletePackTC(props.packId))
     }
 
     return (

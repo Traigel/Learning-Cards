@@ -5,9 +5,9 @@ import {errorHandlerUtil} from "../../common/utils/errors-utils";
 
 const initialState = {
     cardPacks: null as PackType[] | null,
-    page: null as number | null,
-    pageCount: null as number | null,
-    cardPacksTotalCount: null as number | null,
+    page: 0,
+    pageCount: 5,
+    cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 0,
     token: null as string | null,
@@ -27,10 +27,10 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
 //thunks
-export const setPacksTC = (): AppThunk => async (dispatch) => {
+export const setPacksTC = (page: number, pageCount?: number): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
-        const res = await packsAPI.getPacks()
+        const res = await packsAPI.getPacks(page, pageCount)
         dispatch(setPacksDataAC(res.data))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -43,7 +43,7 @@ export const addNewPackTC = (data: createPacksType): AppThunk => async (dispatch
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.createPack(data)
-        dispatch(setPacksTC())
+        dispatch(setPacksTC(0))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -55,7 +55,7 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.updatePack(data)
-        dispatch(setPacksTC())
+        dispatch(setPacksTC(0))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -67,7 +67,7 @@ export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.deletePack(data)
-        dispatch(setPacksTC())
+        dispatch(setPacksTC(0))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {

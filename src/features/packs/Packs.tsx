@@ -16,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {PacksPagination} from "./packsPagination/PacksPagination";
 
 export const Packs = () => {
 
@@ -29,7 +30,7 @@ export const Packs = () => {
     }
 
     useEffect(() => {
-        dispatch(setPacksTC())
+        dispatch(setPacksTC(0))
     }, [])
 
     return (
@@ -41,7 +42,7 @@ export const Packs = () => {
             <div className={styles.input}>
                 <SuperInputText placeholder={'Provide your text'}/>
             </div>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className={styles.tableContainer}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
 
                     <TableHead>
@@ -67,8 +68,8 @@ export const Packs = () => {
                             />
                         ))}
                     </TableBody>
-
                 </Table>
+                <PacksPagination/>
             </TableContainer>
         </>
     )

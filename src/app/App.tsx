@@ -15,7 +15,6 @@ import {CheckEmail} from '../features/password/checkEmail/CheckEmail';
 import {useAppDispatch, useAppSelector} from '../common/hooks/hooks';
 import {Packs} from "../features/packs/Packs";
 import {TableCards} from '../features/cards/TableCards';
-import {TEST} from "../features/packs/TEST";
 
 export const App = () => {
 
@@ -46,7 +45,7 @@ export const App = () => {
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
 
-                    <Route path={'/packs'} element={<TEST/>}/>
+                    <Route path={'/packs'} element={<Packs/>}/>
 
                     <Route path={'/profile'} element={<Profile/>}/>
 

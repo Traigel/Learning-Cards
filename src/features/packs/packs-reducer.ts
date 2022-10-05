@@ -5,8 +5,8 @@ import {errorHandlerUtil} from "../../common/utils/errors-utils";
 
 const initialState = {
     cardPacks: null as PackType[] | null,
-    page: 0,
-    pageCount: 0,
+    page: 1,
+    pageCount: 5,
     cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 100,
@@ -27,10 +27,10 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
 //thunks
-export const setPacksTC = (): AppThunk => async (dispatch) => {
+export const setPacksTC = (page: number, pageCount: number): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
-        const res = await packsAPI.getPacks()
+        const res = await packsAPI.getPacks(page, pageCount)
         dispatch(setPacksDataAC(res.data))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -63,11 +63,13 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
     }
 }
 
-export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
+export const deletePackTC = (data: string): AppThunk => async (dispatch, getState) => {
     dispatch(setAppStatusAC("loading"))
+    const page = getState().packs.page
+    const pageCount = getState().packs.pageCount
     try {
         await packsAPI.deletePack(data)
-        dispatch(setPacksTC())
+        dispatch(setPacksTC(page, pageCount))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {

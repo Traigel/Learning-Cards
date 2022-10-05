@@ -17,6 +17,8 @@ export const Profile = () => {
     const profileInfo = useSelector(getProfileInfo)
     const isLoggedIn = useSelector(getIsLoggedIn)
     const userName = useAppSelector((state) => state.auth.profile?.name)
+    const page = useAppSelector((state) => state.packs.page)
+    const pageCount = useAppSelector((state) => state.packs.pageCount)
 
     const [inputValue, setInputValue] = useState(userName)
     const dispatch = useAppDispatch()
@@ -58,7 +60,7 @@ export const Profile = () => {
     return (
         <div className={styles.profileContainer}>
             <div className={styles.backToCardsBlock}>
-                <NavLink to={'/packs'} className={styles.goToPacksTitle}>
+                <NavLink to={`/packs?page=${page}&pageCount=${pageCount}`} className={styles.goToPacksTitle}>
                     <span className={styles.backArrowTitle}>←</span>
                     Back to packs list
                 </NavLink>

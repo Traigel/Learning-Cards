@@ -17,55 +17,58 @@ import {createSearchParams, Navigate, useNavigate, useSearchParams} from "react-
 
 export const Packs = () => {
 
-    const [searchParams] = useSearchParams()
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate();
-
+    const [searchParams, setSearchParams] = useSearchParams()
     const pageURL = searchParams.get('page')
     const pageCountURL = searchParams.get('pageCount')
+    const packNameURL = searchParams.get('packName')
+
+    console.log(packNameURL)
+
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const packsInfo = useAppSelector((state) => state.packs.cardPacks)
-    const page = useAppSelector((state) => state.packs.page)
-    const pageCount = useAppSelector((state) => state.packs.pageCount)
-    const packNameSearch = useAppSelector(state => state.packs.packNameSearch)
+    const packsInfo = useAppSelector(state => state.packs.cardPacks)
+    const page = useAppSelector(state => state.packs.page)
+    const pageCount = useAppSelector(state => state.packs.pageCount)
+    const packName = useAppSelector(state => state.packs.packName)
+    const minRange = useAppSelector(state => state.packs.minRange)
+    const maxRange = useAppSelector(state => state.packs.maxRange)
+
 
     const finalPageURL = pageURL ? +pageURL : page
     const finalPageCountURL = pageCountURL ? +pageCountURL : pageCount
+    const finalPackNameURL = packNameURL !== null ? packNameURL : packName
 
     useEffect(() => {
-        pageURL && pageCountURL && dispatch(setPacksTC({page: finalPageURL, pageCount: finalPageCountURL, packName: packNameSearch}))
-    }, [packNameSearch])
+        dispatch(setPacksTC({
+            page: finalPageURL,
+            pageCount: finalPageCountURL,
+            packName: finalPackNameURL,
+            minRange,
+            maxRange
+        }))
+    }, [packName, minRange, maxRange])
 
-    useEffect(() => {
-        console.log('page, pageCount')
-        navigate({
-            search: createSearchParams({
-                page: page + '',
-                pageCount: pageCount + ''
-            }).toString()
-        });
-    }, [page, pageCount])
+    // useEffect(() => {
+    //     if (packName) {
+    //         navigate({
+    //             search: createSearchParams({
+    //                 page: page + '',
+    //                 pageCount: pageCount + '',
+    //                 packName: packName,
+    //             }).toString()
+    //         });
+    //     } else {
+    //         navigate({
+    //             search: createSearchParams({
+    //                 page: page + '',
+    //                 pageCount: pageCount + ''
+    //             }).toString()
+    //         });
+    //     }
+    // }, [page, pageCount, packName])
 
-    useEffect(() => {
-        if (packNameSearch) {
-            navigate({
-                search: createSearchParams({
-                    page: page + '',
-                    pageCount: pageCount + '',
-                    packName: packNameSearch
-                }).toString()
-            });
-        } else {
-            navigate({
-                search: createSearchParams({
-                    page: page + '',
-                    pageCount: pageCount + ''
-                }).toString()
-            });
-        }
-
-
-    }, [page, pageCount, packNameSearch])
 
     const onclickHandler = () => {
         const createPacksData = {name: 'Typescript Pack'}
@@ -73,11 +76,12 @@ export const Packs = () => {
     }
 
     const pageHandler = (valuePage: number) => {
-        dispatch(setPacksTC({page: valuePage, pageCount, packName: packNameSearch}))
+        setSearchParams({page: valuePage + '', pageCount: pageCount + '', packName})
+        dispatch(setPacksTC({page: valuePage, pageCount, packName, minRange, maxRange}))
     }
 
     const pageCountHandler = (valuePageCount: number) => {
-        dispatch(setPacksTC({page, pageCount: valuePageCount, packName: packNameSearch}))
+        dispatch(setPacksTC({page, pageCount: valuePageCount, packName, minRange, maxRange}))
     }
 
     if (!isLoggedIn) {

@@ -12,7 +12,7 @@ const initialState = {
     maxCardsCount: 0,
     token: '',
     tokenDeathTime: 0,
-    packNameSearch: '',
+    packName: '',
     minRange: 0,
     maxRange: 0
 }
@@ -33,7 +33,7 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
                 pageCount: action.data.pageCount
             }
         case "PACKS/SET-PACKS-NAME-SEARCH": {
-            return {...state, packNameSearch: action.packName}
+            return {...state, packName: action.packName}
         }
         case "PACKS/SET-MIN-MAX": {
             return {...state, minRange: action.min, maxRange: action.max}

@@ -13,11 +13,12 @@ export const SetPacks = () => {
     const dispatch = useAppDispatch()
     const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
-    const minRange = useAppSelector(state => state.packs.minRange)
-    const maxRange = useAppSelector(state => state.packs.maxRange)
 
     const [valueSearch, setValueSearch] = useState<string>('')
     const debouncedValue = useDebounce<string>(valueSearch, 500)
+
+    const [minRange, setMinRange] = useState<number>(minCardsCount)
+    const [maxRange, setMaxRange] = useState<number>(maxCardsCount)
 
     const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValueSearch(e.currentTarget.value)
@@ -28,15 +29,17 @@ export const SetPacks = () => {
     }, [debouncedValue])
 
     const onChangeRangeHandler = (value: [number, number]) => {
+        setMinRange(value[0])
+        setMaxRange(value[1])
+    }
+
+    const onChangeCommittedHandler = (value: [number, number]) => {
         dispatch(setMinMaxAC(value[0], value[1]))
     }
 
-    const onChangeCommittedHandler = (event: React.SyntheticEvent | Event, value: number | number[]) => {
-
-    }
-
     useEffect(() => {
-        dispatch(setMinMaxAC(minCardsCount, maxCardsCount))
+        setMinRange(minCardsCount)
+        setMaxRange(maxCardsCount)
     }, [minCardsCount, maxCardsCount])
 
     const myActive = styles.active

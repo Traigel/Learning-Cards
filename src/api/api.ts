@@ -45,12 +45,12 @@ export const packsAPI = {
                 page: data.page,
                 pageCount: data.pageCount,
                 packName: data.packName,
-                minRange: 3,
-                maxRange: 5
+                min: data.minRange,
+                max: data.maxRange
             }
         })
     },
-    createPack(cardsPack: createPacksType, ) {
+    createPack(cardsPack: createPacksType,) {
         return instance.post('cards/pack', {cardsPack})
     },
     updatePack(cardsPack: updatePackType) {

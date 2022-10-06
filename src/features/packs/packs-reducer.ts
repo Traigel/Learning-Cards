@@ -12,10 +12,14 @@ const initialState = {
     maxCardsCount: 0,
     token: '',
     tokenDeathTime: 0,
-    packName: '',
-    minRange: 0,
-    maxRange: 0,
-    userID: ''
+    params: {
+        page: '1',
+        pageCount: '5',
+        packName: '',
+        userID: '',
+        min: '',
+        max: ''
+    } as UrlParamsType
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialPacksStateType => {
@@ -33,18 +37,9 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
                 page: action.data.page,
                 pageCount: action.data.pageCount
             }
-        case "PACKS/SET-PACKS-NAME-SEARCH": {
-            return {...state, packName: action.packName}
+        case "PACKS/SET-URL-PARAMS": {
+            return {...state, params: {...action.params}}
         }
-        case "PACKS/SET-MIN-MAX": {
-            return {...state, minRange: action.min, maxRange: action.max}
-        }
-        case "PACKS/SET-USER-ID": {
-            return {...state, userID: action.userID}
-        }
-        // case "PACKS/SET-PAGES": {
-        //     return {...state, page: action.page, pageCount: action.pageCount}
-        // }
         default:
             return state
     }
@@ -53,42 +48,14 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 //action creators
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
-export const setPackNameSearchAC = (packName: string) => ({
-    type: 'PACKS/SET-PACKS-NAME-SEARCH', packName
-} as const)
-
-export const setMinMaxAC = (min: number, max: number) => ({
-    type: 'PACKS/SET-MIN-MAX', min, max
-} as const)
-
-export const setUserIDAC = (userID: string) => ({
-    type: 'PACKS/SET-USER-ID', userID
-} as const)
-
-// export const setPagesAC = (page: number, pageCount: number) => ({
-//     type: 'PACKS/SET-PAGES', page, pageCount
-// } as const)
+export const setUrlParamsAC = (params: UrlParamsType) => ({type: 'PACKS/SET-URL-PARAMS', params} as const)
 
 //thunks
-export const setPacksTC = (data: SetDataType): AppThunk => async (dispatch) => {
+export const setPacksTC = (): AppThunk => async (dispatch, getState) => {
+    const urlParams = getState().packs.params
     dispatch(setAppStatusAC("loading"))
     try {
-        const res = await packsAPI.getPacks(data)
-        dispatch(setPacksDataAC(res.data))
-    } catch (e) {
-        errorHandlerUtil(e, dispatch)
-    } finally {
-        dispatch(setAppStatusAC("idle"))
-    }
-}
-
-export const setResetFilterTC = (page: number, pageCount: number,): AppThunk => async (dispatch) => {
-    dispatch(setAppStatusAC("loading"))
-    try {
-        const res = await packsAPI.getPacks({page, pageCount})
-        dispatch(setPackNameSearchAC(''))
-        dispatch(setMinMaxAC(0, 0))
-        dispatch(setUserIDAC(''))
+        const res = await packsAPI.getPacks({...urlParams})
         dispatch(setPacksDataAC(res.data))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -101,7 +68,7 @@ export const addNewPackTC = (data: createPacksType): AppThunk => async (dispatch
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.createPack(data)
-        dispatch(setPacksTC({page: 1, pageCount: 5}))
+        dispatch(setPacksTC())
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -113,7 +80,7 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.updatePack(data)
-        dispatch(setPacksTC({page: 1, pageCount: 5}))
+        dispatch(setPacksTC())
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -123,11 +90,11 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
 
 export const deletePackTC = (data: string): AppThunk => async (dispatch, getState) => {
     dispatch(setAppStatusAC("loading"))
-    const page = getState().packs.page
-    const pageCount = getState().packs.pageCount
+    const page = getState().packs.page + ''
+    const pageCount = getState().packs.pageCount + ''
     try {
         await packsAPI.deletePack(data)
-        dispatch(setPacksTC({page, pageCount}))
+        dispatch(setPacksTC())
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -140,16 +107,16 @@ export type InitialPacksStateType = typeof initialState
 
 export type PacksActionsType =
     | ReturnType<typeof setPacksDataAC>
-    | ReturnType<typeof setPackNameSearchAC>
-    | ReturnType<typeof setMinMaxAC>
-    | ReturnType<typeof setUserIDAC>
-// | ReturnType<typeof setPagesAC>
+    | ReturnType<typeof setUrlParamsAC>
+//     | ReturnType<typeof setPackNameSearchAC>
+//     | ReturnType<typeof setMinMaxAC>
+//     | ReturnType<typeof setUserIDAC>
+// // | ReturnType<typeof setPagesAC>
 
-export type SetDataType = {
-    page: number,
-    pageCount: number,
-    packName?: string
+export type UrlParamsType = {
+    page?: string,
+    pageCount?: string,
     userID?: string
-    minRange?: number
-    maxRange?: number
+    min?: string
+    max?: string
 }

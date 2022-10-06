@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Packs.module.css';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {addNewPackTC, setPacksTC} from './packs-reducer';
+import {addNewPackTC, setPacksTC, setUrlParamsAC, UrlParamsType} from './packs-reducer';
 import {Pack} from "./pack/Pack";
 import TableCell from '@mui/material/TableCell';
 import Table from '@mui/material/Table';
@@ -13,85 +13,52 @@ import Paper from '@mui/material/Paper';
 import SuperButton from "../../common/components/superButton/SuperButton";
 import {SetPacks} from './setPacks/SetPacks';
 import {PacksPagination} from "./packsPagination/PacksPagination";
-import {createSearchParams, Navigate, useNavigate, useSearchParams} from "react-router-dom";
+import {Navigate, useSearchParams} from "react-router-dom";
+import {filterQueryParams} from "../../common/utils/query-params";
+import {useDebounce} from "../../common/hooks/useDebounce";
 
 export const Packs = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams()
-    const pageURL = searchParams.get('page')
-    const pageCountURL = searchParams.get('pageCount')
-    const packNameURL = searchParams.get('packName')
-    const userIDURL = searchParams.get('userID')
-    const minRangeURL = searchParams.get('min')
-    const maxRangeURL = searchParams.get('max')
-
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const packsInfo = useAppSelector(state => state.packs.cardPacks)
-    const page = useAppSelector(state => state.packs.page)
-    const pageCount = useAppSelector(state => state.packs.pageCount)
-    const packName = useAppSelector(state => state.packs.packName)
-    const userID = useAppSelector(state => state.packs.userID)
-    const minRange = useAppSelector(state => state.packs.minRange)
-    const maxRange = useAppSelector(state => state.packs.maxRange)
+    const cardPacks = useAppSelector(state => state.packs.cardPacks)
 
-    const finalPageURL = pageURL ? +pageURL : page
-    const finalPageCountURL = pageCountURL ? +pageCountURL : pageCount
-    const finalPackNameURL = packNameURL !== null ? packNameURL : packName
-    const finalUserID = userIDURL !== null ? userIDURL : userID
-    const finalMinRangeURL = minRangeURL !== null ? +minRangeURL : minRange
-    const finalMaxRangeURL = maxRangeURL !== null ? +maxRangeURL : maxRange
+    const params = useAppSelector(state => state.packs.params)
+    const myUserID = useAppSelector(state => state.auth.profile?._id)
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    const pageURL = searchParams.get('page') ? searchParams.get('page') + '' : '1'
+    const pageCountURL = searchParams.get('pageCount') ? searchParams.get('pageCount') + '' : '5'
+    const packNameURL = searchParams.get('packName') ? searchParams.get('packName') + '' : ''
+    const userIDURL = searchParams.get('userID') ? searchParams.get('userID') + '' : ''
+    const minRangeURL = searchParams.get('min') ? searchParams.get('min') + '' : ''
+    const maxRangeURL = searchParams.get('max') ? searchParams.get('max') + '' : ''
+
+    const [paramsSearchState, setParamsSearchState] = useState<UrlParamsType>({
+        page: '1',
+        pageCount: '5',
+        userID: '',
+        min: '',
+        max: ''
+    })
+    const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
+
+    const debouncedValue = useDebounce<string>(packName, 500)
+
+    const urlParamsFilter = filterQueryParams({
+        page: pageURL,
+        pageCount: pageCountURL,
+        packName: packNameURL,
+        userID: userIDURL,
+        min: minRangeURL,
+        max: maxRangeURL
+    })
 
     useEffect(() => {
-            setSearchParams({
-                page: page + '',
-                pageCount: pageCount + '',
-                packName,
-                userID,
-                min: minRange + '',
-                max: maxRange + ''
-            })
-            // if (packName) {
-            //     setSearchParams({page: page + '', pageCount: pageCount + '', packName})
-            // } else {
-            //     setSearchParams({page: page + '', pageCount: pageCount + ''})
-            // }
-
-        },
-        [page, pageCount, packName, userID, minRange, maxRange]
+            dispatch(setUrlParamsAC({...urlParamsFilter}))
+            dispatch(setPacksTC())
+        }, [paramsSearchState, debouncedValue]
     )
-
-    useEffect(() => {
-        dispatch(setPacksTC({
-            page: finalPageURL,
-            pageCount: finalPageCountURL,
-            packName: finalPackNameURL,
-            userID: finalUserID,
-            minRange: finalMinRangeURL,
-            maxRange: finalMaxRangeURL
-        }))
-    }, [finalPackNameURL, finalMinRangeURL, finalMaxRangeURL, finalUserID])
-
-
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     if (packName) {
-    //         navigate({
-    //             search: createSearchParams({
-    //                 page: page + '',
-    //                 pageCount: pageCount + '',
-    //                 packName: packName,
-    //             }).toString()
-    //         });
-    //     } else {
-    //         navigate({
-    //             search: createSearchParams({
-    //                 page: page + '',
-    //                 pageCount: pageCount + ''
-    //             }).toString()
-    //         });
-    //     }
-    // }, [page, pageCount, packName])
 
     const onclickHandler = () => {
         const createPacksData = {name: 'Typescript Pack'}
@@ -99,11 +66,38 @@ export const Packs = () => {
     }
 
     const pageHandler = (valuePage: number) => {
-        dispatch(setPacksTC({page: valuePage, pageCount, packName, userID, minRange, maxRange}))
+        setParamsSearchState({...params, page: valuePage + ''})
+        setSearchParams({...filterQueryParams({...params, page: valuePage + ''})})
     }
 
     const pageCountHandler = (valuePageCount: number) => {
-        dispatch(setPacksTC({page, pageCount: valuePageCount, packName, userID, minRange, maxRange}))
+        setParamsSearchState({...params, pageCount: valuePageCount + ''})
+        setSearchParams({...filterQueryParams({...params, pageCount: valuePageCount + ''})})
+    }
+
+    const onClickButtonMyHandler = () => {
+        myUserID && setParamsSearchState({...params, userID: myUserID})
+        myUserID && setSearchParams({...filterQueryParams({...params, userID: myUserID})})
+    }
+
+    const onClickButtonAllHandler = () => {
+        setParamsSearchState({...params, userID: ''})
+        setSearchParams({...filterQueryParams({...params, userID: ''})})
+    }
+
+    const onChangeCommittedRangeHandler = (min: string, max: string) => {
+        setParamsSearchState({...params, min, max})
+        setSearchParams({...filterQueryParams({...params, min, max})})
+    }
+
+    const setResetFilterHandler = () => {
+        setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: ''})
+        setSearchParams({page: '1', pageCount: '5'})
+    }
+
+    const searchValueTextHandler = (valueSearch: string) => {
+        setPackName(valueSearch)
+        setSearchParams({...filterQueryParams({...params, packName: valueSearch})})
     }
 
     if (!isLoggedIn) {
@@ -115,7 +109,14 @@ export const Packs = () => {
             <div className={styles.button}>
                 <SuperButton onClick={onclickHandler}>Add new Pack</SuperButton>
             </div>
-            <SetPacks/>
+            <SetPacks
+                onClickButtonMy={onClickButtonMyHandler}
+                onClickButtonAll={onClickButtonAllHandler}
+                onChangeCommittedRange={onChangeCommittedRangeHandler}
+                setResetFilter={setResetFilterHandler}
+                valueSearch={packName}
+                searchValueText={searchValueTextHandler}
+            />
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
@@ -129,7 +130,7 @@ export const Packs = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {packsInfo && packsInfo.map((row) => (
+                        {cardPacks && cardPacks.map((row) => (
                             <Pack
                                 key={row._id}
                                 userId={row.user_id}

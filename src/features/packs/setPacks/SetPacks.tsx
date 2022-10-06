@@ -6,38 +6,38 @@ import {SuperDoubleRange} from "../../../common/components/superDoubleRange/Supe
 import {SvgSelector} from "../../../common/components/svgSelector/svgSelector";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {useDebounce} from '../../../common/hooks/useDebounce';
-import {setMinMaxAC, setPackNameSearchAC, setPacksTC, setResetFilterTC, setUserIDAC} from "../packs-reducer";
+import {setUrlParamsAC} from "../packs-reducer";
 
-export const SetPacks = () => {
+type SetPacksPropsType = {
+    onClickButtonMy: () => void
+    onClickButtonAll: () => void
+    onChangeCommittedRange: (min: string, max: string) => void
+    setResetFilter: () => void
+    valueSearch: string
+    searchValueText: (valueSearch: string) => void
+}
 
-    const dispatch = useAppDispatch()
+export const SetPacks = ({
+                             onClickButtonMy,
+                             onClickButtonAll,
+                             onChangeCommittedRange,
+                             setResetFilter,
+                             searchValueText,
+                             valueSearch,
+                         }: SetPacksPropsType) => {
+
     const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
 
-    const [valueSearch, setValueSearch] = useState<string>('')
-    const debouncedValue = useDebounce<string>(valueSearch, 500)
-
     const myUserID = useAppSelector(state => state.auth.profile?._id)
-    const UserID = useAppSelector(state => state.packs.userID)
+    const filterUserID = useAppSelector(state => state.packs.params.userID)
 
     const [minRange, setMinRange] = useState<number>(minCardsCount)
     const [maxRange, setMaxRange] = useState<number>(maxCardsCount)
 
     const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setValueSearch(e.currentTarget.value)
+        searchValueText(e.currentTarget.value)
     }
-
-    const onClickButtonMyHandler = () => {
-        myUserID && dispatch(setUserIDAC(myUserID))
-    }
-
-    const onClickButtonAllHandler = () => {
-        dispatch(setUserIDAC(''))
-    }
-
-    useEffect(() => {
-        dispatch(setPackNameSearchAC(valueSearch))
-    }, [debouncedValue])
 
     const onChangeRangeHandler = (value: [number, number]) => {
         setMinRange(value[0])
@@ -45,11 +45,11 @@ export const SetPacks = () => {
     }
 
     const onChangeCommittedHandler = (value: [number, number]) => {
-        dispatch(setMinMaxAC(value[0], value[1]))
+        onChangeCommittedRange(value[0] + '', value[1] + '')
     }
 
     const onFunnelClickHandler = () => {
-        dispatch(setResetFilterTC(1, 5))
+        setResetFilter()
     }
 
     useEffect(() => {
@@ -57,8 +57,8 @@ export const SetPacks = () => {
         setMaxRange(maxCardsCount)
     }, [minCardsCount, maxCardsCount])
 
-    const myNotActive = myUserID === UserID ? styles.active : styles.notActive
-    const allNotActive = myUserID !== UserID ? styles.active : styles.notActive
+    const myNotActive = myUserID === filterUserID ? styles.active : styles.notActive
+    const allNotActive = myUserID !== filterUserID ? styles.active : styles.notActive
 
     return (
         <div className={styles.setPacks}>
@@ -75,13 +75,13 @@ export const SetPacks = () => {
                 <label className={styles.title}>Show packs cards</label>
                 <SuperButton
                     className={`${styles.button} ${myNotActive}`}
-                    onClick={onClickButtonMyHandler}
-                    disabled={myUserID === UserID}
+                    onClick={onClickButtonMy}
+                    disabled={myUserID === filterUserID}
                 >My</SuperButton>
                 <SuperButton
                     className={`${styles.button} ${allNotActive}`}
-                    onClick={onClickButtonAllHandler}
-                    disabled={myUserID !== UserID}
+                    onClick={onClickButtonAll}
+                    disabled={myUserID !== filterUserID}
                 >All</SuperButton>
             </div>
             <div className={styles.doubleRangeBlock}>

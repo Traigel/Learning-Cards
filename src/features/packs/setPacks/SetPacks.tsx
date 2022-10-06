@@ -63,7 +63,7 @@ export const SetPacks = () => {
     return (
         <div className={styles.setPacks}>
             <div className={styles.inputBlock}>
-                <label>Search</label>
+                <label className={styles.title}>Search</label>
                 <SuperInputText
                     placeholder={'Provide your text'}
                     className={styles.input}
@@ -72,7 +72,7 @@ export const SetPacks = () => {
                 />
             </div>
             <div className={styles.buttonFilterBlock}>
-                <label>Show packs cards</label>
+                <label className={styles.title}>Show packs cards</label>
                 <SuperButton
                     className={`${styles.button} ${myNotActive}`}
                     onClick={onClickButtonMyHandler}
@@ -85,7 +85,7 @@ export const SetPacks = () => {
                 >All</SuperButton>
             </div>
             <div className={styles.doubleRangeBlock}>
-                <label>Number of cards</label>
+                <label className={styles.title}>Number of cards</label>
                 <div className={styles.number}>{minRange}</div>
                 <SuperDoubleRange
                     value={[minRange, maxRange]}
@@ -96,10 +96,11 @@ export const SetPacks = () => {
                 />
                 <div className={styles.number}>{maxRange}</div>
             </div>
-            <SuperButton onClick={onFunnelClickHandler} className={styles.iconBtn}>
-                <SvgSelector svgName='funnel'/>
-            </SuperButton>
-
+            <div>
+                <SuperButton onClick={onFunnelClickHandler} className={styles.iconBtn}>
+                    <SvgSelector svgName='funnel'/>
+                </SuperButton>
+            </div>
         </div>
     )
 }

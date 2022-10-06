@@ -27,7 +27,7 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
     const finalInputClassName = `${s.checkbox} ${className ? className : ''}`
 
     return (
-        <div>
+        <label>
             <input
                 type={'checkbox'}
                 onChange={onChangeCallback}
@@ -36,7 +36,7 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
                 {...restProps}
             />
             {children && <span className={s.spanClassName}>{children}</span>}
-        </div>
+        </label>
     )
 }
 

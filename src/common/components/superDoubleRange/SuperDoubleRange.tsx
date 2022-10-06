@@ -17,7 +17,6 @@ export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         onChangeRange,
         onChangeCommitted,
         value,
-        width,
         className,
         minMax
     }
@@ -33,7 +32,7 @@ export const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
 
     return (
         <div className={styles.range}>
-            <Box width={width ? width : 200}>
+            <Box>
                 <Slider
                     getAriaLabel={() => 'Range'}
                     value={value}

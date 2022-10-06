@@ -43,17 +43,6 @@ export const Packs = () => {
     const finalMaxRangeURL = maxRangeURL !== null ? +maxRangeURL : maxRange
 
     useEffect(() => {
-        dispatch(setPacksTC({
-            page: finalPageURL,
-            pageCount: finalPageCountURL,
-            packName: finalPackNameURL,
-            userID: finalUserID,
-            minRange: finalMinRangeURL,
-            maxRange: finalMaxRangeURL
-        }))
-    }, [finalPackNameURL, finalMinRangeURL, finalMaxRangeURL, finalUserID])
-
-    useEffect(() => {
             setSearchParams({
                 page: page + '',
                 pageCount: pageCount + '',
@@ -71,6 +60,18 @@ export const Packs = () => {
         },
         [page, pageCount, packName, userID, minRange, maxRange]
     )
+
+    useEffect(() => {
+        dispatch(setPacksTC({
+            page: finalPageURL,
+            pageCount: finalPageCountURL,
+            packName: finalPackNameURL,
+            userID: finalUserID,
+            minRange: finalMinRangeURL,
+            maxRange: finalMaxRangeURL
+        }))
+    }, [finalPackNameURL, finalMinRangeURL, finalMaxRangeURL, finalUserID])
+
 
     // const navigate = useNavigate();
     // useEffect(() => {

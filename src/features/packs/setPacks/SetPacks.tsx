@@ -15,6 +15,8 @@ type SetPacksPropsType = {
     setResetFilter: () => void
     valueSearch: string
     searchValueText: (valueSearch: string) => void
+    minRangeURL: string
+    maxRangeURL: string
 }
 
 export const SetPacks = ({
@@ -24,6 +26,8 @@ export const SetPacks = ({
                              setResetFilter,
                              searchValueText,
                              valueSearch,
+                             minRangeURL,
+                             maxRangeURL
                          }: SetPacksPropsType) => {
 
     const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
@@ -53,8 +57,8 @@ export const SetPacks = ({
     }
 
     useEffect(() => {
-        setMinRange(minCardsCount)
-        setMaxRange(maxCardsCount)
+        setMinRange(minRangeURL ? +minRangeURL : minCardsCount)
+        setMaxRange(maxRangeURL ? +maxRangeURL : maxCardsCount)
     }, [minCardsCount, maxCardsCount])
 
     const myNotActive = myUserID === filterUserID ? styles.active : styles.notActive

@@ -17,8 +17,8 @@ const initialState = {
         pageCount: '5',
         packName: '',
         userID: '',
-        min: '',
-        max: ''
+        min: '0',
+        max: '0'
     } as UrlParamsType
 }
 
@@ -88,10 +88,8 @@ export const changePackTC = (data: updatePackType): AppThunk => async (dispatch)
     }
 }
 
-export const deletePackTC = (data: string): AppThunk => async (dispatch, getState) => {
+export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    const page = getState().packs.page + ''
-    const pageCount = getState().packs.pageCount + ''
     try {
         await packsAPI.deletePack(data)
         dispatch(setPacksTC())

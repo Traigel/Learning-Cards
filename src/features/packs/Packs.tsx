@@ -18,12 +18,11 @@ import {filterQueryParams} from "../../common/utils/query-params";
 import {useDebounce} from "../../common/hooks/useDebounce";
 
 export const Packs = () => {
-
+    console.log('Packs')
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const cardPacks = useAppSelector(state => state.packs.cardPacks)
 
-    const params = useAppSelector(state => state.packs.params)
     const myUserID = useAppSelector(state => state.auth.profile?._id)
 
     const [searchParams, setSearchParams] = useSearchParams()
@@ -38,8 +37,8 @@ export const Packs = () => {
         page: '1',
         pageCount: '5',
         userID: '',
-        min: '',
-        max: ''
+        min: '0',
+        max: '0'
     })
     const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
 
@@ -66,28 +65,35 @@ export const Packs = () => {
     }
 
     const pageHandler = (valuePage: number) => {
-        setParamsSearchState({...params, page: valuePage + ''})
-        setSearchParams({...filterQueryParams({...params, page: valuePage + ''})})
+        setParamsSearchState({...paramsSearchState, page: valuePage + ''})
+        setSearchParams({...filterQueryParams({...paramsSearchState, page: valuePage + ''})})
     }
 
     const pageCountHandler = (valuePageCount: number) => {
-        setParamsSearchState({...params, pageCount: valuePageCount + ''})
-        setSearchParams({...filterQueryParams({...params, pageCount: valuePageCount + ''})})
+        setParamsSearchState({...paramsSearchState, pageCount: valuePageCount + '', min: '', max: ''})
+        setSearchParams({...filterQueryParams({...paramsSearchState, pageCount: valuePageCount + '', min: '', max: ''})})
     }
 
     const onClickButtonMyHandler = () => {
-        myUserID && setParamsSearchState({...params, userID: myUserID})
-        myUserID && setSearchParams({...filterQueryParams({...params, userID: myUserID})})
+        myUserID && setParamsSearchState({...paramsSearchState, userID: myUserID, page: '1', pageCount: '5', min: '', max: ''})
+        myUserID && setSearchParams({
+            ...filterQueryParams({
+                ...paramsSearchState,
+                userID: myUserID,
+                page: '1',
+                pageCount: '5', min: '', max: ''
+            })
+        })
     }
 
     const onClickButtonAllHandler = () => {
-        setParamsSearchState({...params, userID: ''})
-        setSearchParams({...filterQueryParams({...params, userID: ''})})
+        setParamsSearchState({...paramsSearchState, userID: '', page: '1', pageCount: '5'})
+        setSearchParams({...filterQueryParams({...paramsSearchState, userID: '', page: '1', pageCount: '5'})})
     }
 
     const onChangeCommittedRangeHandler = (min: string, max: string) => {
-        setParamsSearchState({...params, min, max})
-        setSearchParams({...filterQueryParams({...params, min, max})})
+        setParamsSearchState({...paramsSearchState, min, max})
+        setSearchParams({...filterQueryParams({...paramsSearchState, min, max})})
     }
 
     const setResetFilterHandler = () => {
@@ -97,7 +103,7 @@ export const Packs = () => {
 
     const searchValueTextHandler = (valueSearch: string) => {
         setPackName(valueSearch)
-        setSearchParams({...filterQueryParams({...params, packName: valueSearch})})
+        setSearchParams({...filterQueryParams({...paramsSearchState, packName: valueSearch})})
     }
 
     if (!isLoggedIn) {
@@ -116,6 +122,8 @@ export const Packs = () => {
                 setResetFilter={setResetFilterHandler}
                 valueSearch={packName}
                 searchValueText={searchValueTextHandler}
+                minRangeURL={minRangeURL}
+                maxRangeURL={maxRangeURL}
             />
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -143,11 +151,12 @@ export const Packs = () => {
                         ))}
                     </TableBody>
                 </Table>
-                <PacksPagination
-                    callBackPage={pageHandler}
-                    callBackPageCount={pageCountHandler}
-                />
+
             </TableContainer>
+            <PacksPagination
+                callBackPage={pageHandler}
+                callBackPageCount={pageCountHandler}
+            />
         </>
     )
 }

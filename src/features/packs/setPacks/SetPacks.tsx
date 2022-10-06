@@ -6,7 +6,7 @@ import {SuperDoubleRange} from "../../../common/components/superDoubleRange/Supe
 import {SvgSelector} from "../../../common/components/svgSelector/svgSelector";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {useDebounce} from '../../../common/hooks/useDebounce';
-import {setMinMaxAC, setPackNameSearchAC} from "../packs-reducer";
+import {setMinMaxAC, setPackNameSearchAC, setPacksTC, setResetFilterTC, setUserIDAC} from "../packs-reducer";
 
 export const SetPacks = () => {
 
@@ -17,11 +17,22 @@ export const SetPacks = () => {
     const [valueSearch, setValueSearch] = useState<string>('')
     const debouncedValue = useDebounce<string>(valueSearch, 500)
 
+    const myUserID = useAppSelector(state => state.auth.profile?._id)
+    const UserID = useAppSelector(state => state.packs.userID)
+
     const [minRange, setMinRange] = useState<number>(minCardsCount)
     const [maxRange, setMaxRange] = useState<number>(maxCardsCount)
 
     const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValueSearch(e.currentTarget.value)
+    }
+
+    const onClickButtonMyHandler = () => {
+        myUserID && dispatch(setUserIDAC(myUserID))
+    }
+
+    const onClickButtonAllHandler = () => {
+        dispatch(setUserIDAC(''))
     }
 
     useEffect(() => {
@@ -37,13 +48,17 @@ export const SetPacks = () => {
         dispatch(setMinMaxAC(value[0], value[1]))
     }
 
+    const onFunnelClickHandler = () => {
+        dispatch(setResetFilterTC(1, 5))
+    }
+
     useEffect(() => {
         setMinRange(minCardsCount)
         setMaxRange(maxCardsCount)
     }, [minCardsCount, maxCardsCount])
 
-    const myActive = styles.active
-    const allActive = 'styles.active'
+    const myNotActive = myUserID === UserID ? styles.active : styles.notActive
+    const allNotActive = myUserID !== UserID ? styles.active : styles.notActive
 
     return (
         <div className={styles.setPacks}>
@@ -59,12 +74,14 @@ export const SetPacks = () => {
             <div className={styles.buttonFilterBlock}>
                 <label>Show packs cards</label>
                 <SuperButton
-                    className={`${styles.button} ${myActive}`}
-
+                    className={`${styles.button} ${myNotActive}`}
+                    onClick={onClickButtonMyHandler}
+                    disabled={myUserID === UserID}
                 >My</SuperButton>
                 <SuperButton
-                    className={`${styles.button} ${allActive}`}
-
+                    className={`${styles.button} ${allNotActive}`}
+                    onClick={onClickButtonAllHandler}
+                    disabled={myUserID !== UserID}
                 >All</SuperButton>
             </div>
             <div className={styles.doubleRangeBlock}>
@@ -79,9 +96,10 @@ export const SetPacks = () => {
                 />
                 <div className={styles.number}>{maxRange}</div>
             </div>
-            <div>
-                <SvgSelector svgName={"funnel"}/>
-            </div>
+            <SuperButton onClick={onFunnelClickHandler} className={styles.iconBtn}>
+                <SvgSelector svgName='funnel'/>
+            </SuperButton>
+
         </div>
     )
 }

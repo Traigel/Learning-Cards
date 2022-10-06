@@ -21,10 +21,9 @@ export const Packs = () => {
     const pageURL = searchParams.get('page')
     const pageCountURL = searchParams.get('pageCount')
     const packNameURL = searchParams.get('packName')
-
-    console.log(packNameURL)
-
-    const navigate = useNavigate();
+    const userIDURL = searchParams.get('userID')
+    const minRangeURL = searchParams.get('min')
+    const maxRangeURL = searchParams.get('max')
 
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -32,24 +31,48 @@ export const Packs = () => {
     const page = useAppSelector(state => state.packs.page)
     const pageCount = useAppSelector(state => state.packs.pageCount)
     const packName = useAppSelector(state => state.packs.packName)
+    const userID = useAppSelector(state => state.packs.userID)
     const minRange = useAppSelector(state => state.packs.minRange)
     const maxRange = useAppSelector(state => state.packs.maxRange)
-
 
     const finalPageURL = pageURL ? +pageURL : page
     const finalPageCountURL = pageCountURL ? +pageCountURL : pageCount
     const finalPackNameURL = packNameURL !== null ? packNameURL : packName
+    const finalUserID = userIDURL !== null ? userIDURL : userID
+    const finalMinRangeURL = minRangeURL !== null ? +minRangeURL : minRange
+    const finalMaxRangeURL = maxRangeURL !== null ? +maxRangeURL : maxRange
 
     useEffect(() => {
         dispatch(setPacksTC({
             page: finalPageURL,
             pageCount: finalPageCountURL,
             packName: finalPackNameURL,
-            minRange,
-            maxRange
+            userID: finalUserID,
+            minRange: finalMinRangeURL,
+            maxRange: finalMaxRangeURL
         }))
-    }, [packName, minRange, maxRange])
+    }, [finalPackNameURL, finalMinRangeURL, finalMaxRangeURL, finalUserID])
 
+    useEffect(() => {
+            setSearchParams({
+                page: page + '',
+                pageCount: pageCount + '',
+                packName,
+                userID,
+                min: minRange + '',
+                max: maxRange + ''
+            })
+            // if (packName) {
+            //     setSearchParams({page: page + '', pageCount: pageCount + '', packName})
+            // } else {
+            //     setSearchParams({page: page + '', pageCount: pageCount + ''})
+            // }
+
+        },
+        [page, pageCount, packName, userID, minRange, maxRange]
+    )
+
+    // const navigate = useNavigate();
     // useEffect(() => {
     //     if (packName) {
     //         navigate({
@@ -69,19 +92,17 @@ export const Packs = () => {
     //     }
     // }, [page, pageCount, packName])
 
-
     const onclickHandler = () => {
         const createPacksData = {name: 'Typescript Pack'}
         dispatch(addNewPackTC(createPacksData))
     }
 
     const pageHandler = (valuePage: number) => {
-        setSearchParams({page: valuePage + '', pageCount: pageCount + '', packName})
-        dispatch(setPacksTC({page: valuePage, pageCount, packName, minRange, maxRange}))
+        dispatch(setPacksTC({page: valuePage, pageCount, packName, userID, minRange, maxRange}))
     }
 
     const pageCountHandler = (valuePageCount: number) => {
-        dispatch(setPacksTC({page, pageCount: valuePageCount, packName, minRange, maxRange}))
+        dispatch(setPacksTC({page, pageCount: valuePageCount, packName, userID, minRange, maxRange}))
     }
 
     if (!isLoggedIn) {
@@ -100,7 +121,8 @@ export const Packs = () => {
                         <TableRow>
                             <TableCell style={{fontWeight: 'bold', width: 50}}>Name</TableCell>
                             <TableCell style={{fontWeight: 'bold', width: 50}} align="right">Cards</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Last Updated</TableCell>
+                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Last
+                                Updated</TableCell>
                             <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Created By</TableCell>
                             <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Actions</TableCell>
                         </TableRow>

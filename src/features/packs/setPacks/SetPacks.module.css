@@ -1,11 +1,15 @@
 .setPacks {
+    /*background-color: #9b9b9b;*/
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
 }
 
 label {
     position: absolute;
-    bottom: 50px
+    bottom: 40px
 }
 
 .inputBlock {
@@ -25,10 +29,27 @@ label {
     border-radius: 0;
 }
 
-.active {
+.notActive {
     background-color: #fff;
     color: black;
     border: 1px solid #9b9b9b;
+}
+
+.active {
+    opacity: 1;
+    cursor: not-allowed !important;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+    border-color: #0b78ea;
+}
+
+.active:hover {
+    background-color: #0b78ea;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+    border-color: #0b78ea;
+}
+
+.active:active {
+    border-color: #0b78ea;
 }
 
 .buttonFilterBlock {
@@ -44,10 +65,17 @@ label {
 .number {
     display: inline-block;
     background-color: #fff;
-    padding: 3px 10px;
+    padding: 3px 0;
+    width: 35px;
+    text-align: center;
     border: 1px solid #9b9b9b;
+    border-radius: 5px;
 }
 
 .doubleRange {
 
+}
+
+.iconBtn {
+    background-color: white;
 }

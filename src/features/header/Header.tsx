@@ -14,9 +14,11 @@ export const Header = () => {
     return (
         <header className={styles.headerBlock}>
             <div className={styles.headerContainer}>
-                <div className={styles.imgBlock}>
-                    <a href="#"><img src={logoImg} alt={'Logo'}/></a>
-                </div>
+                <NavLink to={`/login`}>
+                    <div className={styles.imgBlock}>
+                        <img src={logoImg} alt={'Logo'}/>
+                    </div>
+                </NavLink>
                 <div>
                     {profileInfo &&
                         <div className={styles.personInfoInHeader}>

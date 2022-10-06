@@ -14,7 +14,8 @@ const initialState = {
     tokenDeathTime: 0,
     packName: '',
     minRange: 0,
-    maxRange: 0
+    maxRange: 0,
+    userID: ''
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialPacksStateType => {
@@ -38,6 +39,9 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
         case "PACKS/SET-MIN-MAX": {
             return {...state, minRange: action.min, maxRange: action.max}
         }
+        case "PACKS/SET-USER-ID": {
+            return {...state, userID: action.userID}
+        }
         // case "PACKS/SET-PAGES": {
         //     return {...state, page: action.page, pageCount: action.pageCount}
         // }
@@ -57,6 +61,10 @@ export const setMinMaxAC = (min: number, max: number) => ({
     type: 'PACKS/SET-MIN-MAX', min, max
 } as const)
 
+export const setUserIDAC = (userID: string) => ({
+    type: 'PACKS/SET-USER-ID', userID
+} as const)
+
 // export const setPagesAC = (page: number, pageCount: number) => ({
 //     type: 'PACKS/SET-PAGES', page, pageCount
 // } as const)
@@ -66,6 +74,21 @@ export const setPacksTC = (data: SetDataType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         const res = await packsAPI.getPacks(data)
+        dispatch(setPacksDataAC(res.data))
+    } catch (e) {
+        errorHandlerUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
+}
+
+export const setResetFilterTC = (page: number, pageCount: number,): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        const res = await packsAPI.getPacks({page, pageCount})
+        dispatch(setPackNameSearchAC(''))
+        dispatch(setMinMaxAC(0, 0))
+        dispatch(setUserIDAC(''))
         dispatch(setPacksDataAC(res.data))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -118,13 +141,15 @@ export type InitialPacksStateType = typeof initialState
 export type PacksActionsType =
     | ReturnType<typeof setPacksDataAC>
     | ReturnType<typeof setPackNameSearchAC>
-| ReturnType<typeof setMinMaxAC>
+    | ReturnType<typeof setMinMaxAC>
+    | ReturnType<typeof setUserIDAC>
 // | ReturnType<typeof setPagesAC>
 
 export type SetDataType = {
     page: number,
     pageCount: number,
     packName?: string
+    userID?: string
     minRange?: number
     maxRange?: number
 }

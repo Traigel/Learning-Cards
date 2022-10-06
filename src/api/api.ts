@@ -45,6 +45,7 @@ export const packsAPI = {
                 page: data.page,
                 pageCount: data.pageCount,
                 packName: data.packName,
+                user_id: data.userID,
                 min: data.minRange,
                 max: data.maxRange
             }

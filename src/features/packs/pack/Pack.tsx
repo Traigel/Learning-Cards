@@ -9,8 +9,11 @@ import TableRow from "@mui/material/TableRow";
 
 import {NavLink} from "react-router-dom";
 
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
-import {changePackTC, deletePackTC} from "../packs-reducer";
+import {useAppSelector} from "../../../common/hooks/hooks";
+
+import {BasicModal} from "../../../common/components/basicModal/BasicModal";
+import {DeletePackModal} from "../packsModals/DeletePackModal";
+import {EditPackModal} from "../packsModals/EditPackModal";
 
 type PacksTablePropsType = {
     userId: string
@@ -23,27 +26,39 @@ type PacksTablePropsType = {
 
 export const Pack = (props: PacksTablePropsType) => {
 
+    const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
+    const [openEditModal, setOpenEditModal] = React.useState(false);
+
+    const handleDeleteModalClose = () => setOpenDeleteModal(false);
+    const handleEditModalClose = () => setOpenEditModal(false);
+
     const userId = useAppSelector((state) => state.auth.profile?._id)
 
     const isPackAuthor = props.userId === userId
 
-    const dispatch = useAppDispatch()
-
     const onLearnClickHandler = () => {
-        alert('i wanna learn it !!!')
+        // open LEARN component
     }
 
     const onEditClickHandler = () => {
-        const updatePackData = {_id: props.packId, name: 'changed Pack-Name'}
-        dispatch(changePackTC(updatePackData))
+        setOpenEditModal(true)
     }
 
     const onDeleteClickHandler = () => {
-        dispatch(deletePackTC(props.packId))
+        setOpenDeleteModal(true)
     }
 
     return (
         <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+
+            <BasicModal open={openDeleteModal} handleClose={handleDeleteModalClose}>
+                <DeletePackModal packName={props.name} packId={props.packId} handleClose={handleDeleteModalClose}/>
+            </BasicModal>
+
+            <BasicModal open={openEditModal} handleClose={handleEditModalClose}>
+                <EditPackModal packName={props.name} packId={props.packId} handleClose={handleEditModalClose}/>
+            </BasicModal>
+
             <TableCell component="th" scope="row">
                 <NavLink to={`/cards/${props.packId}`}>{props.name}</NavLink>
             </TableCell>

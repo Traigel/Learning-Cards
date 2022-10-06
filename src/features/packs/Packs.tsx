@@ -17,6 +17,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {PacksPagination} from "./packsPagination/PacksPagination";
 import {createSearchParams, useNavigate, useSearchParams} from "react-router-dom";
+import {AddNewPackModal} from "./packsModals/AddNewPackModal";
+import {BasicModal} from "../../common/components/basicModal/BasicModal";
 
 export const Packs = () => {
 
@@ -25,13 +27,15 @@ export const Packs = () => {
     const pageURL = searchParams.get('page')
     const pageCountURL = searchParams.get('pageCount')
 
+    const [openAddNewPackModal, setOpenAddNewPackModal] = React.useState(false);
+
+    const handleAddNewPackModalClose = () => setOpenAddNewPackModal(false);
+
     useEffect(() => {
         pageURL && dispatch(setPageUlr(+pageURL))
     }, [])
 
     const packsInfo = useAppSelector((state) => state.packs.cardPacks)
-    console.log('render PACKS')
-    //console.log(pageURL, pageCountURL)
 
     const page = useAppSelector((state) => state.packs.page)
     const pageCount = useAppSelector((state) => state.packs.pageCount)
@@ -48,15 +52,18 @@ export const Packs = () => {
 
     const dispatch = useAppDispatch()
 
-    const onclickHandler = () => {
-        const createPacksData = {name: 'Typescript Pack'}
-        dispatch(addNewPackTC(createPacksData))
+    const onclickAddPackHandler = () => {
+        setOpenAddNewPackModal(true)
     }
 
     return (
         <>
+            <BasicModal open={openAddNewPackModal} handleClose={handleAddNewPackModalClose}>
+                <AddNewPackModal handleClose={handleAddNewPackModalClose}/>
+            </BasicModal>
+
             <div className={styles.button}>
-                <SuperButton onClick={onclickHandler}>Add new Pack</SuperButton>
+                <SuperButton onClick={onclickAddPackHandler}>Add new Pack</SuperButton>
             </div>
             <label>Search</label>
             <div className={styles.input}>

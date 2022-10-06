@@ -55,8 +55,8 @@ export const App = () => {
 
                     <Route path={'/cards/:packID'} element={<TableCards/>}/>
 
-                    {/*<Route path={'/error404'} element={<Error404/>}/>*/}
-                    {/*<Route path={'*'} element={<Navigate to={'/error404'}/>}/>*/}
+                    <Route path={'/error404'} element={<Error404/>}/>
+                    <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
                 </Routes>
             </div>
         </div>

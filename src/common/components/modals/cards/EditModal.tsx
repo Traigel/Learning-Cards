@@ -2,11 +2,11 @@ import {BasicModal} from './BaseModal';
 import SuperInputText from '../../superInputText/SuperInputText';
 import {updateCardsTC} from '../../../../features/table/cards/cards-reducer';
 import {useAppDispatch} from '../../../hooks/hooks';
-import React, {useState} from 'react';
+import React from 'react';
 import {useFormik} from 'formik';
 import styles from '../../../../features/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
-// import styles from './Modal.module.css';
+import {SvgSelector} from '../../svgSelector/svgSelector';
 
 type EditModalType = {
     answer: string
@@ -16,7 +16,7 @@ type EditModalType = {
 
 export const EditModal = ({cardID, answer, question}: EditModalType) => {
     const dispatch = useAppDispatch()
-    // const [open, setOpen] = useState(false);
+
     const formik = useFormik({
         initialValues: {
             _id: cardID,
@@ -29,7 +29,7 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
     })
 
     return (
-        <BasicModal title={'Edit card'}>
+        <BasicModal svgName={SvgSelector({svgName:'pencil'})} >
             <h2>Edit card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -46,11 +46,10 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
                     />
                 </div>
                 <div >
-                    <SuperButton >cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
+                    <SuperButton >cancel</SuperButton> <SuperButton  type="submit">Apply</SuperButton>
 
                 </div>
             </form>
         </BasicModal>
     )
 }
-// {/*type={'button'} onClick={()=>setOpen(false)}*/}

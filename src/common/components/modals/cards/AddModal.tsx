@@ -3,7 +3,7 @@ import SuperInputText from '../../superInputText/SuperInputText';
 import {createCardsTC} from '../../../../features/table/cards/cards-reducer';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch} from '../../../hooks/hooks';
-import React, { useState } from 'react';
+import React from 'react';
 import {useFormik} from 'formik';
 import styles from '../../../../features/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
@@ -26,9 +26,8 @@ export const AddModal = () => {
             formik.resetForm()
         },
     })
-
         return (
-        <BasicModal title={'Add card'} >
+        <BasicModal title='Add card'>
             <h2>Add card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -50,5 +49,6 @@ export const AddModal = () => {
 
             </form>
         </BasicModal>
+
     )
 }

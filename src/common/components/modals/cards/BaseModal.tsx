@@ -6,7 +6,8 @@ import SuperButton from '../../superButton/SuperButton';
 
 type PropsType = {
     children: ReactNode
-    title: string
+    svgName?: any
+    title?: string
 }
 
 const style = {
@@ -21,14 +22,14 @@ const style = {
     p: 4,
 }
 
-export const BasicModal = ({children, title}: PropsType) => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+export const BasicModal = ({children, svgName, title}: PropsType) => {
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
 
     return (
         <div>
-            <SuperButton onClick={handleOpen}>{title}</SuperButton>
+            <SuperButton onClick={handleOpen}>{title ? title : svgName}</SuperButton>
             <Modal
                 open={open}
                 onClose={handleClose}

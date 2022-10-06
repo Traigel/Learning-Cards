@@ -1,0 +1,7 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a8b9cc;
+    padding: 54px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-type SvgSelectorPropsType = {
+export type SvgSelectorPropsType = {
     svgName: "cap" | "pencil" | "delete" | "funnel"
 }
 

@@ -11,10 +11,10 @@ export type BasicRatingProps = {
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-        color: '#ffd000',
+        color: '#0ddc66',
     },
     '& .MuiRating-iconHover': {
-        color: 'rgba(72,81,220,0.51)',
+        color: 'rgba(127,244,203,0.55)',
     },
 })
 

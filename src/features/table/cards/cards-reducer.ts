@@ -7,6 +7,8 @@ const InitialStateCards = {
     cards: null as CardsType[] | null,
     packUserID: null as string | null,
     packName: null as string | null,
+    page: 1,
+    pageCount: 5,
 }
 
 export const cardsReducer = (state = InitialStateCards, action: CardsActionType): InitialStateCardsType => {
@@ -44,6 +46,7 @@ export const setCardsTC = (packID: string): AppThunk => async (dispatch) => {
         dispatch(setCards(res.data.cards))
         dispatch(setPackUserID(res.data.packUserId))
         dispatch(setPackName(res.data.packName))
+        console.log(res)
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {

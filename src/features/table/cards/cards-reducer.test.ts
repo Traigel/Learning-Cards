@@ -9,6 +9,8 @@ beforeEach(() => {
         cards: null as CardsType[] | null,
         packUserID: '',
         packName:  '',
+        page: 1,
+        pageCount: 5,
     }
     cards = {
         _id: '2',

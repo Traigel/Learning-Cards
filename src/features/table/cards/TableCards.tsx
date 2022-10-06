@@ -16,6 +16,7 @@ import {useParams} from 'react-router-dom';
 import {Card} from './Card';
 import {AddModal} from '../../../common/components/modals/cards/AddModal';
 import {DeleteModal} from '../../../common/components/modals/cards/DeleteModal';
+import {CardsPagination} from './PaginationCards';
 
 export const TableCards = () => {
 
@@ -79,6 +80,7 @@ export const TableCards = () => {
                             />
                         ))}
                     </TableBody>
+                    <CardsPagination/>
                 </Table>
             </TableContainer>
         </>

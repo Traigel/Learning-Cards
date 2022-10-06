@@ -27,7 +27,7 @@ export const DeleteModal = (props: DeleteModalType) => {
                 All cards will be deleted.
             </div>
             <div>
-                <SuperButton >Отмена</SuperButton> <SuperButton onClick={onDeleteClickHandler}><SvgSelector svgName='delete'/></SuperButton>
+                <SuperButton type='button'>Отмена</SuperButton> <SuperButton onClick={onDeleteClickHandler}>Delete</SuperButton>
             </div>
         </BasicModal>
     )

@@ -1,6 +1,5 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useState} from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import SuperButton from '../../superButton/SuperButton';
 
@@ -9,7 +8,6 @@ type PropsType = {
     children: ReactNode
     title: string
 }
-
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -21,10 +19,10 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-};
+}
 
 export const BasicModal = ({children, title}: PropsType) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -35,10 +33,11 @@ export const BasicModal = ({children, title}: PropsType) => {
                 open={open}
                 onClose={handleClose}
             >
+
                 <Box sx={style}>
                     {children}
                 </Box>
             </Modal>
         </div>
-    );
+    )
 }

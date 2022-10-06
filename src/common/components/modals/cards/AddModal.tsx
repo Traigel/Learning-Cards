@@ -28,7 +28,7 @@ export const AddModal = () => {
     })
 
         return (
-        <BasicModal title={'Add card'}>
+        <BasicModal title={'Add card'} >
             <h2>Add card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -45,7 +45,7 @@ export const AddModal = () => {
                     />
                 </div>
                 <div>
-                    <SuperButton>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
+                    <SuperButton type='button'>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
                 </div>
 
             </form>

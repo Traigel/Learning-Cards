@@ -1,12 +1,12 @@
 import {BasicModal} from './BaseModal';
 import SuperInputText from '../../superInputText/SuperInputText';
-import {createCardsTC, updateCardsTC} from '../../../../features/table/cards/cards-reducer';
-import {useParams} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
+import {updateCardsTC} from '../../../../features/table/cards/cards-reducer';
+import {useAppDispatch} from '../../../hooks/hooks';
 import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import styles from '../../../../features/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
+// import styles from './Modal.module.css';
 
 type EditModalType = {
     answer: string
@@ -14,11 +14,9 @@ type EditModalType = {
     cardID: string
 }
 
-
 export const EditModal = ({cardID, answer, question}: EditModalType) => {
     const dispatch = useAppDispatch()
-
-
+    // const [open, setOpen] = useState(false);
     const formik = useFormik({
         initialValues: {
             _id: cardID,
@@ -27,7 +25,6 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
         },
         onSubmit: values => {
             dispatch(updateCardsTC(values))
-            formik.resetForm()
         },
     })
 
@@ -48,10 +45,12 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
                         {...formik.getFieldProps('answer')}
                     />
                 </div>
-                <div>
-                    <SuperButton>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
+                <div >
+                    <SuperButton >cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
+
                 </div>
             </form>
         </BasicModal>
     )
 }
+// {/*type={'button'} onClick={()=>setOpen(false)}*/}

@@ -35,6 +35,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 3px;
+    cursor: pointer;
 }
 
 .personInfoInHeader:hover {
@@ -89,7 +90,6 @@
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
-
 }
 
 .nav {
@@ -103,7 +103,9 @@
     color: #525252;
 }
 
-
+.menu:focus {
+    background-color: #1976d2;
+}
 
 @media (max-width: 450px) {
     .headerContainer {

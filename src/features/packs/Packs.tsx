@@ -68,7 +68,14 @@ export const Packs = () => {
 
     const pageHandler = (valuePage: number) => {
         setParamsSearchState({...paramsSearchState, page: valuePage + ''})
-        setSearchParams({...filterQueryParams({...paramsSearchState, page: valuePage + '', userID: userIDURL})})
+        setSearchParams({
+            ...filterQueryParams({
+                ...paramsSearchState,
+                page: valuePage + '',
+                userID: userIDURL,
+                packName
+            })
+        })
     }
 
     const pageCountHandler = (valuePageCount: number) => {
@@ -78,7 +85,9 @@ export const Packs = () => {
                 ...paramsSearchState,
                 pageCount: valuePageCount + '',
                 min: '',
-                max: '', userID: userIDURL
+                max: '',
+                userID: userIDURL,
+                packName
             })
         })
     }
@@ -97,19 +106,22 @@ export const Packs = () => {
                 ...paramsSearchState,
                 userID: myUserID,
                 page: '1',
-                pageCount: '5', min: '', max: ''
+                pageCount: '5',
+                min: '',
+                max: '',
+                packName
             })
         })
     }
 
     const onClickButtonAllHandler = () => {
         setParamsSearchState({...paramsSearchState, userID: '', page: '1', pageCount: '5'})
-        setSearchParams({...filterQueryParams({...paramsSearchState, userID: '', page: '1', pageCount: '5'})})
+        setSearchParams({...filterQueryParams({...paramsSearchState, userID: '', page: '1', pageCount: '5', packName})})
     }
 
     const onChangeCommittedRangeHandler = (min: string, max: string) => {
         setParamsSearchState({...paramsSearchState, min, max, userID: userIDURL})
-        setSearchParams({...filterQueryParams({...paramsSearchState, min, max, userID: userIDURL})})
+        setSearchParams({...filterQueryParams({...paramsSearchState, min, max, userID: userIDURL, packName})})
     }
 
     const setResetFilterHandler = () => {

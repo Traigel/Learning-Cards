@@ -10,19 +10,23 @@ export const CheckEmail = () => {
     const email = useAppSelector(s => s.auth.forgetEmail)
 
     return (
-        <div className={styles.containerForm}>
-            <h1 className={styles.checkMailTitle}>Check Email</h1>
-            <div>
+        <div className={styles.containerCheckForm}>
+            <h2 className={styles.title}>Check Email</h2>
+            <div className={styles.checkBox}>
                 <div className={styles.checkEmail}>
                     <img src={checkEmail} alt={'check'}/>
                 </div>
-                <div className={styles.mail}>
-                    <span className={styles.instructionsTitle}>We’ve sent an Email with instructions to </span>
-                    <span className={styles.emailAddressTitle}>{email}</span>
+                <div className={styles.dontHaveAccountTitle}>
+                    <div className={styles.instructionsTitle}>
+                        We’ve sent an Email with instructions to
+                    </div>
+                    <div className={styles.emailAddressTitle}>
+                        {email}
+                    </div>
                 </div>
-                <div className={styles.bottomBlock}>
+                <div className={styles.buttonForm}>
                     <NavLink to={'/login'}>
-                        <SuperButton className={styles.buttonReg} type={'submit'}>Back to Login</SuperButton>
+                        <SuperButton type="submit">Back to Login</SuperButton>
                     </NavLink>
                 </div>
             </div>

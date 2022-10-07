@@ -40,32 +40,29 @@ export const ForgotPassword = () => {
     }
 
     return (
-        <div className={styles.containerForm}>
-            <h1 className={styles.forgotPasswordTitle}>Forgot your password?</h1>
-            <div className={styles.mainContainer}>
-                <form onSubmit={formik.handleSubmit}>
-                    <div className={styles.inputSize}>
-                        <SuperInputText
-                            autoComplete="email"
-                            placeholder="Email"
-                            id={'email'}
-                            type="text"
-                            {...formik.getFieldProps('email')}
-                        />
+        <div className={styles.ForgotPasBlock}>
+            <h2 className={styles.title}>Forgot your password?</h2>
+            <form className={styles.form} onSubmit={formik.handleSubmit}>
+                <div className={styles.inputForm}>
+                    <SuperInputText
+                        placeholder="Email"
+                        {...formik.getFieldProps('email')}
+                    />
+                    <div className={styles.error}>
+                        {formik.touched.email && formik.errors.email && formik.errors.email}
                     </div>
-                    <div className={styles.errorConfirmPass}>
-                        {formik.touched.email && formik.errors.email &&
-                            <div className={styles.errorFormik}>{formik.errors.email}</div>}
-                    </div>
-
-                    <h4 className={styles.enterEmailTitle}>Enter your email address and we<br/> will send you further instructions </h4>
-                    <div className={styles.bottomBlock}>
-                        <SuperButton className={styles.buttonReg} type={'submit'}>send Instructions</SuperButton>
-                        <h4 className={styles.rememberPasswordTitle}>Did you remember your password?</h4>
-                        <NavLink to={'/login'} className={styles.tryToLoginTitle}>Try logging in</NavLink>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div className={styles.dontHaveAccountTitle}>
+                    Enter your email address and we will send you further instructions
+                </div>
+                <div className={styles.buttonForm}>
+                    <SuperButton type="submit">Send Instructions</SuperButton>
+                </div>
+                <div className={styles.dontHaveAccountTitle}>
+                    Did you remember your password?
+                </div>
+                <NavLink to={'/login'} className={styles.signForgotPas}>Sign Up</NavLink>
+            </form>
         </div>
     )
 }

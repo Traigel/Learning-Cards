@@ -38,10 +38,10 @@ export const authAPI = {
 }
 
 export const packsAPI = {
-    getPacks() {
-        return instance.get<ResponsePacksType>('cards/pack')
+    getPacks(page: number = 1, pageCount: number = 5) {
+        return instance.get<ResponsePacksType>(`cards/pack?page=${page}&pageCount=${pageCount}`)
     },
-    createPack(cardsPack: createPacksType) {
+    createPack(cardsPack: createPacksType, ) {
         return instance.post('cards/pack', {cardsPack})
     },
     updatePack(cardsPack: updatePackType) {
@@ -49,7 +49,7 @@ export const packsAPI = {
     },
     deletePack(packID: string) {
         return instance.delete(`cards/pack?id=${packID}`)
-    }
+    },
 }
 
 export const cardsAPI = {

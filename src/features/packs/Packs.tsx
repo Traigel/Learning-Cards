@@ -1,45 +1,77 @@
-import React from 'react';
-import {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {addNewPackTC, setPacksTC} from './packs-reducer';
-import {Pack} from "./pack/Pack";
+import React, {useEffect} from 'react';
 import styles from './Packs.module.css';
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+
+import {addNewPackTC, setPacksTC, setPageUlr} from './packs-reducer';
+
+import {Pack} from "./pack/Pack";
+import SuperButton from "../../common/components/superButton/SuperButton";
+import SuperInputText from "../../common/components/superInputText/SuperInputText";
+
+import TableCell from '@mui/material/TableCell';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SuperButton from "../../common/components/superButton/SuperButton";
-import SuperInputText from "../../common/components/superInputText/SuperInputText";
+import {PacksPagination} from "./packsPagination/PacksPagination";
+import {createSearchParams, useNavigate, useSearchParams} from "react-router-dom";
+import {AddNewPackModal} from "./packsModals/AddNewPackModal";
+import {BasicModal} from "../../common/components/basicModal/BasicModal";
 
 export const Packs = () => {
 
-    const packsInfo = useAppSelector((state)=> state.packs.cardPacks)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const navigate = useNavigate();
+    const pageURL = searchParams.get('page')
+    const pageCountURL = searchParams.get('pageCount')
+
+    const [openAddNewPackModal, setOpenAddNewPackModal] = React.useState(false);
+
+    const handleAddNewPackModalClose = () => setOpenAddNewPackModal(false);
+
+    useEffect(() => {
+        pageURL && dispatch(setPageUlr(+pageURL))
+    }, [])
+
+    const packsInfo = useAppSelector((state) => state.packs.cardPacks)
+
+    const page = useAppSelector((state) => state.packs.page)
+    const pageCount = useAppSelector((state) => state.packs.pageCount)
+
+    useEffect(() => {
+        navigate({
+            search: createSearchParams({
+                page: page + '',
+                pageCount: pageCount + '',
+            }).toString()
+        });
+        dispatch(setPacksTC(page, pageCount))
+    }, [page, pageCount])
 
     const dispatch = useAppDispatch()
 
-    const onclickHandler = () => {
-        const createPacksData = {name: 'Typescript Pack'}
-        dispatch(addNewPackTC(createPacksData))
+    const onclickAddPackHandler = () => {
+        setOpenAddNewPackModal(true)
     }
-
-    useEffect(() => {
-        dispatch(setPacksTC())
-    }, [])
 
     return (
         <>
+            <BasicModal open={openAddNewPackModal} handleClose={handleAddNewPackModalClose}>
+                <AddNewPackModal handleClose={handleAddNewPackModalClose}/>
+            </BasicModal>
+
             <div className={styles.button}>
-                <SuperButton onClick={onclickHandler}>Add new Pack</SuperButton>
+                <SuperButton onClick={onclickAddPackHandler}>Add new Pack</SuperButton>
             </div>
             <label>Search</label>
             <div className={styles.input}>
                 <SuperInputText placeholder={'Provide your text'}/>
             </div>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className={styles.tableContainer}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
+
                     <TableHead>
                         <TableRow>
                             <TableCell style={{fontWeight: 'bold', width: 50}}>Name</TableCell>
@@ -49,6 +81,7 @@ export const Packs = () => {
                             <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
+
                     <TableBody>
                         {packsInfo && packsInfo.map((row) => (
                             <Pack
@@ -63,6 +96,7 @@ export const Packs = () => {
                         ))}
                     </TableBody>
                 </Table>
+                <PacksPagination/>
             </TableContainer>
         </>
     )

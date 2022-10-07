@@ -1,17 +1,16 @@
 {
   "files": {
-    "main.css": "/cards-nya-front-2-0/static/css/main.102bf639.css",
-    "main.js": "/cards-nya-front-2-0/static/js/main.23c95a6d.js",
+    "main.css": "/cards-nya-front-2-0/static/css/main.4bc0fdce.css",
+    "main.js": "/cards-nya-front-2-0/static/js/main.ef4a3f5e.js",
     "static/js/787.42533a0b.chunk.js": "/cards-nya-front-2-0/static/js/787.42533a0b.chunk.js",
     "static/media/error404.gif": "/cards-nya-front-2-0/static/media/error404.3fd10b989bf425404d23.gif",
-    "static/media/logo.png": "/cards-nya-front-2-0/static/media/logo.4147f80b4a682994c012.png",
     "index.html": "/cards-nya-front-2-0/index.html",
-    "main.102bf639.css.map": "/cards-nya-front-2-0/static/css/main.102bf639.css.map",
-    "main.23c95a6d.js.map": "/cards-nya-front-2-0/static/js/main.23c95a6d.js.map",
+    "main.4bc0fdce.css.map": "/cards-nya-front-2-0/static/css/main.4bc0fdce.css.map",
+    "main.ef4a3f5e.js.map": "/cards-nya-front-2-0/static/js/main.ef4a3f5e.js.map",
     "787.42533a0b.chunk.js.map": "/cards-nya-front-2-0/static/js/787.42533a0b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.102bf639.css",
-    "static/js/main.23c95a6d.js"
+    "static/css/main.4bc0fdce.css",
+    "static/js/main.ef4a3f5e.js"
   ]
 }

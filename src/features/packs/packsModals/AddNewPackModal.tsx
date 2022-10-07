@@ -44,9 +44,7 @@ export const AddNewPackModal = (props: AddNewPackModalPropsType) => {
             <h3>Add new Pack</h3>
             <form onSubmit={formik.handleSubmit}>
                 <SuperInputText
-                    autoComplete="packName"
                     placeholder="pack name here"
-                    id={'packName'}
                     type={'text'}
                     {...formik.getFieldProps('packName')}
                 />
@@ -54,6 +52,7 @@ export const AddNewPackModal = (props: AddNewPackModalPropsType) => {
                     {formik.touched.packName && formik.errors.packName &&
                         <div className={styles.errorFormik}>{formik.errors.packName}</div>}
                 </div>
+                <SuperButton onClick={props.handleClose} type={'reset'}>Cansel</SuperButton>
                 <SuperButton type={'submit'}>add new Pack</SuperButton>
             </form>
         </div>

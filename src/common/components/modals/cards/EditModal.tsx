@@ -16,6 +16,8 @@ type EditModalType = {
 
 export const EditModal = ({cardID, answer, question}: EditModalType) => {
     const dispatch = useAppDispatch()
+    const [open, setOpen] = useState(false)
+    const handleClose = () => setOpen(!open)
 
     const formik = useFormik({
         initialValues: {
@@ -25,11 +27,12 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
         },
         onSubmit: values => {
             dispatch(updateCardsTC(values))
+            handleClose()
         },
     })
 
     return (
-        <BasicModal svgName={SvgSelector({svgName: 'pencil'})}>
+        <BasicModal  open={open} handleClose={handleClose} svgName={SvgSelector({svgName: 'pencil'})}>
             <h2>Edit card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -46,7 +49,7 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
                     />
                 </div>
                 <div>
-                    <SuperButton>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
+                    <SuperButton onClick={handleClose} type='button'>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
 
                 </div>
             </form>

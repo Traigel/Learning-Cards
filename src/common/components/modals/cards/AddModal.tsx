@@ -2,7 +2,7 @@ import {BasicModal} from './BaseModal';
 import SuperInputText from '../../superInputText/SuperInputText';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch} from '../../../hooks/hooks';
-import React from 'react';
+import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import styles from '../../../../features/auth/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
@@ -10,7 +10,8 @@ import {createCardsTC} from '../../../../features/cards/cards-reducer';
 
 export const AddModal = () => {
     const dispatch = useAppDispatch()
-
+    const [open, setOpen] = useState(false)
+    const handleClose = () => setOpen(!open)
     const params = useParams()
     const packID = params.packID
 
@@ -23,11 +24,12 @@ export const AddModal = () => {
         onSubmit: values => {
             dispatch(createCardsTC(values))
             formik.resetForm()
+            handleClose()
         },
     })
 
     return (
-        <BasicModal title="Add card">
+        <BasicModal open={open} handleClose={handleClose} title="Add card">
             <h2>Add card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -44,7 +46,7 @@ export const AddModal = () => {
                     />
                 </div>
                 <div>
-                    <SuperButton type="button">cancel</SuperButton>
+                    <SuperButton onClick={handleClose} type="button">cancel</SuperButton>
                     <SuperButton type="submit">Apply</SuperButton>
                 </div>
             </form>

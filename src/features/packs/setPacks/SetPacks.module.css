@@ -1,0 +1,157 @@
+.setPacks {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.title {
+    position: absolute;
+    bottom: 55px
+}
+
+.rangeTitle {
+    position: absolute;
+    top: -31px;
+}
+
+.inputBlock {
+    display: inline-block;
+    position: relative;
+    width: 35%;
+}
+
+.input {
+    width: 100%;
+    height: 38.19px;
+    border-radius: 10px;
+    border: 1px solid #9b9b9b;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+.button {
+    padding: 8px 30px;
+    font-size: 18px;
+}
+
+.notActive {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #9b9b9b;
+}
+
+.active {
+    opacity: 1;
+    cursor: not-allowed !important;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+    border-color: #0b78ea;
+}
+
+.active:hover {
+    background-color: #0b78ea;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+    border-color: #0b78ea;
+}
+
+.active:active {
+    border-color: #0b78ea;
+}
+
+.buttonFilterBlock {
+    display: inline-block;
+    position: relative;
+}
+
+.buttonFilterBlock button:nth-child(2) {
+    border-radius: 10px 0 0 10px;
+}
+
+.buttonFilterBlock button:nth-child(3) {
+    border-radius: 0 10px 10px 0;
+}
+
+.doubleRangeBlock {
+    display: inline-block;
+    position: relative;
+    top: -3px;
+}
+
+.doubleRangeBlock label {
+    bottom: 41px
+}
+
+.number {
+    display: inline-block;
+    background-color: #fff;
+    padding: 3px 0;
+    width: 35px;
+    text-align: center;
+    border: 1px solid #9b9b9b;
+    border-radius: 10px;
+}
+
+.doubleRange {
+    position: relative;
+    top: 7px;
+}
+
+.iconBtn {
+    background-color: white;
+}
+
+@media (max-width: 1099px) {
+    .setPacks {
+        height: 200px;
+        justify-content: space-around;
+    }
+
+    .setPacks :nth-child(1) {
+        order: 1;
+    }
+
+    .setPacks :nth-child(2) {
+        order: 3;
+    }
+
+    .setPacks :nth-child(3) {
+        order: 4;
+    }
+
+    .setPacks :nth-child(4) {
+        order: 2;
+    }
+
+    .inputBlock {
+        width: 85%;
+    }
+}
+
+@media (max-width: 659px) {
+    .setPacks {
+        height: 270px;
+
+    }
+
+    .doubleRangeBlock {
+        width: 100%;
+        text-align: center;
+    }
+
+    .inputBlock {
+        width: 75%;
+    }
+}
+
+@media (max-width: 430px) {
+
+    .doubleRange {
+        width: 130px !important;
+    }
+
+    .doubleRangeBlock div:nth-child(3) {
+        width: 130px !important;
+    }
+}

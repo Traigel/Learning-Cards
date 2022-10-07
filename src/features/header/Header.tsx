@@ -1,27 +1,45 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './Header.module.css'
-import SuperButton from "../../common/components/superButton/SuperButton";
 import logoImg from '../../assets/images/logo.png'
 import LinearProgress from '@mui/material/LinearProgress';
 import {NavLink} from "react-router-dom";
-import {useAppSelector} from "../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {SvgSelector} from "../../common/components/svgSelector/svgSelector";
+import {logoutTC} from "../login/auth-reducer";
 
 export const Header = () => {
 
+    const dispatch = useAppDispatch()
     const status = useAppSelector(state => state.app.status)
     const profileInfo = useAppSelector(state => state.auth.profile)
+
+    const [visibilityValue, setVisibilityValue] = useState<boolean>(false)
+
+    const visibilityHandler = () => {
+        setVisibilityValue(!visibilityValue)
+    }
+
+    const logoutHandler = () => {
+        dispatch(logoutTC())
+        visibilityHandler()
+    }
 
     return (
         <header className={styles.headerBlock}>
             <div className={styles.headerContainer}>
-                <div className={styles.imgBlock}>
-                    <a href="#"><img src={logoImg} alt={'Logo'}/></a>
-                </div>
-                <div>
+                <NavLink to={`/login`}>
+                    <div className={styles.imgBlock}>
+                        <img src={logoImg} alt={'Logo'}/>
+                    </div>
+                </NavLink>
+                <div style={{position: 'relative'}}>
                     {profileInfo &&
-                        <div className={styles.personInfoInHeader}>
+                        <div
+                            className={styles.personInfoInHeader}
+                            onClick={visibilityHandler}
+                        >
                             <span className={styles.userNameIcon}>
-                                <NavLink to={'/'} className={styles.goToProfileTitle}>{profileInfo.name}</NavLink>
+                                {profileInfo.name}
                             </span>
                             <span className={styles.userAvatarIcon}>
                                 <img className={styles.userAvatar}
@@ -29,8 +47,34 @@ export const Header = () => {
                                      alt='user-avatar'/>
                             </span>
                         </div>
+
                     }
-                    {/*<SuperButton className={styles.buttonIn}>Sign in</SuperButton>*/}
+                    {visibilityValue &&
+                        <div className={styles.profileMenu}>
+                            <div className={styles.pointer}></div>
+                            <div className={styles.menu}>
+                                <div>
+                                    <NavLink
+                                        to={'/'}
+                                        className={styles.nav}
+                                        onClick={visibilityHandler}
+                                    >
+                                        <SvgSelector svgName={"profile"}/> Profile
+                                    </NavLink>
+                                </div>
+                                <div>
+                                    <NavLink
+                                        to={'/'}
+                                        className={styles.nav}
+                                        onClick={logoutHandler}
+                                    >
+                                        <SvgSelector svgName={"logOut"}/> Log out
+                                    </NavLink>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                 </div>
             </div>
             <div className={styles.linear}>

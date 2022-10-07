@@ -1,12 +1,4 @@
-.errorFormik {
-    text-align: center;
-    color: rgba(208, 0, 0, 0.63);
-    font-size: 0.85rem;
-    user-select: none;
-}
-
 .formContainer {
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,73 +9,58 @@
     background: #FFFFFF;
     box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
     border-radius: 2px;
-    padding: 20px;
-}
-
-.visibleConfirmEye {
-    cursor: pointer;
-    position: relative;
-    width: 20px;
-    top: -77px;
-    left: 265px;
-    color: #1565c0
-}
-
-.visibleEye {
-    cursor: pointer;
-    position: relative;
-    width: 20px;
-    top: -110px;
-    left: 265px;
-    color: #1565c0
+    padding: 50px;
 }
 
 .signUpTitle {
     font-size: 1.8rem;
     font-weight: 600;
     user-select: none;
-    margin-top: 80px;
+    margin-bottom: 50px;
 }
 
-.errorConfirmPass {
-    height: 25px;
-}
-
-.formContainer input {
-    padding: 5px;
-    height: 20px;
-    width: 280px;
-}
-
-.formContainer input::placeholder {
-    color: #afafaf;
-}
-
-.bottomBlock {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.buttonReg {
+.form {
     width: 100%;
-    margin-bottom: 20px;
+    text-align: center;
 }
 
-.haveAccountTitle {
+.inputForm input {
+    width: 100%;
+}
+
+.error {
+    box-sizing: border-box;
+    margin: 3px 0 5px 0;
+    font-size: 0.85rem;
+    color: rgba(208, 0, 0, 0.63);
+    height: 20px;
+    user-select: none;
+}
+
+.eye {
+    position: absolute;
+    margin-left: -28px;
+    margin-top: 8px;
+}
+
+.buttonForm button {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.dontHaveAccountTitle {
     color: #757575;
     user-select: none;
-    font-weight: 400;
-    margin: 0;
+    margin-top: 30px;
+    padding-bottom: 15px;
 }
 
-.signInTitle {
+.signUpTitle {
     user-select: none;
     text-decoration: none;
     color: black;
-    box-sizing: border-box;
 }
 
-.signInTitle:hover {
+.signUpTitle:hover {
     color: #072c57;
 }

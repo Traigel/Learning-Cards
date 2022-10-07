@@ -1,7 +1,36 @@
-.iconBtn {
-    background-color: inherit;
+.maneColumn {
+    user-select: none;
+    text-decoration: none;
+    color: black;
 }
 
-.button {
-    float: right;
+.maneColumn:hover {
+    color: #525252;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+
+}
+
+.cardsColumn {
+    width: 10% !important;
+}
+
+.dateColumn {
+    width: 18% !important;
+}
+
+.userNameColumn {
+    width: 17% !important;
+}
+
+.iconsColumn {
+    width: 10% !important;
+}
+
+.icon {
+    cursor: pointer;
 }

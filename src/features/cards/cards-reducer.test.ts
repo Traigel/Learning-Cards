@@ -1,5 +1,5 @@
 import {cardsReducer, InitialStateCardsType, setCards, setPackName, setPackUserID} from './cards-reducer';
-import {CardsType} from '../../../api/api';
+import {CardsType} from '../../api/api';
 
 let state: InitialStateCardsType
 let cards: CardsType

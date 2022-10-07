@@ -1,14 +1,47 @@
-.button {
+.packsHeader {
     display: flex;
-    justify-content: end;
-    padding-bottom: 30px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
 }
 
-.input input{
+.packsHeader h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+}
+
+.button {
+    height: 36px;
+    width: 175px;
+}
+
+.input input {
     min-width: 100%;
     height: 30px;
 }
 
 .input {
     padding: 5px 0 20px 0;
+}
+
+.headerRow {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    width: 50px !important;
+}
+
+@media (max-width: 430px) {
+
+    .packsHeader {
+        justify-content: center;
+    }
+
+    .packsHeader h2 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 }

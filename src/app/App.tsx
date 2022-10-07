@@ -21,9 +21,6 @@ export const App = () => {
     const dispatch = useAppDispatch()
     const isInitialized = useAppSelector(state => state.app.isInitialized)
 
-    const page = useAppSelector((state) => state.packs.page)
-    const pageCount = useAppSelector((state) => state.packs.pageCount)
-
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
@@ -41,17 +38,13 @@ export const App = () => {
             <div className={styles.appContainer}>
                 <Routes>
                     <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
-
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
                     <Route path={'/forgot'} element={<ForgotPassword/>}/>
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
-
-                    <Route path={'/packs'} element={<Packs/>}/>
-                    {/*/packs?page=:page&pageCount=:pageCount*/}
-
                     <Route path={'/profile'} element={<Profile/>}/>
+                    <Route path={'/packs'} element={<Packs/>}/>
 
                     <Route path={'/cards/:packID'} element={<TableCards/>}/>
 

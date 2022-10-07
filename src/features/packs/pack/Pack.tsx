@@ -1,12 +1,8 @@
 import React from 'react';
 import styles from "./Pack.module.css"
-
-import SuperButton from "../../../common/components/superButton/SuperButton";
 import {SvgSelector} from "../../../common/components/svgSelector/svgSelector";
-
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-
 import {NavLink} from "react-router-dom";
 
 import {useAppSelector} from "../../../common/hooks/hooks";
@@ -61,25 +57,31 @@ export const Pack = (props: PacksTablePropsType) => {
             </BasicModal>
 
             <TableCell component="th" scope="row">
-                <NavLink to={`/cards/${props.packId}`}>{props.name}</NavLink>
+                <NavLink
+                    to={`/cards/${props.packId}`}
+                    className={styles.maneColumn}
+                >{props.name}</NavLink>
             </TableCell>
-
-            <TableCell align="right">{props.cardsCount}</TableCell>
-            <TableCell align="right">{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
-            <TableCell align="right">{props.user_name}</TableCell>
-
-            <TableCell align="right">
-                <SuperButton onClick={onLearnClickHandler} className={styles.iconBtn}>
-                    <SvgSelector svgName='cap'/>
-                </SuperButton>
-                {isPackAuthor &&
-                    <SuperButton onClick={onEditClickHandler} className={styles.iconBtn}>
-                        <SvgSelector svgName='pencil'/>
-                    </SuperButton>}
-                {isPackAuthor &&
-                    <SuperButton onClick={onDeleteClickHandler} className={styles.iconBtn}>
-                        <SvgSelector svgName='delete'/>
-                    </SuperButton>}
+            <TableCell className={styles.cardsColumn}>{props.cardsCount}</TableCell>
+            <TableCell
+                className={styles.dateColumn}>{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
+            <TableCell className={styles.userNameColumn}>{props.user_name}</TableCell>
+            <TableCell className={styles.iconsColumn}>
+                <div className={styles.icons}>
+                    <div className={styles.icon} onClick={onLearnClickHandler}>
+                        <SvgSelector svgName='cap'/>
+                    </div>
+                    {isPackAuthor &&
+                        <div className={styles.icon} onClick={onEditClickHandler}>
+                            <SvgSelector svgName='pencil'/>
+                        </div>
+                    }
+                    {isPackAuthor &&
+                        <div className={styles.icon} onClick={onDeleteClickHandler}>
+                            <SvgSelector svgName='delete'/>
+                        </div>
+                    }
+                </div>
             </TableCell>
         </TableRow>
     )

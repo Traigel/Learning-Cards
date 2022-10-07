@@ -38,10 +38,19 @@ export const authAPI = {
 }
 
 export const packsAPI = {
-    getPacks(page: number = 1, pageCount: number = 5) {
-        return instance.get<ResponsePacksType>(`cards/pack?page=${page}&pageCount=${pageCount}`)
+    getPacks(data: ParamsType) {
+        return instance.get<ResponsePacksType>(`cards/pack`, {
+            params: {
+                page: data.page,
+                pageCount: data.pageCount,
+                packName: data.packName,
+                user_id: data.userID,
+                min: data.min,
+                max: data.max
+            }
+        })
     },
-    createPack(cardsPack: createPacksType, ) {
+    createPack(cardsPack: createPacksType,) {
         return instance.post('cards/pack', {cardsPack})
     },
     updatePack(cardsPack: updatePackType) {
@@ -206,4 +215,13 @@ export type updateCardsType = {
     _id: string
     question?: string
     comments?: string
+}
+
+export type ParamsType = {
+    page?: string,
+    pageCount?: string,
+    packName?: string
+    userID?: string
+    min?: string
+    max?: string
 }

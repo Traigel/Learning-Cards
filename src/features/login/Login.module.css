@@ -9,20 +9,19 @@
     background: #FFFFFF;
     box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
     border-radius: 2px;
-}
-
-.loginContainer {
-    margin-top: 50px;
-    background-color: #fff;
-    width: 360px;
-    text-align: center;
-    padding: 20px;
+    padding: 50px;
 }
 
 .title {
     font-size: 1.8rem;
     font-weight: 600;
     user-select: none;
+    margin-bottom: 50px;
+}
+
+.form {
+    width: 100%;
+    text-align: center;
 }
 
 .forgotPassTitle:hover {
@@ -32,6 +31,8 @@
 .dontHaveAccountTitle {
     color: #757575;
     user-select: none;
+    margin-top: 30px;
+    padding-bottom: 15px;
 }
 
 .signUpTitle {
@@ -45,13 +46,7 @@
 }
 
 .inputForm input {
-    padding: 5px;
-    height: 20px;
-    width: 80%;
-}
-
-.inputForm input::placeholder {
-    color: #afafaf;
+    width: 100%;
 }
 
 .eye {
@@ -62,7 +57,6 @@
 
 .checkedForm {
     text-align: left;
-    padding-left: 28px;
     user-select: none;
 }
 
@@ -81,9 +75,8 @@
 
 .forPass {
     text-align: right;
-    padding-right: 28px;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .forPass a {
@@ -92,6 +85,5 @@
 }
 
 .buttonForm button {
-    width: 85%;
-    margin-bottom: 20px;
+    width: 100%;
 }

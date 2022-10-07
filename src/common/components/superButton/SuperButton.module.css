@@ -1,19 +1,26 @@
 .default {
-    background-color: #4f98dc;
+    background-color: #0b78ea;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     padding: 7px 10px;
     color: white;
+    border-radius: 20px;
+    border: 1px solid #0b78ea;
     font-weight: 500;
-    border: none;
+    font-size: 20px;
+    line-height: 20px;
 }
 
 .default:hover {
     cursor: pointer;
+    background-color: #298eff;
+    border: 1px solid #298eff;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
 }
 
 .default:active {
-
+    background-color: #4d5156;
+    border: 1px solid #4d5156;
 }
 
 .disabled {
@@ -29,5 +36,3 @@
 .red {
     background: red;
 }
-
-

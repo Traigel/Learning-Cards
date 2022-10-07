@@ -1,5 +1,5 @@
 .headerBlock {
-    margin-bottom: 50px;
+    margin-bottom: 44px;
     height: 60px;
     width: 100%;
     box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
@@ -32,19 +32,19 @@
 
 .personInfoInHeader {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-top: 3px;
 }
 
-.userNameIcon {
-    padding: 7px 10px 0;
-    user-select: none;
+.personInfoInHeader:hover {
+    color: #525252;
 }
 
-.goToProfileTitle {
+.userNameIcon {
     user-select: none;
-    text-decoration: none;
-    color: black;
-    box-sizing: border-box;
+    font-size: 20px;
+    padding-right: 10px;
 }
 
 .goToProfileTitle:hover {
@@ -55,4 +55,63 @@
     width: 35px;
     height: 35px;
     border-radius: 18px;
+}
+
+.profileMenu {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background-color: #fff;
+    width: 122px;
+    height: 104px;
+    border: 1px #9b9b9b solid;
+    border-radius: 10px;
+}
+
+.pointer {
+    position: absolute;
+    right: 12px;
+    top: -6.5px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    border-left: 1px #9b9b9b solid;
+    border-top: 1px #9b9b9b solid;
+}
+
+.menu {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.nav {
+    font-size: 20px;
+    user-select: none;
+    text-decoration: none;
+    color: black;
+}
+
+.nav:hover {
+    color: #525252;
+}
+
+
+
+@media (max-width: 450px) {
+    .headerContainer {
+        justify-content: center;
+    }
+
+    .imgBlock img {
+        position: absolute;
+        display: none
+    }
 }

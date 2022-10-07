@@ -4,9 +4,7 @@ import SuperInputText from "../../../common/components/superInputText/SuperInput
 import SuperButton from "../../../common/components/superButton/SuperButton";
 import {SuperDoubleRange} from "../../../common/components/superDoubleRange/SuperDoubleRange";
 import {SvgSelector} from "../../../common/components/svgSelector/svgSelector";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
-import {useDebounce} from '../../../common/hooks/useDebounce';
-import {setUrlParamsAC} from "../packs-reducer";
+import {useAppSelector} from "../../../common/hooks/hooks";
 
 type SetPacksPropsType = {
     onClickButtonMy: () => void
@@ -17,6 +15,7 @@ type SetPacksPropsType = {
     searchValueText: (valueSearch: string) => void
     minRangeURL: string
     maxRangeURL: string
+    urlUserID: string
 }
 
 export const SetPacks = ({
@@ -27,14 +26,14 @@ export const SetPacks = ({
                              searchValueText,
                              valueSearch,
                              minRangeURL,
-                             maxRangeURL
+                             maxRangeURL,
+                             urlUserID
                          }: SetPacksPropsType) => {
 
     const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
 
     const myUserID = useAppSelector(state => state.auth.profile?._id)
-    const filterUserID = useAppSelector(state => state.packs.params.userID)
 
     const [minRange, setMinRange] = useState<number>(minCardsCount)
     const [maxRange, setMaxRange] = useState<number>(maxCardsCount)
@@ -61,8 +60,8 @@ export const SetPacks = ({
         setMaxRange(maxRangeURL ? +maxRangeURL : maxCardsCount)
     }, [minCardsCount, maxCardsCount])
 
-    const myNotActive = myUserID === filterUserID ? styles.active : styles.notActive
-    const allNotActive = myUserID !== filterUserID ? styles.active : styles.notActive
+    const myNotActive = myUserID === urlUserID ? styles.active : styles.notActive
+    const allNotActive = myUserID !== urlUserID ? styles.active : styles.notActive
 
     return (
         <div className={styles.setPacks}>
@@ -80,16 +79,16 @@ export const SetPacks = ({
                 <SuperButton
                     className={`${styles.button} ${myNotActive}`}
                     onClick={onClickButtonMy}
-                    disabled={myUserID === filterUserID}
+                    disabled={myUserID === urlUserID}
                 >My</SuperButton>
                 <SuperButton
                     className={`${styles.button} ${allNotActive}`}
                     onClick={onClickButtonAll}
-                    disabled={myUserID !== filterUserID}
+                    disabled={myUserID !== urlUserID}
                 >All</SuperButton>
             </div>
             <div className={styles.doubleRangeBlock}>
-                <label className={styles.title}>Number of cards</label>
+                <label className={styles.rangeTitle}>Number of cards</label>
                 <div className={styles.number}>{minRange}</div>
                 <SuperDoubleRange
                     value={[minRange, maxRange]}

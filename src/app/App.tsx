@@ -38,18 +38,13 @@ export const App = () => {
             <div className={styles.appContainer}>
                 <Routes>
                     <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
-
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/register'} element={<Registration/>}/>
                     <Route path={'/forgot'} element={<ForgotPassword/>}/>
                     <Route path={'/new-password/:token'} element={<NewPassword/>}/>
                     <Route path={'/checkEmail'} element={<CheckEmail/>}/>
-
                     <Route path={'/profile'} element={<Profile/>}/>
-
                     <Route path={'/packs'} element={<Packs/>}/>
-
-
 
                     <Route path={'/cards/:packID'} element={<TableCards/>}/>
 

@@ -37,8 +37,8 @@ export const Packs = () => {
         page: '1',
         pageCount: '5',
         userID: '',
-        min: '0',
-        max: '0'
+        min: '',
+        max: ''
     })
     const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
 
@@ -53,6 +53,8 @@ export const Packs = () => {
         max: maxRangeURL
     })
 
+    console.log(urlParamsFilter.userID)
+
     useEffect(() => {
             dispatch(setUrlParamsAC({...urlParamsFilter}))
             dispatch(setPacksTC())
@@ -66,16 +68,30 @@ export const Packs = () => {
 
     const pageHandler = (valuePage: number) => {
         setParamsSearchState({...paramsSearchState, page: valuePage + ''})
-        setSearchParams({...filterQueryParams({...paramsSearchState, page: valuePage + ''})})
+        setSearchParams({...filterQueryParams({...paramsSearchState, page: valuePage + '', userID: userIDURL})})
     }
 
     const pageCountHandler = (valuePageCount: number) => {
         setParamsSearchState({...paramsSearchState, pageCount: valuePageCount + '', min: '', max: ''})
-        setSearchParams({...filterQueryParams({...paramsSearchState, pageCount: valuePageCount + '', min: '', max: ''})})
+        setSearchParams({
+            ...filterQueryParams({
+                ...paramsSearchState,
+                pageCount: valuePageCount + '',
+                min: '',
+                max: '', userID: userIDURL
+            })
+        })
     }
 
     const onClickButtonMyHandler = () => {
-        myUserID && setParamsSearchState({...paramsSearchState, userID: myUserID, page: '1', pageCount: '5', min: '', max: ''})
+        myUserID && setParamsSearchState({
+            ...paramsSearchState,
+            userID: myUserID,
+            page: '1',
+            pageCount: '5',
+            min: '',
+            max: ''
+        })
         myUserID && setSearchParams({
             ...filterQueryParams({
                 ...paramsSearchState,
@@ -92,18 +108,19 @@ export const Packs = () => {
     }
 
     const onChangeCommittedRangeHandler = (min: string, max: string) => {
-        setParamsSearchState({...paramsSearchState, min, max})
-        setSearchParams({...filterQueryParams({...paramsSearchState, min, max})})
+        setParamsSearchState({...paramsSearchState, min, max, userID: userIDURL})
+        setSearchParams({...filterQueryParams({...paramsSearchState, min, max, userID: userIDURL})})
     }
 
     const setResetFilterHandler = () => {
         setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: ''})
         setSearchParams({page: '1', pageCount: '5'})
+        setPackName('')
     }
 
     const searchValueTextHandler = (valueSearch: string) => {
         setPackName(valueSearch)
-        setSearchParams({...filterQueryParams({...paramsSearchState, packName: valueSearch})})
+        setSearchParams({...filterQueryParams({...paramsSearchState, packName: valueSearch, userID: userIDURL})})
     }
 
     if (!isLoggedIn) {
@@ -112,8 +129,14 @@ export const Packs = () => {
 
     return (
         <>
-            <div className={styles.button}>
-                <SuperButton onClick={onclickHandler}>Add new Pack</SuperButton>
+            <div className={styles.packsHeader}>
+                <h2>Packs list</h2>
+                <div>
+                    <SuperButton
+                        onClick={onclickHandler}
+                        className={styles.button}
+                    >Add new pack</SuperButton>
+                </div>
             </div>
             <SetPacks
                 onClickButtonMy={onClickButtonMyHandler}
@@ -124,17 +147,17 @@ export const Packs = () => {
                 searchValueText={searchValueTextHandler}
                 minRangeURL={minRangeURL}
                 maxRangeURL={maxRangeURL}
+                urlUserID={userIDURL}
             />
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{fontWeight: 'bold', width: 50}}>Name</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 50}} align="right">Cards</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Last
-                                Updated</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Created By</TableCell>
-                            <TableCell style={{fontWeight: 'bold', width: 100}} align="right">Actions</TableCell>
+                            <TableCell className={styles.headerRow}>Name</TableCell>
+                            <TableCell className={styles.headerRow}>Cards</TableCell>
+                            <TableCell className={styles.headerRow}>Last Updated</TableCell>
+                            <TableCell className={styles.headerRow}>Created By</TableCell>
+                            <TableCell className={styles.headerRow}>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

@@ -68,8 +68,8 @@ export const Registration = () => {
     return (
         <div className={styles.formContainer}>
             <h2 className={styles.signUpTitle}>Sign Up</h2>
-            <div className={styles.mainContainer}>
-                <form onSubmit={formik.handleSubmit}>
+            <form className={styles.form} onSubmit={formik.handleSubmit}>
+                <div className={styles.inputForm}>
                     <SuperInputText
                         autoComplete="email"
                         placeholder="Email"
@@ -77,9 +77,11 @@ export const Registration = () => {
                         type="text"
                         {...formik.getFieldProps('email')}
                     />
-                    <div className={styles.errorConfirmPass}>
-                        {formik.touched.email && formik.errors.email && <div className={styles.errorFormik}>{formik.errors.email}</div>}
+                    <div className={styles.error}>
+                        {formik.touched.email && formik.errors.email && formik.errors.email}
                     </div>
+                </div>
+                <div className={styles.inputForm}>
                     <SuperInputText
                         autoComplete="current-password"
                         placeholder="Password"
@@ -87,10 +89,16 @@ export const Registration = () => {
                         type={passwordShow ? 'text' : 'password'}
                         {...formik.getFieldProps('password')}
                     />
-                    <div className={styles.errorConfirmPass}>
-                        {formik.touched.password && formik.errors.password &&
-                            <div className={styles.errorFormik}>{formik.errors.password}</div>}
+                    <EyeOnOff
+                        onClick={togglePassword}
+                        onOff={passwordShow}
+                        className={styles.eye}
+                    />
+                    <div className={styles.error}>
+                        {formik.touched.password && formik.errors.password && formik.errors.password}
                     </div>
+                </div>
+                <div className={styles.inputForm}>
                     <SuperInputText
                         autoComplete="current-password"
                         placeholder="confirm Password"
@@ -98,21 +106,23 @@ export const Registration = () => {
                         type={confirmPasswordShow ? 'text' : 'password'}
                         {...formik.getFieldProps('confirmPassword')}
                     />
-                    <div className={styles.errorConfirmPass}>
-                        {formik.touched.confirmPassword && formik.errors.confirmPassword &&
-                            <div className={styles.errorFormik}>{formik.errors.confirmPassword}</div>}
+                    <EyeOnOff
+                        onClick={toggleConfirmPassword}
+                        onOff={confirmPasswordShow}
+                        className={styles.eye}
+                    />
+                    <div className={styles.error}>
+                        {formik.touched.confirmPassword && formik.errors.confirmPassword && formik.errors.confirmPassword}
                     </div>
-                    <div className={styles.errorConfirmPass}>
-                        <EyeOnOff className={styles.visibleEye} onClick={togglePassword} onOff={passwordShow}/>
-                    </div>
-                    <div>
-                        <EyeOnOff className={styles.visibleConfirmEye} onClick={toggleConfirmPassword} onOff={confirmPasswordShow}/>
-                    </div>
-                    <SuperButton className={styles.buttonReg} type={'submit'}>sign up</SuperButton>
-                </form>
-            </div>
-            <h4 className={styles.haveAccountTitle}>Already have an account?</h4>
-            <NavLink to={'/login'} className={styles.signInTitle}>Sign In</NavLink>
+                </div>
+                <div className={styles.buttonForm}>
+                    <SuperButton type="submit">Sign Up</SuperButton>
+                </div>
+                <div className={styles.dontHaveAccountTitle}>
+                    Already have an account?
+                </div>
+                <NavLink to={'/login'} className={styles.signInTitle}>Sign In</NavLink>
+            </form>
         </div>
     )
 }

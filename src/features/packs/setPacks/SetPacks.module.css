@@ -9,7 +9,12 @@
 
 .title {
     position: absolute;
-    bottom: 40px
+    bottom: 55px
+}
+
+.rangeTitle {
+    position: absolute;
+    top: -31px;
 }
 
 .inputBlock {
@@ -20,19 +25,16 @@
 
 .input {
     width: 100%;
-    height: 27px;
+    height: 38.19px;
     border-radius: 10px;
     border: 1px solid #9b9b9b;
+    padding-left: 10px;
+    font-size: 18px;
 }
-
-.input:focus {
-    outline: none;
-    border: 1px solid #9b9b9b;
-}
-
 
 .button {
     padding: 8px 30px;
+    font-size: 18px;
 }
 
 .notActive {
@@ -102,7 +104,7 @@
 
 @media (max-width: 1099px) {
     .setPacks {
-        height: 160px;
+        height: 200px;
         justify-content: space-around;
     }
 
@@ -129,7 +131,7 @@
 
 @media (max-width: 659px) {
     .setPacks {
-        height: 220px;
+        height: 270px;
 
     }
 
@@ -144,6 +146,7 @@
 }
 
 @media (max-width: 430px) {
+
     .doubleRange {
         width: 130px !important;
     }

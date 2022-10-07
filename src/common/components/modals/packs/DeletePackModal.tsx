@@ -1,7 +1,7 @@
 import React from 'react';
-import SuperButton from "../../../common/components/superButton/SuperButton";
-import {useAppDispatch} from "../../../common/hooks/hooks";
-import {deletePackTC} from "../packs-reducer";
+import SuperButton from "../../superButton/SuperButton";
+import {useAppDispatch} from "../../../hooks/hooks";
+import {deletePackTC} from "../../../../features/packs/packs-reducer";
 
 type deletePackModalType = {
     handleClose: () => void

@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import SuperInputText from '../../common/components/superInputText/SuperInputText';
+import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import {useFormik} from 'formik';
 import styles from './Registration.module.css'
-import SuperButton from '../../common/components/superButton/SuperButton';
+import SuperButton from '../../../common/components/superButton/SuperButton';
 import {Navigate, NavLink} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
-import {EyeOnOff} from '../../common/components/eyeOnOff/EyeOnOff';
-import {registerTC} from '../login/auth-reducer';
+import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
+import {EyeOnOff} from '../../../common/components/eyeOnOff/EyeOnOff';
+import {registerTC} from '../auth-reducer';
 
 type FormikErrorsType = {
     email?: string

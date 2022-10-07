@@ -1,12 +1,12 @@
 import {BasicModal} from './BaseModal';
 import SuperInputText from '../../superInputText/SuperInputText';
-import {updateCardsTC} from '../../../../features/table/cards/cards-reducer';
 import {useAppDispatch} from '../../../hooks/hooks';
-import React from 'react';
+import React, {useState} from 'react';
 import {useFormik} from 'formik';
-import styles from '../../../../features/login/Login.module.css';
+import styles from '../../../../features/auth/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
 import {SvgSelector} from '../../svgSelector/svgSelector';
+import {updateCardsTC} from "../../../../features/cards/cards-reducer";
 
 type EditModalType = {
     answer: string
@@ -29,7 +29,7 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
     })
 
     return (
-        <BasicModal svgName={SvgSelector({svgName:'pencil'})} >
+        <BasicModal svgName={SvgSelector({svgName: 'pencil'})}>
             <h2>Edit card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -45,8 +45,8 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
                         {...formik.getFieldProps('answer')}
                     />
                 </div>
-                <div >
-                    <SuperButton >cancel</SuperButton> <SuperButton  type="submit">Apply</SuperButton>
+                <div>
+                    <SuperButton>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
 
                 </div>
             </form>

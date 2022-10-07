@@ -1,10 +1,10 @@
 import React from 'react';
-import SuperInputText from "../../../common/components/superInputText/SuperInputText";
-import styles from "../../registration/Registration.module.css";
-import SuperButton from "../../../common/components/superButton/SuperButton";
+import SuperInputText from "../../superInputText/SuperInputText";
+import styles from "../../../../features/auth/registration/Registration.module.css";
+import SuperButton from "../../superButton/SuperButton";
 import {useFormik} from "formik";
-import {useAppDispatch} from "../../../common/hooks/hooks";
-import {addNewPackTC} from "../packs-reducer";
+import {useAppDispatch} from "../../../hooks/hooks";
+import {addNewPackTC} from "../../../../features/packs/packs-reducer";
 
 type AddNewPackModalPropsType = {
     handleClose: () => void

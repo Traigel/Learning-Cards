@@ -1,5 +1,5 @@
 import {authAPI} from "../api/api";
-import {setIsLoggedInOutAC, setUserInfoAC} from "../features/login/auth-reducer";
+import {setIsLoggedInOutAC, setUserInfoAC} from "../features/auth/auth-reducer";
 import {AppThunk} from './store';
 
 const initialState = {

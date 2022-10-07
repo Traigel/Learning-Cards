@@ -2,7 +2,7 @@ import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import {deleteCardsTC} from './cards-reducer';
+import {deleteCardsTC} from '../cards-reducer';
 import {BasicRating} from '../../../common/components/starsRating/StartRating';
 import {EditModal} from '../../../common/components/modals/cards/EditModal';
 import {DeleteModal} from '../../../common/components/modals/cards/DeleteModal';

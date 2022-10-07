@@ -7,8 +7,8 @@ import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEd
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {useSelector} from "react-redux";
 
-import {logoutTC, updateUserInfoTC} from "../login/auth-reducer";
-import {getIsLoggedIn, getProfileInfo} from "../login/auth-selectors";
+import {logoutTC, updateUserInfoTC} from "../auth/auth-reducer";
+import {getIsLoggedIn, getProfileInfo} from "../auth/auth-selectors";
 
 import {Navigate, NavLink} from "react-router-dom";
 

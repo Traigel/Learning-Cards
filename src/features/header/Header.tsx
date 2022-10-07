@@ -5,7 +5,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {SvgSelector} from "../../common/components/svgSelector/svgSelector";
-import {logoutTC} from "../login/auth-reducer";
+import {logoutTC} from "../auth/auth-reducer";
 
 export const Header = () => {
 

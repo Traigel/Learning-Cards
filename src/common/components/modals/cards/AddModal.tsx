@@ -1,12 +1,12 @@
 import {BasicModal} from './BaseModal';
 import SuperInputText from '../../superInputText/SuperInputText';
-import {createCardsTC} from '../../../../features/table/cards/cards-reducer';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch} from '../../../hooks/hooks';
 import React from 'react';
 import {useFormik} from 'formik';
-import styles from '../../../../features/login/Login.module.css';
+import styles from '../../../../features/auth/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
+import {createCardsTC} from '../../../../features/cards/cards-reducer';
 
 export const AddModal = () => {
     const dispatch = useAppDispatch()

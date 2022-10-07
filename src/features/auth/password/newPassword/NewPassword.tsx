@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import {useFormik} from 'formik';
 import styles from './NewPassword.module.css'
 import {Navigate, NavLink, useParams} from 'react-router-dom';
-import SuperInputText from '../../../common/components/superInputText/SuperInputText';
-import SuperButton from '../../../common/components/superButton/SuperButton';
-import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
-import {EyeOnOff} from '../../../common/components/eyeOnOff/EyeOnOff';
-import {createNewPasswordTC} from '../../login/auth-reducer';
+import SuperInputText from '../../../../common/components/superInputText/SuperInputText';
+import SuperButton from '../../../../common/components/superButton/SuperButton';
+import {useAppDispatch, useAppSelector} from '../../../../common/hooks/hooks';
+import {EyeOnOff} from '../../../../common/components/eyeOnOff/EyeOnOff';
+import {createNewPasswordTC} from '../../auth-reducer';
 
 type FormikErrorsType = {
     password?: string

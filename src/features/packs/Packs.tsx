@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Packs.module.css';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {addNewPackTC, setPacksTC, setUrlParamsAC, UrlParamsType} from './packs-reducer';
+import {setPacksTC, setUrlParamsAC, UrlParamsType} from './packs-reducer';
 import {Pack} from "./pack/Pack";
 import TableCell from '@mui/material/TableCell';
 import Table from '@mui/material/Table';
@@ -16,9 +16,8 @@ import {PacksPagination} from "./packsPagination/PacksPagination";
 import {Navigate, useSearchParams} from "react-router-dom";
 import {filterQueryParams} from "../../common/utils/query-params";
 import {useDebounce} from "../../common/hooks/useDebounce";
-import {createSearchParams, useNavigate, useSearchParams} from "react-router-dom";
-import {AddNewPackModal} from "./packsModals/AddNewPackModal";
-import {BasicModal} from "../../common/components/basicModal/BasicModal";
+import {AddNewPackModal} from "../../common/components/modals/packs/AddNewPackModal";
+import {BasicModal} from "../../common/components/modals/basicModal/BasicModal";
 
 export const Packs = () => {
 

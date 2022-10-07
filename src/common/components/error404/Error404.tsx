@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from './Error404.module.css'
-import error404 from '../../assets/images/error404.gif';
+import error404 from '../../../assets/images/error404.gif';
 import {Navigate} from "react-router-dom";
 
 export const Error404 = () => {

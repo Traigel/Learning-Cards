@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
-import {useAppDispatch} from "../../../common/hooks/hooks";
+import {useAppDispatch} from "../../../hooks/hooks";
 import {useFormik} from "formik";
-import {changePackTC} from "../packs-reducer";
-import styles from "../../registration/Registration.module.css";
-import SuperButton from "../../../common/components/superButton/SuperButton";
+import {changePackTC} from "../../../../features/packs/packs-reducer";
+import styles from "../../../../features/auth/registration/Registration.module.css";
+import SuperButton from "../../superButton/SuperButton";
 import TextField from "@mui/material/TextField";
-import SuperInputText from "../../../common/components/superInputText/SuperInputText";
+import SuperInputText from "../../superInputText/SuperInputText";
 
 type EditPackModalPropsType = {
     handleClose: () => void

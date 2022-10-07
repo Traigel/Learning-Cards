@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import styles from './Login.module.css'
-import SuperInputText from "../../common/components/superInputText/SuperInputText";
-import SuperCheckbox from "../../common/components/superCheckbox/SuperCheckbox";
-import SuperButton from "../../common/components/superButton/SuperButton";
+import SuperInputText from "../../../common/components/superInputText/SuperInputText";
+import SuperCheckbox from "../../../common/components/superCheckbox/SuperCheckbox";
+import SuperButton from "../../../common/components/superButton/SuperButton";
 import {useFormik} from 'formik';
-import {EyeOnOff} from "../../common/components/eyeOnOff/EyeOnOff";
+import {EyeOnOff} from "../../../common/components/eyeOnOff/EyeOnOff";
 import {Navigate, NavLink} from "react-router-dom";
-import {loginTC} from "./auth-reducer";
-import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
+import {loginTC} from "../auth-reducer";
+import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 
 export const Login = () => {
 

@@ -7,9 +7,9 @@ import {NavLink} from "react-router-dom";
 
 import {useAppSelector} from "../../../common/hooks/hooks";
 
-import {BasicModal} from "../../../common/components/basicModal/BasicModal";
-import {DeletePackModal} from "../packsModals/DeletePackModal";
-import {EditPackModal} from "../packsModals/EditPackModal";
+import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
+import {DeletePackModal} from "../../../common/components/modals/packs/DeletePackModal";
+import {EditPackModal} from "../../../common/components/modals/packs/EditPackModal";
 
 type PacksTablePropsType = {
     userId: string

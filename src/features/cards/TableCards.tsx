@@ -7,15 +7,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SuperButton from '../../../common/components/superButton/SuperButton';
 import styles from './TableCards.module.css'
-import SuperInputText from '../../../common/components/superInputText/SuperInputText';
-import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 import {setCardsTC} from './cards-reducer';
 import {useParams} from 'react-router-dom';
-import {Card} from './Card';
-import {AddModal} from '../../../common/components/modals/cards/AddModal';
+import {Card} from './card/Card';
 import {CardsPagination} from './PaginationCards';
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {AddModal} from '../../common/components/modals/cards/AddModal';
+import SuperButton from '../../common/components/superButton/SuperButton';
+import SuperInputText from "../../common/components/superInputText/SuperInputText";
 
 export const TableCards = () => {
 

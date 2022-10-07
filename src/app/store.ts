@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from 'redux';
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {AppActionType, appReducer} from './app-reducer';
-import {AuthActionsType, authReducer} from '../features/login/auth-reducer';
+import {AuthActionsType, authReducer} from '../features/auth/auth-reducer';
 import {cardsReducer} from '../features/cards/cards-reducer';
 import {PacksActionsType, packsReducer} from '../features/packs/packs-reducer';
 import {CardsActionType} from '../features/cards/cards-reducer';

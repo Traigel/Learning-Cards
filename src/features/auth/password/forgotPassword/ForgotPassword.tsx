@@ -2,10 +2,10 @@ import React from 'react'
 import {useFormik} from 'formik';
 import styles from './ForgotPassword.module.css'
 import {Navigate, NavLink} from 'react-router-dom';
-import SuperInputText from '../../../common/components/superInputText/SuperInputText';
-import SuperButton from '../../../common/components/superButton/SuperButton';
-import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
-import {forgotPasswordTC} from '../../login/auth-reducer';
+import SuperInputText from '../../../../common/components/superInputText/SuperInputText';
+import SuperButton from '../../../../common/components/superButton/SuperButton';
+import {useAppDispatch, useAppSelector} from '../../../../common/hooks/hooks';
+import {forgotPasswordTC} from '../../auth-reducer';
 
 type FormikErrorsType = {
     email?: string

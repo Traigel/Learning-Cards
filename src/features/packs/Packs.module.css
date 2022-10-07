@@ -12,3 +12,7 @@
 .input {
     padding: 5px 0 20px 0;
 }
+
+.btn {
+    color: inherit;
+}

@@ -46,7 +46,6 @@ export const setCardsTC = (packID: string): AppThunk => async (dispatch) => {
         dispatch(setCards(res.data.cards))
         dispatch(setPackUserID(res.data.packUserId))
         dispatch(setPackName(res.data.packName))
-        console.log(res)
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {

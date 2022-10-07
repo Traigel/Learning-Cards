@@ -1,7 +1,11 @@
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #a8b9cc;
-    padding: 54px;
+.btt button{
+    color: black;
+    border-radius: 30px;
+    border:  1px solid black;
+    background-color: #ffffff;
+
+}
+
+.btt {
+    padding-left: 10px;
 }

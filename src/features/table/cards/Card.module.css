@@ -22,3 +22,9 @@
 .iconBtn img {
     width: 20px;
 }
+
+.modals {
+    display: flex;
+    justify-content: end;
+
+}

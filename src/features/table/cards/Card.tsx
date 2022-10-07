@@ -38,10 +38,10 @@ export const Card = (props: CardType) => {
             <TableCell align="left">{props.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}</TableCell>
             <TableCell align="left"><BasicRating values={props.grade}/></TableCell>
             <TableCell align="right">
-                <div className={styles.btn}>
-                {isPackAuthor && <EditModal cardID={props.cardID} answer={props.answer} question={props.question}/>
-                }
-                {isPackAuthor && <DeleteModal cardID={props.cardID}/>}
+                <div className={styles.modals}>
+                    {isPackAuthor && <EditModal cardID={props.cardID} answer={props.answer} question={props.question}/>
+                    }
+                    {isPackAuthor && <DeleteModal cardID={props.cardID}/>}
                 </div>
             </TableCell>
         </TableRow>

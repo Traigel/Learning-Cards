@@ -1,12 +1,12 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactElement, ReactNode, useState} from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import SuperButton from '../../superButton/SuperButton';
-
+import styles from './Modal.module.css'
 
 type PropsType = {
     children: ReactNode
-    svgName?: any
+    svgName?: ReactElement
     title?: string
 }
 
@@ -28,17 +28,19 @@ export const BasicModal = ({children, svgName, title}: PropsType) => {
     const handleClose = () => setOpen(false)
 
     return (
-        <div>
-            <SuperButton onClick={handleOpen}>{title ? title : svgName}</SuperButton>
+        <>
+            <div className={styles.btt}>
+                <SuperButton onClick={handleOpen}>{title ? title : svgName}</SuperButton>
+            </div>
+
             <Modal
                 open={open}
-                onClose={handleClose}
-            >
-
+                onClose={handleClose}>
                 <Box sx={style}>
                     {children}
                 </Box>
             </Modal>
-        </div>
+        </>
     )
 }
+

@@ -11,11 +11,10 @@ import SuperButton from '../../../common/components/superButton/SuperButton';
 import styles from './TableCards.module.css'
 import SuperInputText from '../../../common/components/superInputText/SuperInputText';
 import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
-import {createCardsTC, setCardsTC} from './cards-reducer';
+import {setCardsTC} from './cards-reducer';
 import {useParams} from 'react-router-dom';
 import {Card} from './Card';
 import {AddModal} from '../../../common/components/modals/cards/AddModal';
-import {DeleteModal} from '../../../common/components/modals/cards/DeleteModal';
 import {CardsPagination} from './PaginationCards';
 
 export const TableCards = () => {

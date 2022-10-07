@@ -8,7 +8,6 @@ import {useFormik} from 'formik';
 import styles from '../../../../features/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
 
-
 export const AddModal = () => {
     const dispatch = useAppDispatch()
 
@@ -26,8 +25,9 @@ export const AddModal = () => {
             formik.resetForm()
         },
     })
-        return (
-        <BasicModal title='Add card'>
+
+    return (
+        <BasicModal title="Add card">
             <h2>Add card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
@@ -35,7 +35,7 @@ export const AddModal = () => {
                         placeholder={'question'}
                         {...formik.getFieldProps('question')}
                     />
-                    </div>
+                </div>
 
                 <div className={styles.inputForm}>
                     <SuperInputText
@@ -44,9 +44,9 @@ export const AddModal = () => {
                     />
                 </div>
                 <div>
-                    <SuperButton type='button'>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>
+                    <SuperButton type="button">cancel</SuperButton>
+                    <SuperButton type="submit">Apply</SuperButton>
                 </div>
-
             </form>
         </BasicModal>
 

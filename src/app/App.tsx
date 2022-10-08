@@ -47,7 +47,7 @@ export const App = () => {
                     <Route path={'/profile'} element={<Profile/>}/>
 
                     <Route path={'/packs'} element={<Packs/>}/>
-                    <Route path={'/cards/:packID'} element={<TableCards/>}/>
+                    <Route path={'/packs/cards'} element={<TableCards/>}/>
 
                     <Route path={'/error404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'/error404'}/>}/>

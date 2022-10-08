@@ -1,15 +1,123 @@
-.button {
-display: flex;
-    justify-content: end;
-    padding-bottom: 30px;
+.backToCardsBlock {
+    margin-top: -30px;
 }
 
-.input input{
-    min-width: 100%;
-    height: 30px;
+.goToPacksTitle {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.infoBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.infoBox button {
+    width: 175px;
+}
+
+.titleMenu {
+    position: relative;
+
+}
+
+.title {
+    position: relative;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 27px;
+}
+
+.iconMenu {
+    position: absolute;
+    right: -35px;
+    top: 3px;
+    cursor: pointer;
+}
+
+.cardsMenu {
+    z-index: 5;
+    position: absolute;
+    top: 40px;
+    right: -40px;
+    background-color: #fff;
+    width: 118px;
+    height: 140px;
+    border: 1px #9b9b9b solid;
+    border-radius: 10px;
+}
+
+.pointer {
+    position: absolute;
+    right: 12px;
+    top: -6px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    border-left: 1px #9b9b9b solid;
+    border-top: 1px #9b9b9b solid;
+}
+
+.menu {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 12px;
+}
+
+.menuEl {
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.elTitle {
+    position: relative;
+    left: 10px;
+    top: -5px;
+    user-select: none;
+    color: black;
+    font-size: 20px;
+}
+
+.menuEl:hover .elTitle {
+    color: #525252 !important;
+}
+
+.inputBlock {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.label {
+    position: absolute;
+    bottom: 50px
 }
 
 .input {
-    padding: 5px 0 20px 0;
+    width: 100%;
+    height: 38.19px;
+    border-radius: 10px;
+    border: 1px solid #9b9b9b;
+    padding-left: 10px;
+    font-size: 18px;
 }
 
+.headerRow {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    width: 50px !important;
+}

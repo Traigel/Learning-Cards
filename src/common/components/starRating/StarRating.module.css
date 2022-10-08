@@ -1,0 +1,7 @@
+.stars {
+    display: flex;
+}
+
+.star {
+    margin: 0 2px;
+}

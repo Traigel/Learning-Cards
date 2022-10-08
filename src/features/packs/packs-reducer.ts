@@ -112,8 +112,9 @@ export type PacksActionsType =
 // // | ReturnType<typeof setPagesAC>
 
 export type UrlParamsType = {
-    page?: string,
-    pageCount?: string,
+    page?: string
+    pageCount?: string
+    packName?: string
     userID?: string
     min?: string
     max?: string

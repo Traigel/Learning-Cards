@@ -27,7 +27,7 @@ const style = {
 export const BasicModal = ({children, svgName, title, open, handleClose}: PropsType) => {
     return (
         <>
-            <div className={styles.btt}>
+            <div>
                 <SuperButton onClick={handleClose}>{title ? title : svgName}</SuperButton>
             </div>
 

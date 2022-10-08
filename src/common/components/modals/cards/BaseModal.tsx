@@ -8,6 +8,8 @@ type PropsType = {
     children: ReactNode
     svgName?: ReactElement
     title?: string
+    open: boolean
+    handleClose: () => void
 }
 
 const style = {
@@ -22,15 +24,11 @@ const style = {
     p: 4,
 }
 
-export const BasicModal = ({children, svgName, title}: PropsType) => {
-    const [open, setOpen] = useState(false)
-    const handleOpen = () => setOpen(true)
-    const handleClose = () => setOpen(false)
-
+export const BasicModal = ({children, svgName, title, open, handleClose}: PropsType) => {
     return (
         <>
             <div className={styles.btt}>
-                <SuperButton onClick={handleOpen}>{title ? title : svgName}</SuperButton>
+                <SuperButton onClick={handleClose}>{title ? title : svgName}</SuperButton>
             </div>
 
             <Modal

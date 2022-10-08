@@ -212,7 +212,7 @@ export type createCardsType = {
 }
 
 export type updateCardsType = {
-    _id: string
+    _id?: string
     question?: string
     comments?: string
 }

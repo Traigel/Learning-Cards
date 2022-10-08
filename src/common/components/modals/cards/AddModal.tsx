@@ -10,12 +10,13 @@ import {createCardsTC} from '../../../../features/cards/cards-reducer';
 
 
 type EditModalType = {
+    id?: string
     answer?: string
     question?: string
 }
 
 
-export const AddModal = () => {
+export const AddModal = (props: EditModalType) => {
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
     const handleClose = () => setOpen(!open)
@@ -24,7 +25,7 @@ export const AddModal = () => {
 
     const formik = useFormik({
         initialValues: {
-            cardsPack_id: packID,
+            cardsPack_id: props.id + '',
             answer: '',
             question: '',
         },
@@ -52,7 +53,7 @@ export const AddModal = () => {
     })
 
     return (
-        <BasicModal open={open} handleClose={handleClose} title="Add card">
+        <BasicModal open={open} handleClose={handleClose} title="Add new card">
             <h2>Add card</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>

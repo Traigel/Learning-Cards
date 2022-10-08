@@ -62,8 +62,15 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards(packID: string) {
-        return instance.get<ResponseCardsType>(`cards/card?cardsPack_id=${packID}`)
+    getCards(data: cardsParamsType) {
+        return instance.get<ResponseCardsType>(`cards/card`, {
+            params: {
+                page: data.page,
+                pageCount: data.pageCount,
+                cardQuestion: data.cardQuestion,
+                cardsPack_id: data.cardsPack_id
+            }
+        })
     },
     createCards(card: createCardsType) {
         return instance.post('cards/card', {card})
@@ -165,7 +172,6 @@ export type updatePackType = {
 
 //type cardsAPI
 export type ResponseCardsType = {
-
     cards: CardsType[];
     packUserId: string;
     packName: string;
@@ -224,4 +230,11 @@ export type ParamsType = {
     userID?: string
     min?: string
     max?: string
+}
+
+export type cardsParamsType = {
+    page?: string,
+    pageCount?: string,
+    cardQuestion?: string
+    cardsPack_id?: string
 }

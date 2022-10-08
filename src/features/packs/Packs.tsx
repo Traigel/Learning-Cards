@@ -28,6 +28,7 @@ export const Packs = () => {
     const myUserID = useAppSelector(state => state.auth.profile?._id)
 
     const [searchParams, setSearchParams] = useSearchParams()
+
     const pageURL = searchParams.get('page') ? searchParams.get('page') + '' : '1'
     const pageCountURL = searchParams.get('pageCount') ? searchParams.get('pageCount') + '' : '5'
     const packNameURL = searchParams.get('packName') ? searchParams.get('packName') + '' : ''
@@ -178,20 +179,14 @@ export const Packs = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cardPacks && cardPacks.map((row) => (
+                        {cardPacks && cardPacks.map((el) => (
                             <Pack
-                                key={row._id}
-                                userId={row.user_id}
-                                packId={row._id}
-                                name={row.name}
-                                cardsCount={row.cardsCount}
-                                updated={row.updated}
-                                user_name={row.user_name}
+                                key={el._id}
+                                cardPack={el}
                             />
                         ))}
                     </TableBody>
                 </Table>
-
             </TableContainer>
             <PacksPagination
                 callBackPage={pageHandler}

@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/cards-nya-front-2-0/static/css/main.4bc0fdce.css",
-    "main.js": "/cards-nya-front-2-0/static/js/main.11913d8f.js",
-    "static/js/787.42533a0b.chunk.js": "/cards-nya-front-2-0/static/js/787.42533a0b.chunk.js",
-    "static/media/error404.gif": "/cards-nya-front-2-0/static/media/error404.3fd10b989bf425404d23.gif",
-    "index.html": "/cards-nya-front-2-0/index.html",
-    "main.4bc0fdce.css.map": "/cards-nya-front-2-0/static/css/main.4bc0fdce.css.map",
-    "main.11913d8f.js.map": "/cards-nya-front-2-0/static/js/main.11913d8f.js.map",
-    "787.42533a0b.chunk.js.map": "/cards-nya-front-2-0/static/js/787.42533a0b.chunk.js.map"
+    "main.css": "/Learning-Cards/static/css/main.4c6b048b.css",
+    "main.js": "/Learning-Cards/static/js/main.588ac684.js",
+    "static/js/787.5a03379c.chunk.js": "/Learning-Cards/static/js/787.5a03379c.chunk.js",
+    "static/media/error404.gif": "/Learning-Cards/static/media/error404.3fd10b989bf425404d23.gif",
+    "index.html": "/Learning-Cards/index.html",
+    "main.4c6b048b.css.map": "/Learning-Cards/static/css/main.4c6b048b.css.map",
+    "main.588ac684.js.map": "/Learning-Cards/static/js/main.588ac684.js.map",
+    "787.5a03379c.chunk.js.map": "/Learning-Cards/static/js/787.5a03379c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4bc0fdce.css",
-    "static/js/main.11913d8f.js"
+    "static/css/main.4c6b048b.css",
+    "static/js/main.588ac684.js"
   ]
 }

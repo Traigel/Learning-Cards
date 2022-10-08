@@ -1,15 +1,15 @@
-.formContainer {
+.formRegContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 0 auto;
     width: 413px;
-    height: 528px;
+    height: 500px;
     background: #FFFFFF;
     box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
-    border-radius: 2px;
-    padding: 50px;
+    border-radius: 10px;
+    padding: 30px 50px;
 }
 
 .signUpTitle {
@@ -55,12 +55,12 @@
     padding-bottom: 15px;
 }
 
-.signUpTitle {
+.signInTitle {
     user-select: none;
     text-decoration: none;
     color: black;
 }
 
-.signUpTitle:hover {
+.signInTitle:hover {
     color: #072c57;
 }

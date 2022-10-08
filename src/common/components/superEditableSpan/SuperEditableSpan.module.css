@@ -1,0 +1,15 @@
+.span {
+    display: inline-block;
+    height: 36px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    position: relative;
+}
+
+.span svg {
+    position: relative;
+    top: 3px;
+    right: -5px;
+}

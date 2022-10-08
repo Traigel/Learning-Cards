@@ -1,27 +1,32 @@
-import React, {FocusEvent, KeyboardEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, FocusEvent, KeyboardEvent, useEffect, useRef, useState} from 'react'
 import styles from './Profile.module.css'
-
+import userAvatar from '../../assets/images/userAvata.png'
 import SuperButton from "../../common/components/superButton/SuperButton";
 import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
-
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {useSelector} from "react-redux";
-
 import {logoutTC, updateUserInfoTC} from "../auth/auth-reducer";
-import {getIsLoggedIn, getProfileInfo} from "../auth/auth-selectors";
-
 import {Navigate, NavLink} from "react-router-dom";
+import {SvgSelector} from "../../common/components/svgSelector/svgSelector";
 
 export const Profile = () => {
 
-    const profileInfo = useSelector(getProfileInfo)
-    const isLoggedIn = useSelector(getIsLoggedIn)
-    const userName = useAppSelector((state) => state.auth.profile?.name)
+    const profile = useAppSelector((state) => state.auth.profile)
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
     const page = useAppSelector((state) => state.packs.page)
     const pageCount = useAppSelector((state) => state.packs.pageCount)
 
-    const [inputValue, setInputValue] = useState(userName)
+    const [inputValue, setInputValue] = useState(profile?.name)
     const dispatch = useAppDispatch()
+
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    const selectFileHandler = () => {
+        inputRef && inputRef.current?.click();
+    };
+
+    const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        alert('Заглушка')
+    };
 
     const logoutHandler = () => {
         dispatch(logoutTC())
@@ -32,7 +37,7 @@ export const Profile = () => {
     }
 
     const handler = (value: string) => {
-        if (profileInfo && value !== profileInfo.name && value) {
+        if (profile && value !== profile.name && value) {
             dispatch(updateUserInfoTC({name: value, avatar: ''}))
         }
     }
@@ -48,10 +53,12 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-        if (profileInfo) {
-            setInputValue(profileInfo.name)
+        if (profile) {
+            setInputValue(profile.name)
         }
-    }, [profileInfo])
+    }, [profile])
+
+    const finalUserAvatar = profile?.avatar ? profile.avatar : userAvatar
 
     if (!isLoggedIn) {
         return <Navigate to={'/login'}/>
@@ -61,24 +68,33 @@ export const Profile = () => {
         <div className={styles.profileContainer}>
             <div className={styles.backToCardsBlock}>
                 <NavLink to={`/packs?page=${page}&pageCount=${pageCount}`} className={styles.goToPacksTitle}>
-                    <span className={styles.backArrowTitle}>←</span>
+                    <span className={styles.backArrowTitle}>&#8656; </span>
                     Back to packs list
                 </NavLink>
             </div>
             <div className={styles.profileBlock}>
-                <h2 className={styles.profileMainTitle}>Personal Information</h2>
+                <h2 className={styles.title}>Personal Information</h2>
                 <div className={styles.userAvatarContainer}>
                     <img className={styles.userAvatar}
-                         src='https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-                         alt='user-avatar'/>
-                    <span className={styles.changeAvatarIcon}><svg width="30px" height="30px" viewBox="0 0 52 52"><g><path
-                        d="M26,20c-4.4,0-8,3.6-8,8s3.6,8,8,8s8-3.6,8-8S30.4,20,26,20z"/><path
-                        d="M46,14h-5.2c-1.4,0-2.6-0.7-3.4-1.8l-2.3-3.5C34.4,7,32.7,6,30.9,6h-9.8c-1.8,0-3.5,1-4.3,2.7l-2.3,3.5c-0.7,1.1-2,1.8-3.4,1.8H6c-2.2,0-4,1.8-4,4v24c0,2.2,1.8,4,4,4h40c2.2,0,4-1.8,4-4V18C50,15.8,48.2,14,46,14z M26,40c-6.6,0-12-5.4-12-12s5.4-12,12-12s12,5.4,12,12S32.6,40,26,40z"/></g></svg></span>
+                         src={finalUserAvatar}
+                         alt={'user-avatar'}
+                    />
+                    <div
+                        className={styles.photoButton}
+                        onClick={selectFileHandler}
+                    >
+                        <SvgSelector svgName={"photo"}/>
+                    </div>
+                    <input style={{display: 'none'}}
+                           ref={inputRef}
+                           type="file"
+                           onChange={uploadHandler}
+                    />
                 </div>
                 <div className={styles.inputContainer}>
                     <SuperEditableSpan
                         inputValue={inputValue}
-                        spanValue={userName}
+                        spanValue={profile?.name}
                         className={styles.additionalForInput}
                         spanClassName={styles.additionalForSpan}
                         onChangeText={(e) => changeUserNameHandler(e)}
@@ -86,9 +102,11 @@ export const Profile = () => {
                         onKeyDown={(e) => onKeyDownHandler(e)}
                     />
                 </div>
-                <h3 className={styles.userMailTitle}>{profileInfo && profileInfo.email}</h3>
+                <div className={styles.userMailTitle}>{profile && profile.email}</div>
+                <div className={styles.userMailTitle}>Public card packs
+                    count: {profile && profile.publicCardPacksCount}</div>
                 <SuperButton onClick={logoutHandler} className={styles.logOutBtn}>
-                    Log out
+                    <SvgSelector svgName={"logOut"}/> Log out
                 </SuperButton>
             </div>
         </div>

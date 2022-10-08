@@ -16,10 +16,9 @@ export const NewPassword = () => {
 
     const newPasswordSuccess = useAppSelector(state => state.auth.newPasswordSuccess)
 
-    const [passwordShow, setPasswordShow] = useState(false)
-    const togglePassword = () => {
-        setPasswordShow(!passwordShow);
-    }
+    const [eyeOnOff, setEyeOnOff] = useState<boolean>(false)
+    const onClickHandler = () => setEyeOnOff(!eyeOnOff)
+
     const params = useParams()
     const token = params.token
 
@@ -42,39 +41,38 @@ export const NewPassword = () => {
         }
     })
 
-    if (newPasswordSuccess){
+    if (newPasswordSuccess) {
         return <Navigate to={'/login'}/>
     }
 
     return (
-        <div className={styles.containerForm}>
-            <h1 className={styles.newPasswordTitle}>Create new password</h1>
-            <div>
-                <form onSubmit={formik.handleSubmit}>
-                    <div className={styles.inputSize}>
-                        <SuperInputText
-                            autoComplete="current-password"
-                            placeholder="Password"
-                            id={'password'}
-                            type={passwordShow ? 'text' : 'password'}
-                            {...formik.getFieldProps('password')}
-                        />
+        <div className={styles.containerNewPasForm}>
+            <h2 className={styles.title}>Create new password</h2>
+            <form className={styles.form} onSubmit={formik.handleSubmit}>
+                <div className={styles.inputForm}>
+                    <SuperInputText
+                        placeholder={'Password'}
+                        type={eyeOnOff ? 'text' : 'password'}
+                        {...formik.getFieldProps('password')}
+                    />
+                    <EyeOnOff
+                        onClick={onClickHandler}
+                        onOff={eyeOnOff}
+                        className={styles.eye}
+                    />
+                    <div className={styles.error}>
+                        {formik.touched.password && formik.errors.password && formik.errors.password}
                     </div>
-                    <div className={styles.errorConfirmPass}>
-                        {formik.touched.password && formik.errors.password &&
-                            <div className={styles.errorFormik}>{formik.errors.password}</div>}
-                    </div>
-                    <div className={styles.errorConfirmPass}>
-                        <EyeOnOff className={styles.visibleEye} onClick={togglePassword} onOff={passwordShow}/>
-                    </div>
-                    <h4 className={styles.instructionText}>Create new password and we will send you<br/> further instructions to email</h4>
-                    <div className={styles.bottomBlock}>
-                        <SuperButton className={styles.buttonReg} type={'submit'}>Create new password</SuperButton>
-                        <h4 className={styles.rememberPasswordTitle}>Did you remember your password?</h4>
-                        <NavLink to={'/login'} className={styles.tryToLoginTitle}>Try Logging in</NavLink>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div className={styles.instructionText}>
+                    Create new password and we will send you further instructions to email
+                </div>
+                <div className={styles.buttonForm}>
+                    <NavLink to={'/login'}>
+                        <SuperButton type="submit">Create new password</SuperButton>
+                    </NavLink>
+                </div>
+            </form>
         </div>
     )
 }

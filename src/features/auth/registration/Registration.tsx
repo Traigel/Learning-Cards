@@ -66,7 +66,7 @@ export const Registration = () => {
     }
 
     return (
-        <div className={styles.formContainer}>
+        <div className={styles.formRegContainer}>
             <h2 className={styles.signUpTitle}>Sign Up</h2>
             <form className={styles.form} onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>

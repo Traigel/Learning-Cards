@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import styles from './Header.module.css'
 import logoImg from '../../assets/images/logo.png'
+import userAvatar from '../../assets/images/userAvata.png'
 import LinearProgress from '@mui/material/LinearProgress';
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
@@ -13,6 +14,7 @@ export const Header = () => {
     const status = useAppSelector(state => state.app.status)
     const profileInfo = useAppSelector(state => state.auth.profile)
 
+    const menuRef = useRef<HTMLInputElement>(null)
     const [visibilityValue, setVisibilityValue] = useState<boolean>(false)
 
     const visibilityHandler = () => {
@@ -22,6 +24,16 @@ export const Header = () => {
     const logoutHandler = () => {
         dispatch(logoutTC())
         visibilityHandler()
+    }
+
+    const finalUserAvatar = profileInfo?.avatar ? profileInfo.avatar : userAvatar
+
+    const onBlurMenuHandler = () => {
+        console.log('onBlurMenuHandler')
+    }
+
+    const onFocusMenuHandler = () => {
+        console.log('onFocusMenuHandler')
     }
 
     return (
@@ -43,19 +55,21 @@ export const Header = () => {
                             </span>
                             <span className={styles.userAvatarIcon}>
                                 <img className={styles.userAvatar}
-                                     src='https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-                                     alt='user-avatar'/>
+                                     src={finalUserAvatar}
+                                     alt={'user-avatar'}/>
                             </span>
                         </div>
-
                     }
                     {visibilityValue &&
-                        <div className={styles.profileMenu}>
+                        <div
+                            className={styles.profileMenu}
+                        >
                             <div className={styles.pointer}></div>
                             <div className={styles.menu}>
                                 <div>
                                     <NavLink
                                         to={'/'}
+
                                         className={styles.nav}
                                         onClick={visibilityHandler}
                                     >
@@ -74,11 +88,10 @@ export const Header = () => {
                             </div>
                         </div>
                     }
-
                 </div>
             </div>
             <div className={styles.linear}>
-                {status === 'loading' && <LinearProgress color="inherit"/>}
+                {status === 'loading' && <LinearProgress color="primary"/>}
             </div>
         </header>
     )

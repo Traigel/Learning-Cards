@@ -35,6 +35,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 3px;
+    cursor: pointer;
 }
 
 .personInfoInHeader:hover {
@@ -42,8 +43,9 @@
 }
 
 .userNameIcon {
-    user-select: none;
+    font-weight: 500;
     font-size: 20px;
+    line-height: 20px;
     padding-right: 10px;
 }
 
@@ -89,7 +91,6 @@
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
-
 }
 
 .nav {
@@ -103,7 +104,9 @@
     color: #525252;
 }
 
-
+.menu:focus {
+    background-color: #1976d2;
+}
 
 @media (max-width: 450px) {
     .headerContainer {

@@ -8,6 +8,13 @@ import styles from '../../../../features/auth/login/Login.module.css';
 import SuperButton from '../../superButton/SuperButton';
 import {createCardsTC} from '../../../../features/cards/cards-reducer';
 
+
+type EditModalType = {
+    answer?: string
+    question?: string
+}
+
+
 export const AddModal = () => {
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
@@ -26,6 +33,22 @@ export const AddModal = () => {
             formik.resetForm()
             handleClose()
         },
+        validate: (values) => {
+            const errors: EditModalType = {}
+            if (!values.question) {
+                errors.question = 'please enter question'
+            }
+            if (values.question && values.question.length > 40) {
+                errors.question = 'your card question is too long'
+            }
+            if (!values.answer) {
+                errors.answer = 'please enter answer'
+            }
+            if (values.answer && values.answer.length > 40) {
+                errors.answer = 'your card answer is too long'
+            }
+            return errors
+        },
     })
 
     return (
@@ -37,6 +60,9 @@ export const AddModal = () => {
                         placeholder={'question'}
                         {...formik.getFieldProps('question')}
                     />
+                    <div className={styles.error}>
+                        {formik.touched.question && formik.errors.question && formik.errors.question}
+                    </div>
                 </div>
 
                 <div className={styles.inputForm}>
@@ -44,6 +70,9 @@ export const AddModal = () => {
                         placeholder={'answer'}
                         {...formik.getFieldProps('answer')}
                     />
+                    <div className={styles.error}>
+                        {formik.touched.answer && formik.errors.answer && formik.errors.answer}
+                    </div>
                 </div>
                 <div>
                     <SuperButton onClick={handleClose} type="button">cancel</SuperButton>
@@ -51,6 +80,5 @@ export const AddModal = () => {
                 </div>
             </form>
         </BasicModal>
-
     )
 }

@@ -9,9 +9,9 @@ import {SvgSelector} from '../../svgSelector/svgSelector';
 import {updateCardsTC} from "../../../../features/cards/cards-reducer";
 
 type EditModalType = {
-    answer: string
-    question: string
-    cardID: string
+    answer?: string
+    question?: string
+    cardID?: string
 }
 
 export const EditModal = ({cardID, answer, question}: EditModalType) => {
@@ -29,6 +29,22 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
             dispatch(updateCardsTC(values))
             handleClose()
         },
+        validate: (values) => {
+            const errors: EditModalType = {}
+            if (!values.question) {
+                errors.question = 'please enter question'
+            }
+            if (values.question && values.question.length > 40) {
+                errors.question = 'your card question is too long'
+            }
+            if (!values.answer) {
+                errors.answer = 'please enter answer'
+            }
+            if (values.answer && values.answer.length > 40) {
+                errors.answer = 'your card answer is too long'
+            }
+            return errors
+        },
     })
 
     return (
@@ -40,6 +56,9 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
                         placeholder={'question'}
                         {...formik.getFieldProps('question')}
                     />
+                    <div className={styles.error}>
+                        {formik.touched.question && formik.errors.question && formik.errors.question}
+                    </div>
                 </div>
 
                 <div className={styles.inputForm}>
@@ -47,6 +66,9 @@ export const EditModal = ({cardID, answer, question}: EditModalType) => {
                         placeholder={'answer'}
                         {...formik.getFieldProps('answer')}
                     />
+                    <div className={styles.error}>
+                        {formik.touched.answer && formik.errors.answer && formik.errors.answer}
+                    </div>
                 </div>
                 <div>
                     <SuperButton onClick={handleClose} type='button'>cancel</SuperButton> <SuperButton type="submit">Apply</SuperButton>

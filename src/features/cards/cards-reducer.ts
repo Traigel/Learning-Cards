@@ -28,6 +28,7 @@ export const cardsReducer = (state = InitialStateCards, action: CardsActionType)
                 ...state,
                 packName: action.packName
             }
+
         default:
             return state
     }

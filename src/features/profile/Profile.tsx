@@ -68,8 +68,8 @@ export const Profile = () => {
         <div className={styles.profileContainer}>
             <div className={styles.backToCardsBlock}>
                 <NavLink to={`/packs?page=${page}&pageCount=${pageCount}`} className={styles.goToPacksTitle}>
-                    <span className={styles.backArrowTitle}>&#8656; </span>
-                    Back to packs list
+                    <SvgSelector svgName={"arrow"}/>
+                    <span className={styles.arrowText}> Back to packs list</span>
                 </NavLink>
             </div>
             <div className={styles.profileBlock}>

@@ -115,8 +115,8 @@ export const TableCards = () => {
                     to={`/packs?page=1&pageCount=5`}
                     className={styles.goToPacksTitle}
                 >
-                    <span className={styles.backArrowTitle}>&#8656; </span>
-                    Back to packs list
+                    <SvgSelector svgName={"arrow"}/>
+                    <span className={styles.arrowText}> Back to packs list</span>
                 </NavLink>
             </div>
             <div className={styles.infoBox}>
@@ -151,7 +151,6 @@ export const TableCards = () => {
                             </div>
                         </div>
                     }
-
                 </div>
                 <div>
                     {isPackAuthor

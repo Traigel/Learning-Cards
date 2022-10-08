@@ -2,7 +2,7 @@ import React from 'react';
 
 type SvgSelectorPropsType = {
     svgName: "cap" | "pencil" | "delete" | "funnel" | 'profile' | 'logOut' | 'photo' | 'menu'
-        | 'starActive' | 'starNotActive' | 'starSemiActive'
+        | 'starActive' | 'starNotActive' | 'starSemiActive' | 'arrow'
 }
 
 export const SvgSelector = (props: SvgSelectorPropsType) => {
@@ -164,6 +164,13 @@ export const SvgSelector = (props: SvgSelectorPropsType) => {
                     </defs>
                 </svg>
 
+            )
+        }
+        case "arrow": {
+            return (
+                <svg width="18" height="14" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 5.5H2M2 5.5L6.66667 1M2 5.5L6.66667 10" stroke="black" strokeWidth="2"/>
+                </svg>
             )
         }
         default:

@@ -8,6 +8,7 @@ import {logoutTC, updateUserInfoTC} from '../auth/auth-reducer';
 import {Navigate, NavLink} from 'react-router-dom';
 import {SvgSelector} from '../../common/components/svgSelector/svgSelector';
 import {convertFileToBase64} from '../../common/utils/convertBase64';
+import {errorHandlerUtil} from '../../common/utils/errors-utils';
 
 export const Profile = () => {
 
@@ -33,7 +34,7 @@ export const Profile = () => {
                     dispatch(updateUserInfoTC({avatar: file64}));
                 });
             } else {
-                return console.log('Incorrect file size or type')
+                return errorHandlerUtil(e, dispatch)
             }
         }
     }

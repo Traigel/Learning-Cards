@@ -4,7 +4,7 @@ import {setAppStatusAC} from "../../app/app-reducer";
 import {errorHandlerUtil} from "../../common/utils/errors-utils";
 
 const initialState = {
-    cardPacks: null as PackType[] | null,
+    cardPacks: [] as PackType[],
     page: 1,
     pageCount: 5,
     cardPacksTotalCount: 0,
@@ -19,7 +19,8 @@ const initialState = {
         userID: '',
         min: '0',
         max: '0'
-    } as UrlParamsType
+    } as UrlParamsType,
+    exitDeletion: false
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialPacksStateType => {
@@ -49,6 +50,7 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 
 export const setUrlParamsAC = (params: UrlParamsType) => ({type: 'PACKS/SET-URL-PARAMS', params} as const)
+
 
 //thunks
 export const setPacksTC = (): AppThunk => async (dispatch, getState) => {
@@ -93,6 +95,17 @@ export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     try {
         await packsAPI.deletePack(data)
         dispatch(setPacksTC())
+    } catch (e) {
+        errorHandlerUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
+}
+
+export const deleteSecondPackTC = (data: string): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        await packsAPI.deletePack(data)
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {

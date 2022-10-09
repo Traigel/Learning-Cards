@@ -3,7 +3,7 @@
 }
 
 .goToPacksTitle {
-    text-decoration: none;
+    cursor: pointer;
 }
 
 .goToPacksTitle:hover .arrowText {

@@ -6,11 +6,14 @@ import styles from "../../../../features/auth/registration/Registration.module.c
 import SuperButton from "../../superButton/SuperButton";
 import TextField from "@mui/material/TextField";
 import SuperInputText from "../../superInputText/SuperInputText";
+import {createCardsTC, setCardsTC, updateCardsTC} from "../../../../features/cards/cards-reducer";
+import {setAppStatusAC} from "../../../../app/app-reducer";
 
 type EditPackModalPropsType = {
     handleClose: () => void
     packId: string
     packName: string
+    // inCard?: boolean
 }
 
 type FormikErrorsType = {
@@ -39,9 +42,10 @@ export const EditPackModal = (props: EditPackModalPropsType) => {
             return errors
         },
         onSubmit: values => {
-                dispatch(changePackTC({_id: props.packId, name: values.newPackName}))
-                formik.resetForm()
-                props.handleClose()
+            formik.resetForm()
+            props.handleClose()
+            dispatch(changePackTC({_id: props.packId, name: values.newPackName}))
+            // dispatch(setCardsTC())
         }
     })
 

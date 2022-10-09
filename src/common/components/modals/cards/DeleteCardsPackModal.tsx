@@ -1,7 +1,7 @@
 import React from 'react';
 import SuperButton from "../../superButton/SuperButton";
 import {useAppDispatch} from "../../../hooks/hooks";
-import {deletePackTC} from "../../../../features/packs/packs-reducer";
+import {deletePackTC, deleteSecondPackTC} from "../../../../features/packs/packs-reducer";
 
 type deletePackModalType = {
     handleClose: () => void
@@ -9,12 +9,12 @@ type deletePackModalType = {
     packName: string
 }
 
-export const DeletePackModal = (props: deletePackModalType) => {
+export const DeleteCardsPackModal = (props: deletePackModalType) => {
 
     const dispatch = useAppDispatch()
 
     const deletePackHandler = () => {
-        dispatch(deletePackTC(props.packId))
+        dispatch(deleteSecondPackTC(props.packId))
         props.handleClose()
     }
 

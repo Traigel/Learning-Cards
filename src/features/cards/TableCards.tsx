@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styles from './TableCards.module.css'
 import {setCardsTC, setUrlCardsParamsAC, UrlCardsParamsType} from './cards-reducer';
-import {Navigate, NavLink, useSearchParams} from 'react-router-dom';
+import {Navigate, useNavigate, useSearchParams} from 'react-router-dom';
 import {Card} from './card/Card';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {AddModal} from '../../common/components/modals/cards/AddModal';
@@ -19,8 +19,13 @@ import {CardsPagination} from "./cardsPagination/CardsPagination";
 import {useDebounce} from "../../common/hooks/useDebounce";
 import {filterQueryParams} from "../../common/utils/query-params";
 import {SvgSelector} from "../../common/components/svgSelector/svgSelector";
+import {BasicModal} from "../../common/components/modals/basicModal/BasicModal";
+import {EditPackModal} from "../../common/components/modals/packs/EditPackModal";
+import {DeleteCardsPackModal} from "../../common/components/modals/cards/DeleteCardsPackModal";
 
 export const TableCards = () => {
+
+    const navigate = useNavigate()
 
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -34,6 +39,7 @@ export const TableCards = () => {
 
     const userID = useAppSelector((state) => state.auth.profile?._id)
     const userCardID = useAppSelector(state => state.cards.packUserId)
+    const pack = useAppSelector(state => state.packs.cardPacks.find(el => el._id === cardsPack_idURL))
     const packName = useAppSelector(state => state.cards.packName)
 
     const [visibilityValue, setVisibilityValue] = useState<boolean>(false)
@@ -43,6 +49,8 @@ export const TableCards = () => {
         cardsPack_id: cardsPack_idURL
     })
     const [cardQuestion, setCardQuestion] = useState<string>(cardQuestionURL ? cardQuestionURL : '')
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [openEditModal, setOpenEditModal] = useState(false);
 
     const debouncedValue = useDebounce<string>(cardQuestion, 500)
 
@@ -98,8 +106,32 @@ export const TableCards = () => {
         })
     }
 
+    const handleDeleteModalClose = () => {
+        setOpenDeleteModal(false);
+        navigate(-1)
+    }
+
+    const handleEditModalClose = () => {
+        setOpenEditModal(false);
+    }
+
     const onClickMenuHandler = () => {
         setVisibilityValue(!visibilityValue)
+    }
+
+    const onEditClickHandler = () => {
+        setOpenEditModal(true)
+        setVisibilityValue(false)
+    }
+
+    const onDeleteClickHandler = () => {
+        setOpenDeleteModal(true)
+        setVisibilityValue(false)
+    }
+
+    const onLearnClickHandler = () => {
+        setVisibilityValue(false)
+        alert('onLearnClickHandler')
     }
 
     const isPackAuthor = userCardID === userID
@@ -110,19 +142,31 @@ export const TableCards = () => {
 
     return (
         <>
+            <BasicModal open={openDeleteModal} handleClose={handleDeleteModalClose}>
+                <DeleteCardsPackModal packName={pack ? pack.name : packName} packId={cardsPack_idURL}
+                                      handleClose={handleDeleteModalClose}/>
+            </BasicModal>
+
+            <BasicModal open={openEditModal} handleClose={handleEditModalClose}>
+                <EditPackModal packName={pack ? pack.name : packName} packId={cardsPack_idURL}
+                               handleClose={handleEditModalClose}/>
+            </BasicModal>
+
             <div className={styles.backToCardsBlock}>
-                <NavLink
-                    to={`/packs?page=1&pageCount=5`}
+                <div
+                    onClick={() => {
+                        navigate(-1)
+                    }}
                     className={styles.goToPacksTitle}
                 >
                     <SvgSelector svgName={"arrow"}/>
                     <span className={styles.arrowText}> Back to packs list</span>
-                </NavLink>
+                </div>
             </div>
             <div className={styles.infoBox}>
                 <div className={styles.titleMenu}>
                     <h2 className={styles.title}>
-                        {packName}
+                        {pack ? pack.name : packName}
                         {isPackAuthor ?
                             <div
                                 onClick={onClickMenuHandler}
@@ -136,15 +180,15 @@ export const TableCards = () => {
                         <div className={styles.cardsMenu}>
                             <div className={styles.pointer}></div>
                             <div className={styles.menu}>
-                                <div className={styles.menuEl}>
+                                <div onClick={onEditClickHandler} className={styles.menuEl}>
                                     <SvgSelector svgName={"pencil"}/>
                                     <span className={styles.elTitle}>Edit</span>
                                 </div>
-                                <div className={styles.menuEl}>
+                                <div onClick={onDeleteClickHandler} className={styles.menuEl}>
                                     <SvgSelector svgName={"delete"}/>
                                     <span className={styles.elTitle}>Delete</span>
                                 </div>
-                                <div className={styles.menuEl}>
+                                <div onClick={onLearnClickHandler} className={styles.menuEl}>
                                     <SvgSelector svgName={"cap"}/>
                                     <span className={styles.elTitle}>Learn</span>
                                 </div>

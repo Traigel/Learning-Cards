@@ -110,7 +110,7 @@ export const createNewPasswordTC = (data: SetNewPasswordType): AppThunk => async
 export const updateUserInfoTC = (data: ChangeUserNameParamsType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
-        const res = await authAPI.changeUserName(data)
+        const res = await authAPI.changeUserNameOrAvatar(data)
         dispatch(setUserInfoAC(res.data.updatedUser))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
@@ -118,6 +118,8 @@ export const updateUserInfoTC = (data: ChangeUserNameParamsType): AppThunk => as
         dispatch(setAppStatusAC("idle"))
     }
 }
+
+
 
 //types
 export type InitialAuthStateType = typeof initialState

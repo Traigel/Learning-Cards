@@ -13,6 +13,7 @@ export const DeleteModal = (props: DeleteModalType) => {
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
     const handleClose = () => setOpen(!open)
+
     const onDeleteClickHandler = () => {
         dispatch(deleteCardsTC(props.cardID))
     }

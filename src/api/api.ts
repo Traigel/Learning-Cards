@@ -23,7 +23,7 @@ export const authAPI = {
     me() {
         return instance.post<{}, AxiosResponse<ResponseMeType>>('/auth/me')
     },
-    changeUserName(data: ChangeUserNameParamsType) {
+    changeUserNameOrAvatar(data: ChangeUserNameParamsType) {
         return instance.put<ChangeUserNameParamsType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
     },
     registerUser(data: RegisterParamsType) {
@@ -78,8 +78,8 @@ export const cardsAPI = {
 
 //type
 export type ChangeUserNameParamsType = {
-    name: string
-    avatar: string
+    name?: string
+    avatar?: string
 }
 
 export type LoginParamsType = {

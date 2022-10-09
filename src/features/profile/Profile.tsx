@@ -1,12 +1,13 @@
 import React, {ChangeEvent, FocusEvent, KeyboardEvent, useEffect, useRef, useState} from 'react'
 import styles from './Profile.module.css'
 import userAvatar from '../../assets/images/userAvata.png'
-import SuperButton from "../../common/components/superButton/SuperButton";
-import SuperEditableSpan from "../../common/components/superEditableSpan/SuperEditableSpan";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {logoutTC, updateUserInfoTC} from "../auth/auth-reducer";
-import {Navigate, NavLink} from "react-router-dom";
-import {SvgSelector} from "../../common/components/svgSelector/svgSelector";
+import SuperButton from '../../common/components/superButton/SuperButton';
+import SuperEditableSpan from '../../common/components/superEditableSpan/SuperEditableSpan';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
+import {logoutTC, updateUserInfoTC} from '../auth/auth-reducer';
+import {Navigate, NavLink} from 'react-router-dom';
+import {SvgSelector} from '../../common/components/svgSelector/svgSelector';
+import {convertFileToBase64} from '../../common/utils/convertBase64';
 
 export const Profile = () => {
 
@@ -19,14 +20,23 @@ export const Profile = () => {
     const dispatch = useAppDispatch()
 
     const inputRef = useRef<HTMLInputElement>(null)
-
+    const minFileSize = 40000;
     const selectFileHandler = () => {
         inputRef && inputRef.current?.click();
     };
 
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        alert('Заглушка')
-    };
+        if (e.target.files && e.target.files.length) {
+            const file = e.target.files[0];
+            if (file.size < minFileSize) {
+                convertFileToBase64(file, (file64: string) => {
+                    dispatch(updateUserInfoTC({avatar: file64}));
+                });
+            } else {
+                return console.log('Incorrect file size or type')
+            }
+        }
+    }
 
     const logoutHandler = () => {
         dispatch(logoutTC())
@@ -83,7 +93,7 @@ export const Profile = () => {
                         className={styles.photoButton}
                         onClick={selectFileHandler}
                     >
-                        <SvgSelector svgName={"photo"}/>
+                        <SvgSelector svgName={'photo'}/>
                     </div>
                     <input style={{display: 'none'}}
                            ref={inputRef}
@@ -106,7 +116,7 @@ export const Profile = () => {
                 <div className={styles.userMailTitle}>Public card packs
                     count: {profile && profile.publicCardPacksCount}</div>
                 <SuperButton onClick={logoutHandler} className={styles.logOutBtn}>
-                    <SvgSelector svgName={"logOut"}/> Log out
+                    <SvgSelector svgName={'logOut'}/> Log out
                 </SuperButton>
             </div>
         </div>

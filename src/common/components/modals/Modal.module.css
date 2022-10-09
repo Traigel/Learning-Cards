@@ -1,0 +1,86 @@
+.titleBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+
+.titleBox div {
+    cursor: pointer;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column
+}
+
+.inputForm {
+
+}
+
+.inputForm input {
+    width: 100%;
+}
+
+.textBox {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.textBox p {
+    line-height: 24px;
+    margin-top: 5px;
+}
+
+.textBox span {
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.oneButton {
+    width: 110px;
+    color: black;
+    background-color: rgba(162, 162, 162, 0.13);
+    border: 1px solid rgba(162, 162, 162, 0.13);
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+}
+
+.redButton {
+    width: 110px;
+    background-color: #FF3636;
+    border: 1px solid rgba(162, 162, 162, 0.13);
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+}
+
+.redButton:hover {
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
+}
+
+.redButton:active {
+    background-color: #4d5156;
+    border: 1px solid #4d5156;
+}
+
+.twoButton {
+    width: 110px;
+}
+
+.error {
+    box-sizing: border-box;
+    margin: 3px 0 5px 0;
+    font-size: 0.85rem;
+    color: rgba(208, 0, 0, 0.63);
+    height: 20px;
+    user-select: none;
+}

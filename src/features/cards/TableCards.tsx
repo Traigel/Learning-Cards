@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styles from './TableCards.module.css'
 import {setCardsTC, setUrlCardsParamsAC, UrlCardsParamsType} from './cards-reducer';
-import {Navigate, useNavigate, useSearchParams} from 'react-router-dom';
+import {createSearchParams, Navigate, useNavigate, useSearchParams} from 'react-router-dom';
 import {Card} from './card/Card';
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {AddModal} from '../../common/components/modals/cards/AddModal';
@@ -106,9 +106,17 @@ export const TableCards = () => {
         })
     }
 
+    const backToCardsBlockHandler = () => {
+        navigate(-1)
+    }
+
     const handleDeleteModalClose = () => {
         setOpenDeleteModal(false);
         navigate(-1)
+    }
+
+    const handleDeleteCloseModalClose = () => {
+        setOpenDeleteModal(false);
     }
 
     const handleEditModalClose = () => {
@@ -143,8 +151,10 @@ export const TableCards = () => {
     return (
         <>
             <BasicModal open={openDeleteModal} handleClose={handleDeleteModalClose}>
-                <DeleteCardsPackModal packName={pack ? pack.name : packName} packId={cardsPack_idURL}
-                                      handleClose={handleDeleteModalClose}/>
+                <DeleteCardsPackModal packName={pack ? pack.name : packName}
+                                      packId={cardsPack_idURL}
+                                      handleClose={handleDeleteCloseModalClose}
+                                      handleDelete={handleDeleteModalClose}/>
             </BasicModal>
 
             <BasicModal open={openEditModal} handleClose={handleEditModalClose}>
@@ -154,9 +164,7 @@ export const TableCards = () => {
 
             <div className={styles.backToCardsBlock}>
                 <div
-                    onClick={() => {
-                        navigate(-1)
-                    }}
+                    onClick={backToCardsBlockHandler}
                     className={styles.goToPacksTitle}
                 >
                     <SvgSelector svgName={"arrow"}/>

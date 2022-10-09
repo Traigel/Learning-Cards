@@ -45,7 +45,7 @@ export const Card = ({card}: CardPropsType) => {
             </BasicModal>
 
             <BasicModal open={openDeleteModal} handleClose={handleDeleteModalClose}>
-                <DeleteModal handleClose={handleDeleteModalClose} cardID={card._id}/>
+                <DeleteModal cardName={card.question} handleClose={handleDeleteModalClose} cardID={card._id}/>
             </BasicModal>
 
             <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>

@@ -2,7 +2,7 @@ import React, {ReactElement, ReactNode, useState} from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import SuperButton from '../../superButton/SuperButton';
-import styles from './Modal.module.css'
+import styles from '../Modal.module.css'
 
 type PropsType = {
     children: ReactNode
@@ -14,12 +14,13 @@ type PropsType = {
 
 const style = {
     position: 'absolute' as 'absolute',
-    top: '50%',
+    top: '40%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 380,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: 'cancel',
+    borderRadius: '10px',
     boxShadow: 24,
     p: 4,
 }

@@ -47,10 +47,10 @@ export const App = () => {
                     <Route path={'/profile'} element={<Profile/>}/>
 
                     <Route path={'/packs'} element={<Packs/>}/>
-                    <Route path={'/packs/cards'} element={<TableCards/>}/>
+                    <Route path={'/cards'} element={<TableCards/>}/>
 
-                    <Route path={'/error404'} element={<Error404/>}/>
-                    <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
+                    {/*<Route path={'/error404'} element={<Error404/>}/>*/}
+                    {/*<Route path={'*'} element={<Navigate to={'/error404'}/>}/>*/}
                 </Routes>
             </div>
         </div>

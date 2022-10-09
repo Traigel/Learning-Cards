@@ -54,7 +54,7 @@ export const Pack = ({cardPack}: PacksTablePropsType) => {
 
             <TableCell component="th" scope="row">
                 <NavLink
-                    to={`/packs/cards?cardsPack_id=${cardPack._id}&page=1&pageCount=5`}
+                    to={`/cards?cardsPack_id=${cardPack._id}&page=1&pageCount=5`}
                     className={styles.maneColumn}
                 >{cardPack.name}</NavLink>
             </TableCell>

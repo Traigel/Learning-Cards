@@ -1,10 +1,11 @@
 import SuperInputText from '../../superInputText/SuperInputText';
 import {useAppDispatch} from '../../../hooks/hooks';
-import React, {useState} from 'react';
+import React from 'react';
 import {useFormik} from 'formik';
-import styles from '../../../../features/auth/login/Login.module.css';
+import styles from '../Modal.module.css'
 import SuperButton from '../../superButton/SuperButton';
 import {updateCardsTC} from "../../../../features/cards/cards-reducer";
+import {SvgSelector} from "../../svgSelector/svgSelector";
 
 type EditModalType = {
     handleClose?: () => void
@@ -25,16 +26,16 @@ export const EditModal = ({handleClose, cardID, answer, question}: EditModalType
         validate: (values) => {
             const errors: EditModalType = {}
             if (!values.question) {
-                errors.question = 'please enter question'
+                errors.question = 'Please enter question'
             }
             if (values.question && values.question.length > 40) {
-                errors.question = 'your card question is too long'
+                errors.question = 'Your card question is too long'
             }
             if (!values.answer) {
-                errors.answer = 'please enter answer'
+                errors.answer = 'Please enter answer'
             }
             if (values.answer && values.answer.length > 40) {
-                errors.answer = 'your card answer is too long'
+                errors.answer = 'Your card answer is too long'
             }
             return errors
         },
@@ -46,30 +47,34 @@ export const EditModal = ({handleClose, cardID, answer, question}: EditModalType
 
     return (
         <div>
-            <h2>Edit card</h2>
-            <form onSubmit={formik.handleSubmit}>
+            <div className={styles.titleBox}>
+                <h2 className={styles.title}>Edit card</h2>
+                <div onClick={handleClose}>
+                    <SvgSelector svgName='cross'/>
+                </div>
+            </div>
+            <form className={styles.form} onSubmit={formik.handleSubmit}>
                 <div className={styles.inputForm}>
                     <SuperInputText
-                        placeholder={'question'}
+                        placeholder={'Question'}
                         {...formik.getFieldProps('question')}
                     />
                     <div className={styles.error}>
                         {formik.touched.question && formik.errors.question && formik.errors.question}
                     </div>
                 </div>
-
                 <div className={styles.inputForm}>
                     <SuperInputText
-                        placeholder={'answer'}
+                        placeholder={'Answer'}
                         {...formik.getFieldProps('answer')}
                     />
                     <div className={styles.error}>
                         {formik.touched.answer && formik.errors.answer && formik.errors.answer}
                     </div>
                 </div>
-                <div>
-                    <SuperButton onClick={handleClose} type='button'>cancel</SuperButton> <SuperButton
-                    type="submit">Apply</SuperButton>
+                <div className={styles.buttons}>
+                    <SuperButton className={styles.oneButton} onClick={handleClose} type='button'>Cancel</SuperButton>
+                    <SuperButton className={styles.twoButton}>Save</SuperButton>
                 </div>
             </form>
         </div>

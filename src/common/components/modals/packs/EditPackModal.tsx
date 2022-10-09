@@ -1,19 +1,16 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import {useAppDispatch} from "../../../hooks/hooks";
 import {useFormik} from "formik";
 import {changePackTC} from "../../../../features/packs/packs-reducer";
-import styles from "../../../../features/auth/registration/Registration.module.css";
 import SuperButton from "../../superButton/SuperButton";
-import TextField from "@mui/material/TextField";
 import SuperInputText from "../../superInputText/SuperInputText";
-import {createCardsTC, setCardsTC, updateCardsTC} from "../../../../features/cards/cards-reducer";
-import {setAppStatusAC} from "../../../../app/app-reducer";
+import {SvgSelector} from "../../svgSelector/svgSelector";
+import styles from '../Modal.module.css'
 
 type EditPackModalPropsType = {
     handleClose: () => void
     packId: string
     packName: string
-    // inCard?: boolean
 }
 
 type FormikErrorsType = {
@@ -45,26 +42,30 @@ export const EditPackModal = (props: EditPackModalPropsType) => {
             formik.resetForm()
             props.handleClose()
             dispatch(changePackTC({_id: props.packId, name: values.newPackName}))
-            // dispatch(setCardsTC())
         }
     })
 
     return (
         <div>
-            <h3>Edit pack name</h3>
-            <form onSubmit={formik.handleSubmit}>
-                <SuperInputText
-                    placeholder="pack name here"
-                    type={'text'}
-                    {...formik.getFieldProps('newPackName')}
-                />
-                <div className={styles.errorConfirmPass}>
-                    {formik.touched.newPackName && formik.errors.newPackName &&
-                        <div className={styles.errorFormik}>{formik.errors.newPackName}</div>}
+            <div className={styles.titleBox}>
+                <h2 className={styles.title}>Edit pack</h2>
+                <div onClick={props.handleClose}>
+                    <SvgSelector svgName='cross'/>
                 </div>
-                <div>
-                    <SuperButton onClick={props.handleClose} type={'reset'}>Cansel</SuperButton>
-                    <SuperButton type={'submit'}>Save</SuperButton>
+            </div>
+            <form className={styles.form} onSubmit={formik.handleSubmit}>
+                <div className={styles.inputForm}>
+                    <SuperInputText
+                        placeholder={'Name pack'}
+                        {...formik.getFieldProps('newPackName')}
+                    />
+                    <div className={styles.error}>
+                        {formik.touched.newPackName && formik.errors.newPackName && formik.errors.newPackName}
+                    </div>
+                </div>
+                <div className={styles.buttons}>
+                    <SuperButton className={styles.oneButton} onClick={props.handleClose} >Cancel</SuperButton>
+                    <SuperButton className={styles.twoButton}>Save</SuperButton>
                 </div>
             </form>
         </div>

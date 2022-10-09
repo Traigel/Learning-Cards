@@ -2,6 +2,8 @@ import React from 'react';
 import SuperButton from "../../superButton/SuperButton";
 import {useAppDispatch} from "../../../hooks/hooks";
 import {deletePackTC} from "../../../../features/packs/packs-reducer";
+import styles from '../Modal.module.css'
+import {SvgSelector} from "../../svgSelector/svgSelector";
 
 type deletePackModalType = {
     handleClose: () => void
@@ -24,14 +26,21 @@ export const DeletePackModal = (props: deletePackModalType) => {
 
     return (
         <div>
-            <h3>Delete pack</h3>
-            <p>
-                Do you really want to remove <b>{props.packName}</b>?
-                All cards will be deleted
-            </p>
-            <div>
-                <SuperButton onClick={closeDeletePackModalHandler}>cansel</SuperButton>
-                <SuperButton onClick={deletePackHandler}>delete</SuperButton>
+            <div className={styles.titleBox}>
+                <h2 className={styles.title}>Delete pack</h2>
+                <div onClick={props.handleClose}>
+                    <SvgSelector svgName='cross'/>
+                </div>
+            </div>
+            <div className={styles.form}>
+                <div className={styles.textBox}>
+                    <p>Do you really want to remove <span>{props.packName}</span>?</p>
+                    <p>All cards will be deleted.</p>
+                </div>
+                <div className={styles.buttons}>
+                    <SuperButton className={styles.oneButton} onClick={closeDeletePackModalHandler}>Cancel</SuperButton>
+                    <SuperButton className={styles.redButton} onClick={deletePackHandler}>Delete</SuperButton>
+                </div>
             </div>
         </div>
     );

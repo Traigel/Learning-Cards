@@ -103,8 +103,7 @@ export const Profile = () => {
                     />
                 </div>
                 <div className={styles.userMailTitle}>{profile && profile.email}</div>
-                <div className={styles.userMailTitle}>Public card packs
-                    count: {profile && profile.publicCardPacksCount}</div>
+                <div className={styles.userMailTitle}>Public card packs count: {profile && profile.publicCardPacksCount}</div>
                 <SuperButton onClick={logoutHandler} className={styles.logOutBtn}>
                     <SvgSelector svgName={"logOut"}/> Log out
                 </SuperButton>

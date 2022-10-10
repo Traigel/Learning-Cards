@@ -25,6 +25,17 @@
     line-height: 24px;
 }
 
+.error {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.error span {
+    font-size: 18px;
+    color: red;
+}
+
 .numberShots {
     color: #757575;
     margin-top: 15px;

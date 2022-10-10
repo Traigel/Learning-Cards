@@ -38,7 +38,6 @@ export const Learn = () => {
         updated: '',
     });
 
-
     useEffect(() => {
 
         if (first) {
@@ -83,14 +82,21 @@ export const Learn = () => {
                     Learn "{cards.packName}"
                 </h2>
                 <div className={styles.learn}>
-                    <div>
-                        <span className={styles.question}>Question: </span>{card.question}
-                        <p className={styles.numberShots}>Number of answers per question: {card.shots}</p>
-                    </div>
+                    {cards.cards.length > 0 ?
+                        <div>
+                            <span className={styles.question}>Question: </span>{card.question}
+                            <p className={styles.numberShots}>Number of answers per question: {card.shots}</p>
+                        </div>
+                        :
+                        <div className={styles.error}>
+                            <span>There are no cards in this package.</span>
+                        </div>
+                    }
                     {!visibility
                         ?
                         <div>
-                            <SuperButton onClick={visibilityHandler} className={styles.button}>Show answer</SuperButton>
+                            <SuperButton disabled={cards.cards.length === 0} onClick={visibilityHandler}
+                                         className={styles.button}>Show answer</SuperButton>
                         </div>
                         :
                         <div>

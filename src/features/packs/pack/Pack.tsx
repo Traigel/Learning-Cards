@@ -3,10 +3,8 @@ import styles from "./Pack.module.css"
 import {SvgSelector} from "../../../common/components/svgSelector/svgSelector";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import {NavLink} from "react-router-dom";
-
+import {NavLink, useNavigate} from "react-router-dom";
 import {useAppSelector} from "../../../common/hooks/hooks";
-
 import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
 import {DeletePackModal} from "../../../common/components/modals/packs/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/packs/EditPackModal";
@@ -18,6 +16,8 @@ type PacksTablePropsType = {
 
 export const Pack = ({cardPack}: PacksTablePropsType) => {
 
+    const navigate = useNavigate()
+
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
 
@@ -27,7 +27,7 @@ export const Pack = ({cardPack}: PacksTablePropsType) => {
     const userId = useAppSelector((state) => state.auth.profile?._id)
 
     const onLearnClickHandler = () => {
-        alert('Заглушка')
+        navigate(`/learn/${cardPack._id}`)
     }
 
     const onEditClickHandler = () => {

@@ -1,11 +1,18 @@
-import {cardsAPI, CardsType, createCardsType, ResponseCardsType, updateCardsType} from '../../api/api';
+import {
+    cardLearnType,
+    cardsAPI,
+    CardsType,
+    createCardsType,
+    ResponseCardsType,
+    updateCardsType,
+    updatedGradeCartType
+} from '../../api/api';
 import {AppThunk} from '../../app/store';
 import {setAppStatusAC} from '../../app/app-reducer';
 import {errorHandlerUtil} from '../../common/utils/errors-utils';
-import {UrlParamsType} from "../packs/packs-reducer";
 
 const InitialStateCards = {
-    cards: null as CardsType[] | null,
+    cards: [] as CardsType[],
     packUserId: '',
     packName: '',
     page: 1,
@@ -47,8 +54,14 @@ export const cardsReducer = (state = InitialStateCards, action: CardsActionType)
                 token: action.data.token,
                 tokenDeathTime: action.data.tokenDeathTime
             }
-        case "PACKS/SET-URL-PARAMS": {
+        case "CARDS/SET-URL-PARAMS": {
             return {...state, params: {...action.params}}
+        }
+        case "CARDS/SET-CARDS-LEARN-DATA": {
+            return {
+                ...state,
+                cards: state.cards.map(el => el._id === action.data.card_id ? {...el, grade: action.data.grade} : el)
+            }
         }
         default:
             return state
@@ -58,7 +71,9 @@ export const cardsReducer = (state = InitialStateCards, action: CardsActionType)
 //action creators
 export const setCardsDataAC = (data: ResponseCardsType) => ({type: 'CARDS/SET-CARDS-DATA', data} as const)
 
-export const setUrlCardsParamsAC = (params: UrlCardsParamsType) => ({type: 'PACKS/SET-URL-PARAMS', params} as const)
+export const setUrlCardsParamsAC = (params: UrlCardsParamsType) => ({type: 'CARDS/SET-URL-PARAMS', params} as const)
+
+export const setCardsLearnDataAC = (data: updatedGradeCartType) => ({type: 'CARDS/SET-CARDS-LEARN-DATA', data} as const)
 
 //thunks
 export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
@@ -67,6 +82,30 @@ export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
     try {
         const res = await cardsAPI.getCards({...urlParams})
         dispatch(setCardsDataAC(res.data))
+    } catch (e) {
+        errorHandlerUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
+
+export const setCardsLearnTC = (packId: string): AppThunk => async (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await cardsAPI.getCards({cardsPack_id: packId, page: '1', pageCount: '200'})
+        dispatch(setCardsDataAC(res.data))
+    } catch (e) {
+        errorHandlerUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
+
+export const createLearnCardsTC = (learn: cardLearnType): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await cardsAPI.updateLearnCards(learn)
+        dispatch(setCardsLearnDataAC(res.data.updatedGrade))
     } catch (e) {
         errorHandlerUtil(e, dispatch)
     } finally {
@@ -119,6 +158,7 @@ export type InitialStateCardsType = typeof InitialStateCards
 export type CardsActionType =
     | ReturnType<typeof setCardsDataAC>
     | ReturnType<typeof setUrlCardsParamsAC>
+    | ReturnType<typeof setCardsLearnDataAC>
 
 
 export type UrlCardsParamsType = {

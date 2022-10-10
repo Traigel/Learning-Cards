@@ -71,7 +71,7 @@ export const TableCards = () => {
     }, [])
 
     const learnCards = () => {
-        alert('EXY')
+        navigate(`/learn/${pack ? pack._id : cardsPack_idURL}`)
     }
 
     const searchValueTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -139,7 +139,7 @@ export const TableCards = () => {
 
     const onLearnClickHandler = () => {
         setVisibilityValue(false)
-        alert('onLearnClickHandler')
+        navigate(`/learn/${pack ? pack._id : cardsPack_idURL}`)
     }
 
     const isPackAuthor = userCardID === userID

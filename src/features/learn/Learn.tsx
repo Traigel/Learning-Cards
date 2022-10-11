@@ -110,9 +110,8 @@ export const Learn = () => {
                                         setValueRadio(index + 1)
                                     }
                                     return (
-                                        <div>
+                                        <div key={index}>
                                             <div
-                                                key={index}
                                                 className={styles.inputRadio}
                                                 onClick={onClickHandler}
                                             >

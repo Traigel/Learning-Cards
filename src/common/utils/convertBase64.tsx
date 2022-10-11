@@ -6,7 +6,6 @@ export const convertFileToBase64 = (
 
     reader.onloadend = () => {
         const file64 = reader.result as string;
-
         callBack(file64);
     };
     reader.readAsDataURL(file);

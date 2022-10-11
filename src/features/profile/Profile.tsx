@@ -79,8 +79,8 @@ export const Profile = () => {
         <div className={styles.profileContainer}>
             <div className={styles.backToCardsBlock}>
                 <NavLink to={`/packs?page=${page}&pageCount=${pageCount}`} className={styles.goToPacksTitle}>
-                    <span className={styles.backArrowTitle}>&#8656; </span>
-                    Back to packs list
+                    <SvgSelector svgName={"arrow"}/>
+                    <span className={styles.arrowText}> Back to packs list</span>
                 </NavLink>
             </div>
             <div className={styles.profileBlock}>
@@ -114,8 +114,7 @@ export const Profile = () => {
                     />
                 </div>
                 <div className={styles.userMailTitle}>{profile && profile.email}</div>
-                <div className={styles.userMailTitle}>Public card packs
-                    count: {profile && profile.publicCardPacksCount}</div>
+                <div className={styles.userMailTitle}>Public card packs count: {profile && profile.publicCardPacksCount}</div>
                 <SuperButton onClick={logoutHandler} className={styles.logOutBtn}>
                     <SvgSelector svgName={'logOut'}/> Log out
                 </SuperButton>

@@ -61,15 +61,12 @@ export const Header = () => {
                         </div>
                     }
                     {visibilityValue &&
-                        <div
-                            className={styles.profileMenu}
-                        >
+                        <div className={styles.profileMenu}>
                             <div className={styles.pointer}></div>
                             <div className={styles.menu}>
                                 <div>
                                     <NavLink
                                         to={'/'}
-
                                         className={styles.nav}
                                         onClick={visibilityHandler}
                                     >

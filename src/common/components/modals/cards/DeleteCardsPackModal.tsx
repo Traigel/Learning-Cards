@@ -1,23 +1,24 @@
 import React from 'react';
 import SuperButton from "../../superButton/SuperButton";
 import {useAppDispatch} from "../../../hooks/hooks";
-import {deletePackTC} from "../../../../features/packs/packs-reducer";
-import styles from '../Modal.module.css'
+import {deletePackTC, deleteSecondPackTC} from "../../../../features/packs/packs-reducer";
+import styles from "../Modal.module.css";
 import {SvgSelector} from "../../svgSelector/svgSelector";
 
 type deletePackModalType = {
+    handleDelete: () => void
     handleClose: () => void
     packId: string
     packName: string
 }
 
-export const DeletePackModal = (props: deletePackModalType) => {
+export const DeleteCardsPackModal = (props: deletePackModalType) => {
 
     const dispatch = useAppDispatch()
 
-    const deletePackHandler = () => {
-        dispatch(deletePackTC(props.packId))
-        props.handleClose()
+    const deletePackHandler = async () => {
+        await dispatch(deleteSecondPackTC(props.packId))
+        props.handleDelete()
     }
 
     const closeDeletePackModalHandler = () => {

@@ -19,21 +19,21 @@
     left: -50%;
 }
 
-.backToCardsBlock a {
+.goToPacksTitle {
+    text-decoration: none;
+    color: black;
+}
+
+.goToPacksTitle:hover .arrowText {
+    color: #525252 !important;
+}
+
+.arrowText {
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
 }
 
-.goToPacksTitle {
-    text-decoration: none;
-    color: black;
-
-}
-
-.backArrowTitle {
-    font-weight: bold;
-}
 
 .profileBlock {
     width: 100%;

@@ -1,0 +1,99 @@
+.backToCardsBlock {
+    margin-top: -30px;
+}
+
+.goToPacksTitle {
+    cursor: pointer;
+}
+
+.goToPacksTitle:hover .arrowText {
+    color: #525252 !important;
+}
+
+.title {
+    font-size: 1.8rem;
+    line-height: 27px;
+    font-weight: 600;
+    user-select: none;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.question {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.error {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.error span {
+    font-size: 18px;
+    color: red;
+}
+
+.numberShots {
+    color: #757575;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.arrowText {
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.learnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px auto 0;
+    width: 413px;
+    position: relative;
+}
+
+.learn {
+    background: #FFFFFF;
+    box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
+    border-radius: 10px;
+    width: 100%;
+    padding: 30px;
+}
+
+.button {
+    width: 100%;
+}
+
+.rateBox {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.rateBox p {
+    font-size: 17px;
+}
+
+.inputRadio {
+    margin-top: 10px;
+}
+
+.inputRadio {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.inputRadio span {
+    margin-left: 5px;
+    font-size: 17px;
+}
+
+/*font-weight: 400;*/
+/*font-size: 16px;*/
+/*line-height: 24px;*/

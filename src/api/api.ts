@@ -62,11 +62,21 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards(packID: string) {
-        return instance.get<ResponseCardsType>(`cards/card?cardsPack_id=${packID}`)
+    getCards(data: cardsParamsType) {
+        return instance.get<ResponseCardsType>(`cards/card`, {
+            params: {
+                page: data.page,
+                pageCount: data.pageCount,
+                cardQuestion: data.cardQuestion,
+                cardsPack_id: data.cardsPack_id
+            }
+        })
     },
     createCards(card: createCardsType) {
         return instance.post('cards/card', {card})
+    },
+    updateLearnCards(learn: cardLearnType) {
+        return instance.put<ResponseCardsLearnType>('cards/grade', learn)
     },
     updateCards(card: updateCardsType) {
         return instance.put('cards/card', {card})
@@ -165,7 +175,6 @@ export type updatePackType = {
 
 //type cardsAPI
 export type ResponseCardsType = {
-
     cards: CardsType[];
     packUserId: string;
     packName: string;
@@ -224,4 +233,35 @@ export type ParamsType = {
     userID?: string
     min?: string
     max?: string
+}
+
+export type cardsParamsType = {
+    page?: string,
+    pageCount?: string,
+    cardQuestion?: string
+    cardsPack_id?: string
+}
+
+export type cardLearnType = {
+    grade: number
+    card_id: string
+}
+
+// learn cart
+export type ResponseCardsLearnType = {
+    updatedGrade: updatedGradeCartType;
+    token: string;
+    tokenDeathTime: number;
+}
+export type updatedGradeCartType = {
+    _id: string;
+    cardsPack_id: string;
+    card_id: string;
+    user_id: string;
+    grade: number;
+    shots: number;
+    more_id: string;
+    created: string;
+    updated: string;
+    __v: number;
 }

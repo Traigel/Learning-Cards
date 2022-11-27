@@ -1,6 +1,6 @@
 # Learning Cards
 
-https://Traihel.github.io/Learning-Cards
+https://Traigel.github.io/Learning-Cards
 
 Is a card bearing information on both sides, which is intended to be used as an aid in memorization. Each flashcard
 bears a question on one side and an answer on the other. Flashcards are often used to memorize vocabulary, historical
